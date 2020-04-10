@@ -19,7 +19,7 @@ public class StudyPopUp extends JPanel {
 		this.setLayout(null);
 		this.setSize(600, 600);
 		this.setBackground(new Color(232,221,201));
-		
+		 
 		
 		Image image = new ImageIcon("img/back.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel label = new JLabel(new ImageIcon(image));
