@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 public class StudyPopUp extends JPanel {
 
 	public StudyPopUp(JFrame mf) {
-		 
+		  
 		this.setLayout(null);
 		this.setSize(600, 600);
 		this.setBackground(new Color(232,221,201));
