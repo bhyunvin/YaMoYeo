@@ -27,7 +27,7 @@ public class YaMoYeoLogin extends JPanel {
 		this.mf = mf;
 		this.yaMoYeoLogin = this;
 
-		this.setSize(600, 800);
+		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 
@@ -89,7 +89,8 @@ public class YaMoYeoLogin extends JPanel {
 				try {
 					while((s=br.readLine())!=null) {
 						array=s.split("/");
-						if(idTxt.getText().equals(array[1]) && pwdTxt.getText().equals(array[2]))
+						
+						if(idTxt.getText().equals(array[1]) && String.valueOf(pwdTxt.getPassword()).equals(array[2]))
 						{
 							JOptionPane.showMessageDialog(null, "로그인 성공");
 							ChangePanel.changePanel(mf, yaMoYeoLogin, new YaMoYeoEnter(mf));

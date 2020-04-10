@@ -12,12 +12,12 @@ public class UserInfo {
 	
 	public UserInfo() {}
 	
-	public UserInfo(String id, String password, boolean passwordIsCorrect, String name, String email, String area,
+	public UserInfo(String id, String password, String name, String email, String area,
 			String major, int userNumber) {
 		super();
 		this.id = id;
 		this.password = password;
-		this.passwordIsCorrect = passwordIsCorrect;
+//		this.passwordIsCorrect = passwordIsCorrect;
 		this.name = name;
 		this.email = email;
 		this.area = area;

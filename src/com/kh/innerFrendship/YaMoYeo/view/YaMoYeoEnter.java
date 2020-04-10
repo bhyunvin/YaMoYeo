@@ -16,7 +16,7 @@ public class YaMoYeoEnter extends JPanel {
 		this.mf = mf;
 		this.yaMoYeoEnter = this;
 		
-		// JPanel사이즈를 메인프레임과 같은 600X800으로 설정
+		// JPanel사이즈를 메인프레임과 같은 600X600으로 설정
 		// 확인이 편하도록 흰배경으로 설정
 		// JPanel의 레이아웃을 null로 설정해 원하는 곳에 컴포넌트 배치
 		this.setSize(600, 600);
