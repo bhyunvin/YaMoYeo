@@ -4,7 +4,7 @@ import com.kh.innerFrendship.YaMoYeo.view.YaMoYeoMainFrame;
 
 public class Run {
 	public static void main(String[] args) {
-		// ¸ŞÀÎÇÁ·¹ÀÓ »ı¼ºÀÚ È£Ãâ
+		// ë©”ì¸í”„ë ˆì„ ìƒì„±ì í˜¸ì¶œ
 		new YaMoYeoMainFrame();
 	}
 }

@@ -39,8 +39,8 @@ public class RoomMemberManager extends JPanel {
 		JLabel title = new JLabel();
 		title.setSize(180, 70);
 		title.setLocation(210, 5);
-		title.setText("Á¶¿ø °ü¸®");
-		title.setFont(new Font("µ¸¿ò", Font.BOLD, 36));
+		title.setText("ì¡°ì› ê´€ë¦¬");
+		title.setFont(new Font("ë‹ì›€", Font.BOLD, 36));
 
 		JLabel underLine = new JLabel();
 		underLine.setBackground(Color.BLACK);
@@ -48,16 +48,16 @@ public class RoomMemberManager extends JPanel {
 		underLine.setLocation(210, 65);
 		underLine.setOpaque(true);
 
-		// È¸¿øÀ» ºÒ·¯¿Í¼­ 2Â÷¿ø¹è¿­¿¡ 2Áß for¹®À¸·Î Áı¾î³ÖÀ¸¸é µÉ °Í °°¾Æ¿ä
-		String[] header = {"¹øÈ£", "ÀÌ¸§", "ÀÌ¸ŞÀÏ", "Áö¿ª", "Àü°ø", "°­Åğ"};
+		// íšŒì›ì„ ë¶ˆëŸ¬ì™€ì„œ 2ì°¨ì›ë°°ì—´ì— 2ì¤‘ forë¬¸ìœ¼ë¡œ ì§‘ì–´ë„£ìœ¼ë©´ ë  ê²ƒ ê°™ì•„ìš”
+		String[] header = {"ë²ˆí˜¸", "ì´ë¦„", "ì´ë©”ì¼", "ì§€ì—­", "ì „ê³µ", "ê°•í‡´"};
 		String[][] contents = new String[30][6];
 
 		for(int i = 0; i < contents.length; i++) {
 			for(int j = 0; j < contents[i].length; j++) {
 				if(i == 0) {
-					contents[i] = new String[]{Integer.toString(i + 1), "°³¼³ÀÚ", "ÀÌ¸ŞÀÏ" + i, "Áö¿ª" + i, "Àü°ø" + i, ""};
+					contents[i] = new String[]{Integer.toString(i + 1), "ê°œì„¤ì", "ì´ë©”ì¼" + i, "ì§€ì—­" + i, "ì „ê³µ" + i, ""};
 				} else {
-					contents[i] = new String[]{Integer.toString(i + 1), "Á¶¿ø" + i, "ÀÌ¸ŞÀÏ" + i, "Áö¿ª" + i, "Àü°ø" + i, ""};
+					contents[i] = new String[]{Integer.toString(i + 1), "ì¡°ì›" + i, "ì´ë©”ì¼" + i, "ì§€ì—­" + i, "ì „ê³µ" + i, ""};
 				}
 			}
 		}
@@ -73,17 +73,17 @@ public class RoomMemberManager extends JPanel {
 		manageTable.setLocation(10, 125);
 		manageTable.setRowHeight(60);
 
-		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // µğÆúÆ®Å×ÀÌºí¼¿·»´õ·¯¸¦ »ı¼º
-		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // ·»´õ·¯ÀÇ °¡·ÎÁ¤·ÄÀ» CENTER·Î
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // ë””í´íŠ¸í…Œì´ë¸”ì…€ë Œë”ëŸ¬ë¥¼ ìƒì„±
+		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // ë Œë”ëŸ¬ì˜ ê°€ë¡œì •ë ¬ì„ CENTERë¡œ
 
-		TableColumnModel tcm = manageTable.getColumnModel() ; // Á¤·ÄÇÒ Å×ÀÌºíÀÇ ÄÃ·³¸ğµ¨À» °¡Á®¿È
+		TableColumnModel tcm = manageTable.getColumnModel() ; // ì •ë ¬í•  í…Œì´ë¸”ì˜ ì»¬ëŸ¼ëª¨ë¸ì„ ê°€ì ¸ì˜´
 
 		for(int i = 0 ; i < tcm.getColumnCount() ; i++){
 			tcm.getColumn(i).setCellRenderer(dtcr);  
 		}
 
 		DefaultTableCellRenderer renderer = new MyDefaultTableCellRenderer();
-		manageTable.getColumn("°­Åğ").setCellRenderer(renderer);
+		manageTable.getColumn("ê°•í‡´").setCellRenderer(renderer);
 
 		JScrollPane scroll = new JScrollPane(manageTable);
 		scroll.setSize(540, 450);
@@ -110,7 +110,7 @@ public class RoomMemberManager extends JPanel {
 			Component comp = null;
 
 			if(column == 5){
-				comp = new JButton("°­ÅğÅõÇ¥");
+				comp = new JButton("ê°•í‡´íˆ¬í‘œ");
 			}
 			
 			return comp;

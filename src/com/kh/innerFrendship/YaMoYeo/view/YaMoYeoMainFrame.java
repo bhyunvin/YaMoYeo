@@ -10,7 +10,7 @@ public class YaMoYeoMainFrame extends JFrame {
 		this.setIconImage(new ImageIcon("images/ya.PNG").getImage());
 		this.setResizable(false);
 		
-		// Å¬·¡½º ³ª ÀÚ½Å(JFrame)À» ¸Å°³º¯¼ö·Î ÇÏ¿© YaMoYeoLoadingÀ» È£ÃâÇÕ´Ï´Ù
+		// í´ë˜ìŠ¤ ë‚˜ ìì‹ (JFrame)ì„ ë§¤ê°œë³€ìˆ˜ë¡œ í•˜ì—¬ YaMoYeoLoadingì„ í˜¸ì¶œí•©ë‹ˆë‹¤
 		new YaMoYeoLoading(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

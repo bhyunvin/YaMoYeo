@@ -16,23 +16,23 @@ public class YaMoYeoLoading extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		
-		// »çÀÌÁî, ¹è°æ»ö, ·¹ÀÌ¾Æ¿ô ¼³Á¤
+		// ì‚¬ì´ì¦ˆ, ë°°ê²½ìƒ‰, ë ˆì´ì•„ì›ƒ ì„¤ì •
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 		
-		JLabel welcome1 = new JLabel("´ÜÃ¼ ½ºÅÍµğ ÀÏÁ¤°ü¸® ÇÁ·Î±×·¥");
+		JLabel welcome1 = new JLabel("ë‹¨ì²´ ìŠ¤í„°ë”” ì¼ì •ê´€ë¦¬ í”„ë¡œê·¸ë¨");
 		welcome1.setSize(540, 60);
 		welcome1.setLocation(30, 150);
-		welcome1.setFont(new Font("µ¸¿ò", Font.BOLD, 36));
+		welcome1.setFont(new Font("ë‹ì›€", Font.BOLD, 36));
 		
-		JLabel welcome2 = new JLabel("µ¹¾Æ¿À½Å °ÍÀ» È¯¿µÇÕ´Ï´Ù");
+		JLabel welcome2 = new JLabel("ëŒì•„ì˜¤ì‹  ê²ƒì„ í™˜ì˜í•©ë‹ˆë‹¤");
 		welcome2.setSize(470, 60);
 		welcome2.setLocation(65, 350);
-		welcome2.setFont(new Font("µ¸¿ò", Font.BOLD, 36));
+		welcome2.setFont(new Font("ë‹ì›€", Font.BOLD, 36));
 		
-		// ÀÌ¹ÌÁö¶óº§
-		JLabel image = new JLabel(new ImageIcon(new ImageIcon("images/¿À´Ã_1.JPG").getImage().getScaledInstance(300, 100, 0)));
+		// ì´ë¯¸ì§€ë¼ë²¨
+		JLabel image = new JLabel(new ImageIcon(new ImageIcon("images/ì˜¤ëŠ˜_1.JPG").getImage().getScaledInstance(300, 100, 0)));
 		image.setLocation(150, 230);
 		image.setSize(300, 100);
 		
@@ -42,8 +42,8 @@ public class YaMoYeoLoading extends JPanel {
 		
 		mf.add(this);		
 		
-		// ±¸±Û¸µÀ¸·Î Ã£¾Æ³½ ½Ã°£ Áö¿¬
-		// swing¿¡¼± Thread.sleep¸¦ ±×³É ¾²¸é ¾È¸Ô´Â´Ù°í ÇÕ´Ï´Ù
+		// êµ¬ê¸€ë§ìœ¼ë¡œ ì°¾ì•„ë‚¸ ì‹œê°„ ì§€ì—°
+		// swingì—ì„  Thread.sleepë¥¼ ê·¸ëƒ¥ ì“°ë©´ ì•ˆë¨¹ëŠ”ë‹¤ê³  í•©ë‹ˆë‹¤
 		Thread t = new Thread(new Runnable() {
 		      public void run() {
 		        try {

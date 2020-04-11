@@ -2,6 +2,6 @@ package com.kh.innerFrendship.YaMoYeo;
 
 public class YaMoYeo {
 	public static void main(String[] args) {
-		System.out.println("4Á¶ ³»ÀûÄ£¸ñ ÆÀÀÇ ¾ß!¸ğ¿© ÇÁ·ÎÁ§Æ® ÀÔ´Ï´Ù.");
+		System.out.println("4ì¡° ë‚´ì ì¹œëª© íŒ€ì˜ ì•¼!ëª¨ì—¬ í”„ë¡œì íŠ¸ ì…ë‹ˆë‹¤.");
 	}
 }
