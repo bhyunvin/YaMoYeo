@@ -16,18 +16,18 @@ public class YaMoYeoEnter extends JPanel {
 		this.mf = mf;
 		this.yaMoYeoEnter = this;
 		
-		// JPanel»çÀÌÁî¸¦ ¸ŞÀÎÇÁ·¹ÀÓ°ú °°Àº 600X600À¸·Î ¼³Á¤
-		// È®ÀÎÀÌ ÆíÇÏµµ·Ï Èò¹è°æÀ¸·Î ¼³Á¤
-		// JPanelÀÇ ·¹ÀÌ¾Æ¿ôÀ» null·Î ¼³Á¤ÇØ ¿øÇÏ´Â °÷¿¡ ÄÄÆ÷³ÍÆ® ¹èÄ¡
+		// JPanelì‚¬ì´ì¦ˆë¥¼ ë©”ì¸í”„ë ˆì„ê³¼ ê°™ì€ 600X600ìœ¼ë¡œ ì„¤ì •
+		// í™•ì¸ì´ í¸í•˜ë„ë¡ í°ë°°ê²½ìœ¼ë¡œ ì„¤ì •
+		// JPanelì˜ ë ˆì´ì•„ì›ƒì„ nullë¡œ ì„¤ì •í•´ ì›í•˜ëŠ” ê³³ì— ì»´í¬ë„ŒíŠ¸ ë°°ì¹˜
 		this.setSize(600, 600);
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		
-		JLabel label = new JLabel("¾È³çÇÏ¼¼¿ä ÀÔÀå ÆäÀÌÁöÀÔ´Ï´Ù.");
+		JLabel label = new JLabel("ì•ˆë…•í•˜ì„¸ìš” ì…ì¥ í˜ì´ì§€ì…ë‹ˆë‹¤.");
 		label.setSize(300, 200);
 		label.setLocation(100, 100);
 		
-		// ¸¶¿ì½º ÀÌº¥Æ®¸¦ °®°í¿É´Ï´Ù
+		// ë§ˆìš°ìŠ¤ ì´ë²¤íŠ¸ë¥¼ ê°–ê³ ì˜µë‹ˆë‹¤
 		this.addMouseListener(new MyMouseAdapter());
 		
 		this.add(label);
@@ -35,8 +35,8 @@ public class YaMoYeoEnter extends JPanel {
 		mf.add(this);
 	}
 	
-	// ¸¶¿ì½º°¡ ´­¸®¸é changePanelÀ» ½ÇÇàÇÕ´Ï´Ù
-	// ¿©±â¼± yaMoYeoEnter ÆĞ³ÎÀ» YaMoYeoLoginÆĞ³Î·Î º¯°æÇÕ´Ï´Ù
+	// ë§ˆìš°ìŠ¤ê°€ ëˆŒë¦¬ë©´ changePanelì„ ì‹¤í–‰í•©ë‹ˆë‹¤
+	// ì—¬ê¸°ì„  yaMoYeoEnter íŒ¨ë„ì„ YaMoYeoLoginíŒ¨ë„ë¡œ ë³€ê²½í•©ë‹ˆë‹¤
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {

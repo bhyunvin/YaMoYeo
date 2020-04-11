@@ -24,10 +24,10 @@ public class StudyPopUp extends JPanel {
 		label.setSize(40, 40);
 		label.setLocation(10, 10);
 		
-		JLabel label2 = new JLabel("3¿ù 10ÀÏÀÇ ½ºÅÍµğ ÀÏÁ¤");
+		JLabel label2 = new JLabel("3ì›” 10ì¼ì˜ ìŠ¤í„°ë”” ì¼ì •");
 		label2.setSize(260, 40);
 		label2.setLocation(170, 10);
-		label2.setFont(new Font("µ¸¿ò", Font.BOLD, 23));
+		label2.setFont(new Font("ë‹ì›€", Font.BOLD, 23));
 		
 		Image image2 = new ImageIcon("img/save.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel label3 = new JLabel(new ImageIcon(image2));
@@ -42,10 +42,10 @@ public class StudyPopUp extends JPanel {
 		hourlist.setSize(115, 40);
 		hourlist.setLocation(120, 70);
 		
-		JLabel label4 = new JLabel("½Ã");
+		JLabel label4 = new JLabel("ì‹œ");
 		label4.setSize(30,30);
 		label4.setLocation(255, 73);
-		label4.setFont(new Font("µ¸¿ò", Font.BOLD, 20));
+		label4.setFont(new Font("ë‹ì›€", Font.BOLD, 20));
 		
 		int temp = 0;
 		String[] min = new String[12];	
@@ -62,28 +62,28 @@ public class StudyPopUp extends JPanel {
 		minlist.setSize(115, 40);
 		minlist.setLocation(305, 70);
 	
-		JLabel label5 = new JLabel("ºĞ");
+		JLabel label5 = new JLabel("ë¶„");
 		label5.setSize(30, 30);
 		label5.setLocation(440, 73);
-		label5.setFont(new Font("µ¸¿ò", Font.BOLD, 20));
+		label5.setFont(new Font("ë‹ì›€", Font.BOLD, 20));
 		
-		JTextField tf3 = new JTextField("Àå¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		JTextField tf3 = new JTextField("ì¥ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		tf3.setSize(350, 50);
 		tf3.setLocation(120, 130);
 		
-		JTextField tf4 = new JTextField("ÇØ¾ßÇÒ ÀÏ, °øºÎ¹üÀ§ µîÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		JTextField tf4 = new JTextField("í•´ì•¼í•  ì¼, ê³µë¶€ë²”ìœ„ ë“±ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		tf4.setSize(350, 50);
 		tf4.setLocation(120, 190);		
 		
-		JTextField tf5 = new JTextField("ÇØ¾ßÇÒ ÀÏ, °øºÎ¹üÀ§ µîÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		JTextField tf5 = new JTextField("í•´ì•¼í•  ì¼, ê³µë¶€ë²”ìœ„ ë“±ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		tf5.setSize(350, 50);
 		tf5.setLocation(120, 250);
 		
-		JTextField tf6 = new JTextField("ÇØ¾ßÇÒ ÀÏ, °øºÎ¹üÀ§´Â ÃÖ´ë 3°³±îÁö ÀÔ·Â °¡´ÉÇÕ´Ï´Ù.");
+		JTextField tf6 = new JTextField("í•´ì•¼í•  ì¼, ê³µë¶€ë²”ìœ„ëŠ” ìµœëŒ€ 3ê°œê¹Œì§€ ì…ë ¥ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
 		tf6.setSize(350, 50);
 		tf6.setLocation(120, 310);
 		
-		JTextField tf7 = new JTextField("°úÁ¦, Æ¯ÀÌ»çÇ× µîÀÌ ÀÖ´Ù¸é ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		JTextField tf7 = new JTextField("ê³¼ì œ, íŠ¹ì´ì‚¬í•­ ë“±ì´ ìˆë‹¤ë©´ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		tf7.setSize(350, 50);
 		tf7.setLocation(120, 370);		
 				

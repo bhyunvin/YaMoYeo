@@ -2,13 +2,13 @@ package com.kh.innerFrendship.YaMoYeo.model.vo;
 
 public class UserInfo {
 	private String id; 
-	private String password; //ÆĞ½º¿öµå
-	private boolean passwordIsCorrect; //ÆĞ½º¿öµå°¡ ¸Â´ÂÁö
-	private String name; //ÀÌ¸§
-	private String email; // ÀÌ¸ŞÀÏ
-	private String area; // Áö¿ª
-	private String major; // Àü°ø
-	private int userNumber; // °íÀ¯¹øÈ£
+	private String password; //íŒ¨ìŠ¤ì›Œë“œ
+	private boolean passwordIsCorrect; //íŒ¨ìŠ¤ì›Œë“œê°€ ë§ëŠ”ì§€
+	private String name; //ì´ë¦„
+	private String email; // ì´ë©”ì¼
+	private String area; // ì§€ì—­
+	private String major; // ì „ê³µ
+	private int userNumber; // ê³ ìœ ë²ˆí˜¸
 	
 	public UserInfo() {}
 	
@@ -86,7 +86,7 @@ public class UserInfo {
 	}
 	
 	public void setUserNumber(int userNumber) {
-		// ³ªÁß¿¡ ·£´ıÇÏ°Ô ³ÖÀ»¸¸ÇÑ ¹æ¹ıÀ» Ã£¾Æ¾ß ÇÒ°Í°°À½
+		// ë‚˜ì¤‘ì— ëœë¤í•˜ê²Œ ë„£ì„ë§Œí•œ ë°©ë²•ì„ ì°¾ì•„ì•¼ í• ê²ƒê°™ìŒ
 		this.userNumber = userNumber;
 	}
 	

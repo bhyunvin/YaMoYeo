@@ -34,12 +34,12 @@ public class SignPanel extends JPanel {
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 
-		JLabel lblId = new JLabel("¾ÆÀÌµğ");
-		JLabel lblPwd = new JLabel("ºñ¹Ğ¹øÈ£");
-		JLabel lblPwdRight = new JLabel("ºñ¹Ğ¹øÈ£È®ÀÎ");
-		JLabel lblName = new JLabel("ÀÌ¸§");
-		JLabel lblEmail = new JLabel("ÀÌ¸ŞÀÏ");
-		JLabel lblArea = new JLabel("°ÅÁÖÁö");
+		JLabel lblId = new JLabel("ì•„ì´ë””");
+		JLabel lblPwd = new JLabel("ë¹„ë°€ë²ˆí˜¸");
+		JLabel lblPwdRight = new JLabel("ë¹„ë°€ë²ˆí˜¸í™•ì¸");
+		JLabel lblName = new JLabel("ì´ë¦„");
+		JLabel lblEmail = new JLabel("ì´ë©”ì¼");
+		JLabel lblArea = new JLabel("ê±°ì£¼ì§€");
 
 		lblId.setBounds(150, 50, 100, 20);
 		lblPwd.setBounds(150, 80, 100, 20);
@@ -56,31 +56,31 @@ public class SignPanel extends JPanel {
 		add(lblArea);
 
 		txtId = new JTextField(20);
-		txtId.setText("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+		txtId.setText("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”");
 		txtId.addMouseListener(new IdClear());
 
 		txtPwd = new JTextField(20);
-		txtPwd.setText("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+		txtPwd.setText("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”");
 		txtPwd.addMouseListener(new PwdClear());
 
 		txtPwdTF = new JTextField(20);
-		txtPwdTF.setText("ºñ¹Ğ¹øÈ£ ÇÑ¹ø ´õ ÀÔ·ÂÇÏ¼¼¿ä");
+		txtPwdTF.setText("ë¹„ë°€ë²ˆí˜¸ í•œë²ˆ ë” ì…ë ¥í•˜ì„¸ìš”");
 		txtPwdTF.addMouseListener(new PwdTFClear());
 
 		txtName = new JTextField(20);
-		txtName.setText("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä");
+		txtName.setText("ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”");
 		txtName.addMouseListener(new NameClear());
 
 		txtEmail = new JTextField();
-		txtEmail.setText("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+		txtEmail.setText("ì´ë©”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”");
 		txtEmail.addMouseListener(new EmailClear());
 
 		txtArea = new JTextField();
-		txtArea.setText("Áö¿ªÀ» ÀÔ·ÂÇÏ¼¼¿ä");
+		txtArea.setText("ì§€ì—­ì„ ì…ë ¥í•˜ì„¸ìš”");
 		txtArea.addMouseListener(new AreaClear());
 
-		JButton btnCancel = new JButton("¸ŞÀÎÀ¸·Î");
-		JButton btnSubmit = new JButton("°¡ÀÔ¿Ï·á");
+		JButton btnCancel = new JButton("ë©”ì¸ìœ¼ë¡œ");
+		JButton btnSubmit = new JButton("ê°€ì…ì™„ë£Œ");
 		btnSubmit.addActionListener(new SignUpComplete());
 
 		// btnCancel.setSize(150, 40 );
@@ -99,7 +99,7 @@ public class SignPanel extends JPanel {
 		btnCancel.setBounds(0, 0, 100, 100);
 		File temp = new File("test.txt");
 
-		System.out.println(temp.getAbsolutePath()); // Àı´ëÁÖ¼Ò°ª ±¸ÇÔ.
+		System.out.println(temp.getAbsolutePath()); // ì ˆëŒ€ì£¼ì†Œê°’ êµ¬í•¨.
 
 		add(txtId);
 		add(txtPwd);
@@ -170,16 +170,16 @@ public class SignPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter("È¸¿ø¸í´Ü.txt", true));
+				BufferedWriter bw = new BufferedWriter(new FileWriter("íšŒì›ëª…ë‹¨.txt", true));
 				bw.write(txtId.getText() + "/");
 				bw.write(txtPwd.getText() + "/");
 				bw.write(txtName.getText() + "/");
 				bw.write(txtEmail.getText() + "/");
 				bw.write(txtArea.getText() + "/");
 				bw.close();
-				JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔ¼º°ø");
+				JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì…ì„±ê³µ");
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔ½ÇÆĞ");
+				JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì…ì‹¤íŒ¨");
 			}
 		}
 	}

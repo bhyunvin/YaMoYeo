@@ -1,5 +1,5 @@
 package com.kh.innerFrendship.YaMoYeo.model.dao;
 
 public class YaMoYeoManager {
-	//È¸¿ø°¡ÀÔ ±â´É
+	//íšŒì›ê°€ì… ê¸°ëŠ¥
 }

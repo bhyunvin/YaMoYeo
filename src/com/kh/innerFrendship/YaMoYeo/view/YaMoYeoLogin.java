@@ -32,7 +32,7 @@ public class YaMoYeoLogin extends JPanel {
 		this.setLayout(null);
 
 		JLabel id = new JLabel("ID");
-		JLabel pwd = new JLabel("ºñ¹Ğ¹øÈ£");
+		JLabel pwd = new JLabel("ë¹„ë°€ë²ˆí˜¸");
 
 		id.setBounds(200,280,100,30);
 		pwd.setBounds(200,320,100,30);
@@ -45,16 +45,16 @@ public class YaMoYeoLogin extends JPanel {
 
 
 
-		JLabel label = new JLabel("¾È³çÇÏ¼¼¿ä ·Î±×ÀÎ ÆäÀÌÁöÀÔ´Ï´Ù.");
+		JLabel label = new JLabel("ì•ˆë…•í•˜ì„¸ìš” ë¡œê·¸ì¸ í˜ì´ì§€ì…ë‹ˆë‹¤.");
 		label.setSize(300, 200);
 		label.setLocation(200, 100);
 
-		JButton login = new JButton("·Î±×ÀÎ");
+		JButton login = new JButton("ë¡œê·¸ì¸");
 		login.setSize(100, 50);
 		login.setLocation(200, 400);
 		login.addMouseListener(new Login());
 
-		JButton signUp = new JButton("È¸¿ø°¡ÀÔ");
+		JButton signUp = new JButton("íšŒì›ê°€ì…");
 		signUp.setSize(100,50);
 		signUp.setLocation(300,400);
 		signUp.addMouseListener(new SignPanelAdapter());
@@ -85,18 +85,18 @@ public class YaMoYeoLogin extends JPanel {
 			try {
 				String s;
 				String[] array;
-				BufferedReader br = new BufferedReader(new FileReader("È¸¿ø¸í´Ü.txt"));
+				BufferedReader br = new BufferedReader(new FileReader("íšŒì›ëª…ë‹¨.txt"));
 				try {
 					while((s=br.readLine())!=null) {
 						array=s.split("/");
 						
 						if(idTxt.getText().equals(array[1]) && String.valueOf(pwdTxt.getPassword()).equals(array[2]))
 						{
-							JOptionPane.showMessageDialog(null, "·Î±×ÀÎ ¼º°ø");
+							JOptionPane.showMessageDialog(null, "ë¡œê·¸ì¸ ì„±ê³µ");
 							ChangePanel.changePanel(mf, yaMoYeoLogin, new YaMoYeoEnter(mf));
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "¾ÆÀÌµğ³ª ºñ¹Ğ¹øÈ£°¡ Æ²·È½À´Ï´Ù");
+							JOptionPane.showMessageDialog(null, "ì•„ì´ë””ë‚˜ ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë ¸ìŠµë‹ˆë‹¤");
 							br.close();
 						}
 					}

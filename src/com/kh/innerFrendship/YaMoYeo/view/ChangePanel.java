@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ChangePanel {
-	// JPanelÀ» º¯°æÇÏ±âÀ§ÇÑ ¸Ş¼­µåÀÔ´Ï´Ù
-	// staticÀ¸·Î ÀÛ¼ºÇÏ¿© ChangePanel.changePanel() ·Î »ç¿ë °¡´ÉÇÕ´Ï´Ù
+	// JPanelì„ ë³€ê²½í•˜ê¸°ìœ„í•œ ë©”ì„œë“œì…ë‹ˆë‹¤
+	// staticìœ¼ë¡œ ì‘ì„±í•˜ì—¬ ChangePanel.changePanel() ë¡œ ì‚¬ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤
 	public static void changePanel(JFrame mf, JPanel oldPanel, JPanel newPanel) {
 		mf.remove(oldPanel); 
 		mf.add(newPanel);
