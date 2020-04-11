@@ -32,7 +32,7 @@ public class YaMoYeoLoading extends JPanel {
 		welcome2.setFont(new Font("돋움", Font.BOLD, 36));
 		
 		// 이미지라벨
-		JLabel image = new JLabel(new ImageIcon(new ImageIcon("images/오늘_1.JPG").getImage().getScaledInstance(300, 100, 0)));
+		JLabel image = new JLabel(new ImageIcon(new ImageIcon("images/YaMoYeo.PNG").getImage().getScaledInstance(300, 100, 0)));
 		image.setLocation(150, 230);
 		image.setSize(300, 100);
 		
