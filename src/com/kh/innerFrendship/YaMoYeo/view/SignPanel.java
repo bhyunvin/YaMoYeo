@@ -83,9 +83,6 @@ public class SignPanel extends JPanel {
 		JButton btnSubmit = new JButton("가입완료");
 		btnSubmit.addActionListener(new SignUpComplete());
 
-		// btnCancel.setSize(150, 40 );
-		// btnSubmit.setSize(150, 40);
-
 		btnCancel.addMouseListener(new MyMouseAdapter());
 
 		txtId.setBounds(230, 50, 160, 20);
