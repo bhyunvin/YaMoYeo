@@ -1,14 +1,19 @@
 package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,85 +23,156 @@ import javax.swing.JTextField;
 
 public class SignPanel extends JPanel {
 	private JFrame mf;
-	private JPanel SignPanel;
-	private JTextField txtId;
+	private JPanel signPanel;
 	private JTextField txtPwd;
 	private JTextField txtPwdTF;
-	private JTextField txtName;
-	private JTextField txtEmail;
-	private JTextField txtArea;
+	private JLabel lblPwdWrong;
+	private JLabel lblPwdCorrect;
+	private boolean isOkToSignUp;
 
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
-		this.SignPanel = this;
+		this.signPanel = this;
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
+		
+		JLabel lbltitle = new JLabel("회원가입");
+		lbltitle.setFont(new Font("돋움", Font.BOLD, 36));
+		lbltitle.setSize(200, 42);
+		lbltitle.setLocation(220, 20);
+		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setOpaque(true);
+		underLine.setLocation(220, 62);
+		underLine.setSize(150, 3);
+		
+		Image id = new ImageIcon("images/id.PNG").getImage();
+		JLabel lblId = new JLabel(new ImageIcon(id));
+		lblId.setBounds(30, 70, 56, 56);
+		
+		JTextField txtId = new JTextField(20);
+		txtId.setText("아이디를 입력하세요");
+		txtId.addMouseListener(new Clear());
+		txtId.setBounds(110, 80, 400, 40);
+		
+		Image password = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(56, 56, 0);
+		JLabel lblPwd = new JLabel(new ImageIcon(password));
+		lblPwd.setBounds(30, 130, 56, 56);
+		
+		txtPwd = new JTextField(20);
+		txtPwd.setText("비밀번호를 입력하세요");
+		txtPwd.addMouseListener(new Clear());
+		txtPwd.setBounds(110, 140, 400, 40);
+		
+		Image passwordIsCorrect = new ImageIcon("images/passwordIsCorrect.png").getImage().getScaledInstance(52, 52, 0);
+		JLabel lblPwdIsCorrect = new JLabel(new ImageIcon(passwordIsCorrect));
+		lblPwdIsCorrect.setBounds(30, 195, 56, 56);
+		
+		Image passwordWrong = new ImageIcon("images/wrong.PNG").getImage().getScaledInstance(30, 30, 0);
+		lblPwdWrong = new JLabel(new ImageIcon(passwordWrong));
+		lblPwdWrong.setBounds(535, 205, 30, 30);
+		add(lblPwdWrong);
+		
+		Image passwordCorrect = new ImageIcon("images/OK.PNG").getImage().getScaledInstance(30, 30, 0);
+		lblPwdCorrect = new JLabel(new ImageIcon(passwordCorrect));
+		
+		txtPwdTF = new JTextField(20);
+		txtPwdTF.setText("비밀번호 한번 더 입력하세요");
+		txtPwdTF.addMouseListener(new Clear());
+		txtPwdTF.setBounds(110, 200, 400, 40);
+		
+//		패스워드 확인작업
+		txtPwdTF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(txtPwd.getText().equals(txtPwdTF.getText())) {
+					isOkToSignUp = true;
+					signPanel.add(lblPwdCorrect);
+					lblPwdCorrect.setBounds(535, 205, 30, 30);
+					signPanel.remove(lblPwdWrong);
+				} else {
+					isOkToSignUp = false;
+					signPanel.add(lblPwdWrong);
+					lblPwdWrong.setBounds(535, 205, 30, 30);
+					signPanel.remove(lblPwdCorrect);
+				}
+			}
+		});
+		
+		Image name = new ImageIcon("images/name.PNG").getImage();
+		JLabel lblName = new JLabel(new ImageIcon(name));
+		lblName.setBounds(30, 250, 56, 56);
+		
+		JTextField txtName = new JTextField(20);
+		txtName.setText("이름을 입력하세요");
+		txtName.addMouseListener(new Clear());
+		txtName.setBounds(110, 260, 400, 40);
+		
+		Image email = new ImageIcon("images/mail.jpg").getImage().getScaledInstance(52, 48, 0);
+		JLabel lblEmail = new JLabel(new ImageIcon(email));
+		lblEmail.setBounds(30, 310, 56, 56);
+		
+		JTextField txtEmail = new JTextField();
+		txtEmail.setText("이메일을 입력하세요");
+		txtEmail.addMouseListener(new Clear());
+		txtEmail.setBounds(110, 320, 400, 40);
+		
+		Image area = new ImageIcon("images/local.jpg").getImage().getScaledInstance(56, 56, 0);
+		JLabel lblArea = new JLabel(new ImageIcon(area));
+		lblArea.setBounds(27, 370, 56, 56);
+		
+		JTextField txtArea = new JTextField();
+		txtArea.setText("지역을 입력하세요");
+		txtArea.addMouseListener(new Clear());
+		txtArea.setBounds(110, 380, 400, 40);
+		
+		Image major = new ImageIcon("images/major.png").getImage();
+		JLabel lblMajor = new JLabel(new ImageIcon(major));
+		lblMajor.setBounds(28, 430, 56, 56);
+		
+		JTextField txtMajor = new JTextField();
+		txtMajor.setText("전공을 입력하세요");
+		txtMajor.addMouseListener(new Clear());
+		txtMajor.setBounds(110, 440, 400, 40);
 
-		JLabel lblId = new JLabel("아이디");
-		JLabel lblPwd = new JLabel("비밀번호");
-		JLabel lblPwdRight = new JLabel("비밀번호확인");
-		JLabel lblName = new JLabel("이름");
-		JLabel lblEmail = new JLabel("이메일");
-		JLabel lblArea = new JLabel("거주지");
-
-		lblId.setBounds(150, 50, 100, 20);
-		lblPwd.setBounds(150, 80, 100, 20);
-		lblPwdRight.setBounds(150, 110, 100, 20);
-		lblName.setBounds(150, 140, 100, 20);
-		lblEmail.setBounds(150, 170, 100, 20);
-		lblArea.setBounds(150, 200, 100, 20);
-
+		Image back = new ImageIcon("images/back.png").getImage().getScaledInstance(40, 40, 0);
+		JLabel btnBack = new JLabel(new ImageIcon(back));
+		btnBack.addMouseListener(new MyMouseAdapter());
+		btnBack.setBounds(0, 20, 40, 40);
+		
+		Image signUp = new ImageIcon("images/signup.PNG").getImage();
+		JButton btnSubmit = new JButton(new ImageIcon(signUp));
+		btnSubmit.setBounds(150, 500, 300, 40);
+		btnSubmit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("회원명단.txt", true));
+					bw.write(txtId.getText() + "/");
+					bw.write(txtPwd.getText() + "/");
+					bw.write(txtName.getText() + "/");
+					bw.write(txtEmail.getText() + "/");
+					bw.write(txtArea.getText() + "/");
+					bw.close();
+					JOptionPane.showMessageDialog(null, "회원가입성공");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "회원가입실패");
+				}
+			}
+		});
+		
 		add(lblId);
 		add(lblPwd);
-		add(lblPwdRight);
+		add(lblPwdIsCorrect);
 		add(lblName);
 		add(lblEmail);
 		add(lblArea);
-
-		txtId = new JTextField(20);
-		txtId.setText("아이디를 입력하세요");
-		txtId.addMouseListener(new IdClear());
-
-		txtPwd = new JTextField(20);
-		txtPwd.setText("비밀번호를 입력하세요");
-		txtPwd.addMouseListener(new PwdClear());
-
-		txtPwdTF = new JTextField(20);
-		txtPwdTF.setText("비밀번호 한번 더 입력하세요");
-		txtPwdTF.addMouseListener(new PwdTFClear());
-
-		txtName = new JTextField(20);
-		txtName.setText("이름을 입력하세요");
-		txtName.addMouseListener(new NameClear());
-
-		txtEmail = new JTextField();
-		txtEmail.setText("이메일을 입력하세요");
-		txtEmail.addMouseListener(new EmailClear());
-
-		txtArea = new JTextField();
-		txtArea.setText("지역을 입력하세요");
-		txtArea.addMouseListener(new AreaClear());
-
-		JButton btnCancel = new JButton("메인으로");
-		JButton btnSubmit = new JButton("가입완료");
-		btnSubmit.addActionListener(new SignUpComplete());
-
-		btnCancel.addMouseListener(new MyMouseAdapter());
-
-		txtId.setBounds(230, 50, 160, 20);
-		txtPwd.setBounds(230, 80, 160, 20);
-		txtPwdTF.setBounds(230, 110, 160, 20);
-		txtName.setBounds(230, 140, 160, 20);
-		txtEmail.setBounds(230, 170, 160, 20);
-		txtArea.setBounds(230, 200, 160, 20);
-
-		btnSubmit.setBounds(250, 300, 100, 100);
-		btnCancel.setBounds(0, 0, 100, 100);
-		File temp = new File("test.txt");
-
-		System.out.println(temp.getAbsolutePath()); // 절대주소값 구함.
+		add(lbltitle);
+		add(lblMajor);
+		add(underLine);
 
 		add(txtId);
 		add(txtPwd);
@@ -104,80 +180,35 @@ public class SignPanel extends JPanel {
 		add(txtName);
 		add(txtEmail);
 		add(txtArea);
+		add(txtMajor);
 
 		add(btnSubmit);
-		add(btnCancel);
+		add(btnBack);
 
-		setSize(600, 800);
+		setSize(600, 600);
 		setVisible(true);
 
 		mf.add(this);
 	}
 
-	class IdClear extends MouseAdapter {
+	class Clear extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			txtId.setText("");
+			((JTextField) e.getComponent()).setText("");
 		}
 	}
-
-	class PwdClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtPwd.setText("");
-		}
-	}
-
-	class PwdTFClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtPwdTF.setText("");
-		}
-	}
-
-	class NameClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtName.setText("");
-		}
-	}
-
-	class EmailClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtEmail.setText("");
-		}
-	}
-
-	class AreaClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtArea.setText("");
-		}
-	}
-
+	
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, SignPanel, new YaMoYeoLogin(mf));
+			ChangePanel.changePanel(mf, signPanel, new YaMoYeoLogin(mf));
 		}
 	}
-
-	class SignUpComplete implements ActionListener {
+	
+	class CheckPassword extends MouseAdapter {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter("회원명단.txt", true));
-				bw.write(txtId.getText() + "/");
-				bw.write(txtPwd.getText() + "/");
-				bw.write(txtName.getText() + "/");
-				bw.write(txtEmail.getText() + "/");
-				bw.write(txtArea.getText() + "/");
-				bw.close();
-				JOptionPane.showMessageDialog(null, "회원가입성공");
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "회원가입실패");
-			}
+		public void mouseMoved(MouseEvent e) {
+			System.out.println("마우스 움직임");
 		}
 	}
 }
