@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 public class StudyRoomOpen extends JPanel {
 	
 	private JFrame mf;
-	private JPanel StudyRoomOpen;
+	private JPanel panel;
 	private JTextField txtTitle;
 	private JTextField txtRock;
 	private JTextField txtBook;
@@ -27,7 +27,7 @@ public class StudyRoomOpen extends JPanel {
 	public StudyRoomOpen(JFrame mf) {
 		
 		this.mf = mf;
-		this.StudyRoomOpen = this;
+		this.panel = this;
 		this.setSize(600,600);
 		this.setLocation(100,100);
 		this.setLayout(null);
@@ -68,45 +68,40 @@ public class StudyRoomOpen extends JPanel {
 		lbpeople.setLocation(65, 400);
 		lbpeople.setSize(70,50);
 		
-		
-		
 		JButton btn = new JButton("개설완료!");
 		btn.setLocation(200, 500);
 		btn.setSize(200,40);
 		btn.setBackground(Color.WHITE);
 		
-		
 		txtTitle = new JTextField();
 		txtTitle.setText("방 제목을 입력해주세요.");
 		txtTitle.setBounds(170, 90, 350, 30);
-		txtTitle.addMouseListener(new TitleClear());	
+		txtTitle.addMouseListener(new Clear());	
 			
 		txtRock = new JTextField();
 		txtRock.setText("사용하실 비밀번호를 입력하세요.");
 		txtRock.setBounds(170, 160, 350, 30);
-		txtRock.addMouseListener(new RockClear());
+		txtRock.addMouseListener(new Clear());
 		
 		txtBook = new JTextField();
 		txtBook.setText("공부 주제를 입력해주세요.");
 		txtBook.setBounds(170, 225, 350, 30);
-		txtBook.addMouseListener(new BookClear());
+		txtBook.addMouseListener(new Clear());
 		
 		txtMail = new JTextField();
 		txtMail.setText("사용하실 E-mail 주소를 입력해주세요.");
 		txtMail.setBounds(170, 285, 350, 30);
-		txtMail.addMouseListener(new MailClear());
+		txtMail.addMouseListener(new Clear());
 		
 		txtLocal = new JTextField();
 		txtLocal.setText("주로 활동하실 지역을 입력해주세요.");
 		txtLocal.setBounds(170, 350, 350, 30);
-		txtLocal.addMouseListener(new LocalClear());
+		txtLocal.addMouseListener(new Clear());
 		
 		txtPeople = new JTextField();
 		txtPeople.setText("최대 인원수를 입력해주세요.");
 		txtPeople.setBounds(170, 410, 350, 30);
-		txtPeople.addMouseListener(new PeopleClear());
-		
-		
+		txtPeople.addMouseListener(new Clear());
 		
 		this.add(btn);
 		this.add(lbTitle);
@@ -122,60 +117,15 @@ public class StudyRoomOpen extends JPanel {
 		this.add(txtMail);
 		this.add(txtLocal);
 		this.add(txtPeople);
-	
-		
-		
-		
 		
 		mf.add(this);
 		
 	}
 	
-	class TitleClear extends MouseAdapter {
+	class Clear extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			txtTitle.setText("");
+			((JTextField) e.getComponent()).setText("");
 		}
-	}
-	
-	class RockClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtRock.setText("");
-		}
-	}
-	
-	class BookClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtBook.setText("");
-		}
-	}
-	
-	class MailClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtMail.setText("");
-		}
-	}
-	
-	class LocalClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtLocal.setText("");
-		}
-	}
-	
-	class PeopleClear extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			txtPeople.setText("");
-		}
-	}
-	
-
-	
-	
-	
-	
+	}	
 }

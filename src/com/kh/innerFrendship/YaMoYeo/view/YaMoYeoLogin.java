@@ -1,14 +1,15 @@
 package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
-import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,13 +20,13 @@ import javax.swing.JTextField;
 
 public class YaMoYeoLogin extends JPanel {
 	private JFrame mf;
-	private JPanel yaMoYeoLogin;
+	private JPanel panel;
 	private JTextField idTxt;
 	private JPasswordField pwdTxt;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
-		this.yaMoYeoLogin = this;
+		this.panel = this;
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -43,11 +44,10 @@ public class YaMoYeoLogin extends JPanel {
 		idTxt.setBounds(260, 280, 100, 30);
 		pwdTxt.setBounds(260, 320, 100, 30);
 
-
-
-		JLabel label = new JLabel("안녕하세요 로그인 페이지입니다.");
-		label.setSize(300, 200);
-		label.setLocation(200, 100);
+		Image welcome = new ImageIcon("images/YaMoYeo.PNG").getImage().getScaledInstance(300, 100, 0);
+		JLabel label = new JLabel(new ImageIcon(welcome));
+		label.setSize(300, 100);
+		label.setLocation(150, 100);
 
 		JButton login = new JButton("로그인");
 		login.setSize(100, 50);
@@ -59,7 +59,6 @@ public class YaMoYeoLogin extends JPanel {
 		signUp.setLocation(300,400);
 		signUp.addMouseListener(new SignPanelAdapter());
 
-
 		this.add(idTxt);
 		this.add(pwdTxt);
 		this.add(pwd);
@@ -67,47 +66,27 @@ public class YaMoYeoLogin extends JPanel {
 		this.add(label);
 		this.add(login);
 		this.add(signUp);
+		
 		mf.add(this);
 	}
-
 	
 	class SignPanelAdapter extends MouseAdapter{
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, yaMoYeoLogin, new SignPanel(mf));
-
+			ChangePanel.changePanel(mf, panel, new SignPanel(mf));
 		}
 	}
 
 	class Login extends MouseAdapter{
 		@Override
 		public void mousePressed(MouseEvent e) {
+			ObjectInputStream ois = null;
 			try {
-				String s;
-				String[] array;
-				BufferedReader br = new BufferedReader(new FileReader("회원명단.txt"));
-				try {
-					while((s=br.readLine())!=null) {
-						array=s.split("/");
-						
-						if(idTxt.getText().equals(array[1]) && String.valueOf(pwdTxt.getPassword()).equals(array[2]))
-						{
-							JOptionPane.showMessageDialog(null, "로그인 성공");
-							ChangePanel.changePanel(mf, yaMoYeoLogin, new YaMoYeoEnter(mf));
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다");
-							br.close();
-						}
-					}
-				} catch (HeadlessException | IOException e1) {
-					e1.printStackTrace();
-				}
-
-			} 
-
-			catch (FileNotFoundException e1) {
-				e1.printStackTrace();
+				ois = new ObjectInputStream(new FileInputStream("userList.txt"));
+			} catch (FileNotFoundException fnfe) {
+				JOptionPane.showMessageDialog(panel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
 			}
 		}
 	}

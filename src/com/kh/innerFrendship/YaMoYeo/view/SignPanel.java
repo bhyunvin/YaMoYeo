@@ -40,7 +40,6 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	private User user;
 	private int userCount = 1;
 	List<User> userList = new ArrayList<User>();
 
@@ -163,13 +162,6 @@ public class SignPanel extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				private JTextField txtPwd;
-//				private JTextField txtPwdTF;
-//				private JTextField txtId;
-//				private JTextField txtName;
-//				private JTextField txtArea;
-//				private JTextField txtMajor;
-//				private JTextField txtEmail;
 				if((txtPwd.getText() != null) && (txtPwdTF.getText() != null) && (txtId.getText() != null) && (txtName.getText() != null)
 					&& (txtArea.getText() != null) && (txtMajor.getText() != null) && (txtEmail.getText() != null) && (passwordCheck == true)) {
 					isOkToSignUp = true;
