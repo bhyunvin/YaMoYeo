@@ -9,8 +9,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,10 +31,18 @@ public class SignPanel extends JPanel {
 	private JPanel signPanel;
 	private JTextField txtPwd;
 	private JTextField txtPwdTF;
+	private JTextField txtId;
+	private JTextField txtName;
+	private JTextField txtArea;
+	private JTextField txtMajor;
+	private JTextField txtEmail;
 	private JLabel lblPwdWrong;
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
+	private boolean passwordCheck;
 	private User user;
+	private int userCount = 1;
+	List<User> userList = new ArrayList<User>();
 
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
@@ -55,7 +67,7 @@ public class SignPanel extends JPanel {
 		JLabel lblId = new JLabel(new ImageIcon(id));
 		lblId.setBounds(30, 70, 56, 56);
 		
-		JTextField txtId = new JTextField(20);
+		txtId = new JTextField(20);
 		txtId.setText("아이디를 입력하세요");
 		txtId.addMouseListener(new Clear());
 		txtId.setBounds(110, 80, 400, 40);
@@ -91,12 +103,12 @@ public class SignPanel extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(txtPwd.getText().equals(txtPwdTF.getText())) {
-					isOkToSignUp = true;
+					passwordCheck = true;
 					signPanel.add(lblPwdCorrect);
 					lblPwdCorrect.setBounds(535, 205, 30, 30);
 					signPanel.remove(lblPwdWrong);
 				} else {
-					isOkToSignUp = false;
+					passwordCheck = false;
 					signPanel.add(lblPwdWrong);
 					lblPwdWrong.setBounds(535, 205, 30, 30);
 					signPanel.remove(lblPwdCorrect);
@@ -108,7 +120,7 @@ public class SignPanel extends JPanel {
 		JLabel lblName = new JLabel(new ImageIcon(name));
 		lblName.setBounds(30, 250, 56, 56);
 		
-		JTextField txtName = new JTextField(20);
+		txtName = new JTextField(20);
 		txtName.setText("이름을 입력하세요");
 		txtName.addMouseListener(new Clear());
 		txtName.setBounds(110, 260, 400, 40);
@@ -117,7 +129,7 @@ public class SignPanel extends JPanel {
 		JLabel lblEmail = new JLabel(new ImageIcon(email));
 		lblEmail.setBounds(30, 310, 56, 56);
 		
-		JTextField txtEmail = new JTextField();
+		txtEmail = new JTextField();
 		txtEmail.setText("이메일을 입력하세요");
 		txtEmail.addMouseListener(new Clear());
 		txtEmail.setBounds(110, 320, 400, 40);
@@ -126,7 +138,7 @@ public class SignPanel extends JPanel {
 		JLabel lblArea = new JLabel(new ImageIcon(area));
 		lblArea.setBounds(27, 370, 56, 56);
 		
-		JTextField txtArea = new JTextField();
+		txtArea = new JTextField();
 		txtArea.setText("지역을 입력하세요");
 		txtArea.addMouseListener(new Clear());
 		txtArea.setBounds(110, 380, 400, 40);
@@ -135,7 +147,7 @@ public class SignPanel extends JPanel {
 		JLabel lblMajor = new JLabel(new ImageIcon(major));
 		lblMajor.setBounds(28, 430, 56, 56);
 		
-		JTextField txtMajor = new JTextField();
+		txtMajor = new JTextField();
 		txtMajor.setText("전공을 입력하세요");
 		txtMajor.addMouseListener(new Clear());
 		txtMajor.setBounds(110, 440, 400, 40);
@@ -151,7 +163,24 @@ public class SignPanel extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+//				private JTextField txtPwd;
+//				private JTextField txtPwdTF;
+//				private JTextField txtId;
+//				private JTextField txtName;
+//				private JTextField txtArea;
+//				private JTextField txtMajor;
+//				private JTextField txtEmail;
+				if((txtPwd.getText() != null) && (txtPwdTF.getText() != null) && (txtId.getText() != null) && (txtName.getText() != null)
+					&& (txtArea.getText() != null) && (txtMajor.getText() != null) && (txtEmail.getText() != null) && (passwordCheck == true)) {
+					isOkToSignUp = true;
+				}
 				
+				if(isOkToSignUp == true) {
+					JOptionPane.showMessageDialog(signPanel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
+					signUp();
+				} else {
+					JOptionPane.showMessageDialog(signPanel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -193,6 +222,30 @@ public class SignPanel extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			ChangePanel.changePanel(mf, signPanel, new YaMoYeoLogin(mf));
+		}
+	}
+	
+//	회원가입
+	public void signUp() {
+		userList.add(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(), txtArea.getText(), txtMajor.getText(), userCount));
+		userCount++;
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("userList.txt"));
+			for(int i = 0; i < userList.size(); i++) {
+				oos.writeObject(userList);
+			}
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(signPanel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(signPanel, "입출력 예외가 발생했습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+		} finally {
+			try {
+				oos.flush();
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
