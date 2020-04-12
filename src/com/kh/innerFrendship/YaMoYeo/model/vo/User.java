@@ -1,6 +1,12 @@
 package com.kh.innerFrendship.YaMoYeo.model.vo;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7262631511992160491L;
 	private String id; 
 	private String password; //패스워드
 	private String name; //이름
@@ -11,16 +17,14 @@ public class User {
 	
 	public User() {}
 	
-	public User(String id, String password, String name, String email, String area,
-			String major) {
+	public User(String id, String password, String name, String email, String area, String major, int userNumber) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.area = area;
 		this.major = major;
-//		this.userNumber = userNumber;
-		// 1번유저는 1번 이런식으로 넣어야 할 것 같은데 어떻게 하지
+		this.userNumber = userNumber;
 	}
 	
 	public String getId() {
