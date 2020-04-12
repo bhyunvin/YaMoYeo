@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
@@ -21,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.User;
+
 public class SignPanel extends JPanel {
 	private JFrame mf;
 	private JPanel signPanel;
@@ -29,6 +30,7 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdWrong;
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
+	private User user;
 
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
@@ -149,18 +151,7 @@ public class SignPanel extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter("회원명단.txt", true));
-					bw.write(txtId.getText() + "/");
-					bw.write(txtPwd.getText() + "/");
-					bw.write(txtName.getText() + "/");
-					bw.write(txtEmail.getText() + "/");
-					bw.write(txtArea.getText() + "/");
-					bw.close();
-					JOptionPane.showMessageDialog(null, "회원가입성공");
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "회원가입실패");
-				}
+				
 			}
 		});
 		
@@ -202,13 +193,6 @@ public class SignPanel extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			ChangePanel.changePanel(mf, signPanel, new YaMoYeoLogin(mf));
-		}
-	}
-	
-	class CheckPassword extends MouseAdapter {
-		@Override
-		public void mouseMoved(MouseEvent e) {
-			System.out.println("마우스 움직임");
 		}
 	}
 }
