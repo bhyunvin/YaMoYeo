@@ -22,29 +22,29 @@ public class MemoBoard extends JPanel {
 		this.setBackground(new Color(234, 208, 184));
 		
 		
-		JLabel title = new JLabel("조원에게 메모를 남기세요.");
+		JLabel title = new JLabel("조원에게 메모를 남겨보세요.");
 		title.setLocation(180,10);
-		title.setSize(240,40);
+		title.setSize(250,40);
 		title.setFont(new Font("돋움", Font.BOLD, 18));
 		
-		Image icon = new ImageIcon("images/memo1.jpg").getImage().getScaledInstance(200, 200, 0);
+		Image icon = new ImageIcon("images/memo11.jpg").getImage().getScaledInstance(220, 220, 0);
 		JLabel memo1 = new JLabel(new ImageIcon(icon));
-		memo1.setLocation(70, 80);
-		memo1.setSize(200,200);
+		memo1.setLocation(60, 70);
+		memo1.setSize(220,220);
 		
-		Image icon2 = new ImageIcon("images/memo2.jpg").getImage().getScaledInstance(200, 200, 0);
+		Image icon2 = new ImageIcon("images/memo22.jpg").getImage().getScaledInstance(220, 220, 0);
 		JLabel memo2 = new JLabel(new ImageIcon(icon2));
-		memo2.setLocation(70, 300);
-		memo2.setSize(200,200);
+		memo2.setLocation(60, 310);
+		memo2.setSize(220,220);
 		
-		Image icon3 = new ImageIcon("images/memo3.jpg").getImage().getScaledInstance(200, 200, 0);
+		Image icon3 = new ImageIcon("images/memo33.jpg").getImage().getScaledInstance(220, 220, 0);
 		JLabel memo3 = new JLabel(new ImageIcon(icon3));
-		memo3.setLocation(330, 80);
-		memo3.setSize(200,200);
+		memo3.setLocation(320, 70);
+		memo3.setSize(220,220);
 		
 		JButton btn = new JButton(new ImageIcon("images/plus.PNG"));
 		btn.setContentAreaFilled(false);
-		btn.setLocation(380,360);
+		btn.setLocation(395,380);
 		btn.setSize(70,70);
 		
 	
