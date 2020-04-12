@@ -22,10 +22,10 @@ public class MemoBoard extends JPanel {
 		this.setBackground(new Color(234, 208, 184));
 		
 		
-		JLabel title = new JLabel("Á¶¿ø¿¡°Ô ¸Ş¸ğ¸¦ ³²±â¼¼¿ä.");
+		JLabel title = new JLabel("ì¡°ì›ì—ê²Œ ë©”ëª¨ë¥¼ ë‚¨ê¸°ì„¸ìš”.");
 		title.setLocation(180,10);
 		title.setSize(240,40);
-		title.setFont(new Font("µ¸¿ò", Font.BOLD, 18));
+		title.setFont(new Font("ë‹ì›€", Font.BOLD, 18));
 		
 		Image icon = new ImageIcon("images/memo1.jpg").getImage().getScaledInstance(200, 200, 0);
 		JLabel memo1 = new JLabel(new ImageIcon(icon));

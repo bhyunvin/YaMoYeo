@@ -33,10 +33,10 @@ public class StudyRoomOpen extends JPanel {
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 		
-		JLabel lbTitle = new JLabel("½ºÅÍµğ ÀÏÁ¤ °øÀ¯¹æ °³¼³");
+		JLabel lbTitle = new JLabel("ìŠ¤í„°ë”” ì¼ì • ê³µìœ ë°© ê°œì„¤");
 		lbTitle.setLocation(190,10);
 		lbTitle.setSize(250,40);
-		lbTitle.setFont(new Font("µ¸¿ò", Font.BOLD, 18));
+		lbTitle.setFont(new Font("ë‹ì›€", Font.BOLD, 18));
 		
 		Image icon = new ImageIcon("images/Roomtitle.jpg").getImage().getScaledInstance(70, 50, 0);
 		JLabel lbtitle = new JLabel(new ImageIcon(icon));
@@ -70,39 +70,39 @@ public class StudyRoomOpen extends JPanel {
 		
 		
 		
-		JButton btn = new JButton("°³¼³¿Ï·á!");
+		JButton btn = new JButton("ê°œì„¤ì™„ë£Œ!");
 		btn.setLocation(200, 500);
 		btn.setSize(200,40);
 		btn.setBackground(Color.WHITE);
 		
 		
 		txtTitle = new JTextField();
-		txtTitle.setText("¹æ Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		txtTitle.setText("ë°© ì œëª©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		txtTitle.setBounds(170, 90, 350, 30);
 		txtTitle.addMouseListener(new TitleClear());	
 			
 		txtRock = new JTextField();
-		txtRock.setText("»ç¿ëÇÏ½Ç ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		txtRock.setText("ì‚¬ìš©í•˜ì‹¤ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		txtRock.setBounds(170, 160, 350, 30);
 		txtRock.addMouseListener(new RockClear());
 		
 		txtBook = new JTextField();
-		txtBook.setText("°øºÎ ÁÖÁ¦¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		txtBook.setText("ê³µë¶€ ì£¼ì œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		txtBook.setBounds(170, 225, 350, 30);
 		txtBook.addMouseListener(new BookClear());
 		
 		txtMail = new JTextField();
-		txtMail.setText("»ç¿ëÇÏ½Ç E-mail ÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		txtMail.setText("ì‚¬ìš©í•˜ì‹¤ E-mail ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		txtMail.setBounds(170, 285, 350, 30);
 		txtMail.addMouseListener(new MailClear());
 		
 		txtLocal = new JTextField();
-		txtLocal.setText("ÁÖ·Î È°µ¿ÇÏ½Ç Áö¿ªÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		txtLocal.setText("ì£¼ë¡œ í™œë™í•˜ì‹¤ ì§€ì—­ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		txtLocal.setBounds(170, 350, 350, 30);
 		txtLocal.addMouseListener(new LocalClear());
 		
 		txtPeople = new JTextField();
-		txtPeople.setText("ÃÖ´ë ÀÎ¿ø¼ö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		txtPeople.setText("ìµœëŒ€ ì¸ì›ìˆ˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		txtPeople.setBounds(170, 410, 350, 30);
 		txtPeople.addMouseListener(new PeopleClear());
 		

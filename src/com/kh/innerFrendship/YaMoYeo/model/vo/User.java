@@ -1,28 +1,26 @@
 package com.kh.innerFrendship.YaMoYeo.model.vo;
 
-public class UserInfo {
+public class User {
 	private String id; 
 	private String password; //패스워드
-	private boolean passwordIsCorrect; //패스워드가 맞는지
 	private String name; //이름
 	private String email; // 이메일
 	private String area; // 지역
 	private String major; // 전공
 	private int userNumber; // 고유번호
 	
-	public UserInfo() {}
+	public User() {}
 	
-	public UserInfo(String id, String password, String name, String email, String area,
-			String major, int userNumber) {
-		super();
+	public User(String id, String password, String name, String email, String area,
+			String major) {
 		this.id = id;
 		this.password = password;
-//		this.passwordIsCorrect = passwordIsCorrect;
 		this.name = name;
 		this.email = email;
 		this.area = area;
 		this.major = major;
-		this.userNumber = userNumber;
+//		this.userNumber = userNumber;
+		// 1번유저는 1번 이런식으로 넣어야 할 것 같은데 어떻게 하지
 	}
 	
 	public String getId() {
@@ -39,14 +37,6 @@ public class UserInfo {
 	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public boolean isPasswordIsCorrect() {
-		return passwordIsCorrect;
-	}
-	
-	public void setPasswordIsCorrect(boolean passwordIsCorrect) {
-		this.passwordIsCorrect = passwordIsCorrect;
 	}
 	
 	public String getName() {
@@ -92,7 +82,7 @@ public class UserInfo {
 	
 	@Override
 	public String toString() {
-		return "UserInfo [id=" + id + ", password=" + password + ", passwordIsCorrect=" + passwordIsCorrect + ", name="
+		return "User [id=" + id + ", password=" + password + ", name="
 				+ name + ", email=" + email + ", area=" + area + ", major=" + major + ", userNumber=" + userNumber
 				+ "]";
 	}
