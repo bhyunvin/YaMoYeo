@@ -14,17 +14,17 @@ public class User implements Serializable {
 	private String area; // 지역
 	private String major; // 전공
 	private int userNumber; // 고유번호
+	private int userCount = 1;
 	
-	public User() {}
-	
-	public User(String id, String password, String name, String email, String area, String major, int userNumber) {
+	public User(String id, String password, String name, String email, String area, String major) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.area = area;
 		this.major = major;
-		this.userNumber = userNumber;
+		this.userNumber = userCount;
+		userCount++;
 	}
 	
 	public String getId() {
@@ -80,7 +80,6 @@ public class User implements Serializable {
 	}
 	
 	public void setUserNumber(int userNumber) {
-		// 나중에 랜덤하게 넣을만한 방법을 찾아야 할것같음
 		this.userNumber = userNumber;
 	}
 	
@@ -90,6 +89,4 @@ public class User implements Serializable {
 				+ name + ", email=" + email + ", area=" + area + ", major=" + major + ", userNumber=" + userNumber
 				+ "]";
 	}
-	
-	
 }

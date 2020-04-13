@@ -3,6 +3,8 @@ package com.kh.innerFrendship.YaMoYeo.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,11 +13,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+
 public class KickOut extends JPanel {
+	
+	private JFrame mf;
+	private JPanel panel;
+
+
 	public KickOut(JFrame mf) {
+		
+		this.mf = mf;
+		this.panel = this;
 
 		this.setSize(600,600);
-		this.setLocation(100,100);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 
@@ -23,6 +34,13 @@ public class KickOut extends JPanel {
 		title.setLocation(210,20);
 		title.setSize(250,50);
 		title.setFont(new Font("돋움", Font.BOLD,40));
+		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setOpaque(true);
+		underLine.setLocation(210, 70);
+		underLine.setSize(165, 2);
+
 
 		JLabel title2 = new JLabel("조원의 강퇴 투표가 진행중입니다.");
 		title2.setLocation(110,100);
@@ -50,6 +68,9 @@ public class KickOut extends JPanel {
 		chk2.setOpaque(false);
 		chk2.setFont(new Font("돋움",Font.BOLD,25));
 
+		
+
+
 		JButton btn = new JButton("확인");
 		btn.setLocation(240,500);
 		btn.setSize(100,30);
@@ -59,8 +80,10 @@ public class KickOut extends JPanel {
 		back.setLocation(20,20);
 		back.setSize(45,45);
 		back.setContentAreaFilled(false);
+		back.addMouseListener(new MyMouseAdapter());
 
 		this.add(title);
+		this.add(underLine);
 		this.add(title2);
 		this.add(txt);
 		this.add(btn);
@@ -69,7 +92,18 @@ public class KickOut extends JPanel {
 		this.add(chk2);
 		this.add(back);
 		
+
 		mf.add(this);
 	}
+
+	class MyMouseAdapter extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ChangePanel.changePanel(mf, panel, new Notice(mf));
+			
+		}
+	}
+	
+	
 
 }

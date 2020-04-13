@@ -13,18 +13,15 @@ public class YaMoYeo extends JFrame {
 		this.setTitle("YaMoYeo");
 		this.setIconImage(new ImageIcon("images/ya.PNG").getImage());
 		this.setResizable(false);
-		
 
+		new StudyRoomOpen(this);
 
-
-		
-		
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
 		new YaMoYeo();
 	}
 }
+

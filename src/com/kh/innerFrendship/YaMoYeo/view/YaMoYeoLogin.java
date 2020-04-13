@@ -1,12 +1,12 @@
 package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoLogin extends JPanel {
@@ -28,10 +29,13 @@ public class YaMoYeoLogin extends JPanel {
 	private JTextField txtId;
 	private JPasswordField txtPassword;
 	private ArrayList<User> userList;
+	private ArrayList<StudyRoom> roomList;
+	private YaMoYeoEnter enter;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		enter = new YaMoYeoEnter();
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -59,7 +63,7 @@ public class YaMoYeoLogin extends JPanel {
 		Image loginButton = new ImageIcon("images/login.PNG").getImage();
 		JButton login = new JButton(new ImageIcon(loginButton));
 		login.setSize(260, 40);
-		login.setLocation(160, 370);
+		login.setLocation(180, 370);
 		login.addMouseListener(new Login());
 
 		JLabel signUp = new JLabel();
@@ -72,6 +76,12 @@ public class YaMoYeoLogin extends JPanel {
 		signUpButton.setSize(60, 20);
 		signUpButton.setLocation(340, 450);
 		signUpButton.setForeground(Color.BLUE);
+		signUpButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new SignPanel(mf));
+			}
+		});
 		
 		JLabel findUser = new JLabel();
 		findUser.setText("ID/PW를 잊으셨다면?");
@@ -120,6 +130,7 @@ public class YaMoYeoLogin extends JPanel {
 			String inputId = "";
 			String inputPassword = "";
 			ObjectInputStream ois = null;
+			FileOutputStream fos = null;
 			boolean isOkToEnter = false;
 			
 			try {
@@ -128,7 +139,8 @@ public class YaMoYeoLogin extends JPanel {
 				inputId = txtId.getText();
 				inputPassword = String.valueOf(txtPassword.getPassword());
 				
-				for(int i = 0; i < userList.size(); i++) {
+				int i = 0;
+				for(i = 0; i < userList.size(); i++) {
 					id = userList.get(i).getId();
 					password = userList.get(i).getPassword();
 					
@@ -140,15 +152,32 @@ public class YaMoYeoLogin extends JPanel {
 					}
 				}
 				
+				ois = new ObjectInputStream(new FileInputStream("roomList"));
+				roomList = (ArrayList<StudyRoom>) ois.readObject();
+				
 				if(isOkToEnter == true) {
 					JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
+					enter.getMyNumber(userList.get(i).getUserNumber());
 					ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 				}
-				
 			} catch (FileNotFoundException fnfe) {
-				JOptionPane.showMessageDialog(panel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+				try {
+					fos = new FileOutputStream("roomList.txt");
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} finally {
+					try {
+						fos.flush();
+						fos.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(panel, "개설된 방이 하나도 없습니다. 처음으로 방을 만들어 보세요!", "방이 하나도 없습니다!", JOptionPane.ERROR_MESSAGE);
+				ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
 			} catch (IOException ioe) {
 				JOptionPane.showMessageDialog(panel, "입출력 예외가 발생했습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
 			} catch (ClassNotFoundException cnfe) {
