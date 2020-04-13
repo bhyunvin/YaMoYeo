@@ -141,15 +141,15 @@ public class StudyRoomOpen extends JPanel {
 		txtMail.addMouseListener(new Clear());
 
 		
-		txtLocal = new JTextField();
-		txtLocal.setText("주로 활동하실 지역을 입력해주세요.");
-		txtLocal.setBounds(170, 350, 350, 30);
-		txtLocal.addMouseListener(new Clear());
+		txtArea = new JTextField();
+		txtArea.setText("주로 활동하실 지역을 입력해주세요.");
+		txtArea.setBounds(170, 350, 350, 30);
+		txtArea.addMouseListener(new Clear());
 		
-		txtPeople = new JTextField();
-		txtPeople.setText("최대 인원수를 입력해주세요.");
-		txtPeople.setBounds(170, 410, 350, 30);
-		txtPeople.addMouseListener(new Clear());
+		txtMaxMember = new JTextField();
+		txtMaxMember.setText("최대 인원수를 입력해주세요.");
+		txtMaxMember.setBounds(170, 410, 350, 30);
+		txtMaxMember.addMouseListener(new Clear());
 
 		this.add(back);
 		this.add(btn);
