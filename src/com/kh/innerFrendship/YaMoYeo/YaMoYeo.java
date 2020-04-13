@@ -16,6 +16,9 @@ public class YaMoYeo extends JFrame {
 		
 		new YaMoYeoLogin(this);
 		
+//		new FindMembersPopUp(this);
+		
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
