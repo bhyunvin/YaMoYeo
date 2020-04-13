@@ -80,7 +80,6 @@ public class User implements Serializable {
 	}
 	
 	public void setUserNumber(int userNumber) {
-		// 나중에 랜덤하게 넣을만한 방법을 찾아야 할것같음
 		this.userNumber = userNumber;
 	}
 	

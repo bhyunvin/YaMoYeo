@@ -87,7 +87,7 @@ public class RoomMemberManager extends JPanel {
 				return false;
 			}
 		};
-
+		
 		manageTable = new JTable(model);
 		manageTable.setSize(540, 450);
 		manageTable.setLocation(10, 125);
