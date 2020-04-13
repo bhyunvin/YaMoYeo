@@ -101,7 +101,7 @@ public class YaMoYeoEnter extends JPanel {
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			int result = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?", "이전화면", JOptionPane.YES_NO_OPTION);
+			int result = JOptionPane.showConfirmDialog(panel, "로그아웃 하시겠습니까?", "이전화면", JOptionPane.YES_NO_OPTION);
 			//사용자가 "예", "아니오"의 선택 없이 다이얼로그 창을 닫은 경우
 			if(result == JOptionPane.CLOSED_OPTION) {
 				ChangePanel.changePanel(mf, panel, panel);
