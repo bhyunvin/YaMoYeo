@@ -63,7 +63,7 @@ public class YaMoYeoLogin extends JPanel {
 		Image loginButton = new ImageIcon("images/login.PNG").getImage();
 		JButton login = new JButton(new ImageIcon(loginButton));
 		login.setSize(260, 40);
-		login.setLocation(160, 370);
+		login.setLocation(180, 370);
 		login.addMouseListener(new Login());
 
 		JLabel signUp = new JLabel();
