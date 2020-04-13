@@ -28,7 +28,7 @@ import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class SignPanel extends JPanel {
 	private JFrame mf;
-	private JPanel signPanel;
+	private JPanel panel;
 	private JTextField txtPwd;
 	private JTextField txtPwdTF;
 	private JTextField txtId;
@@ -36,6 +36,7 @@ public class SignPanel extends JPanel {
 	private JTextField txtArea;
 	private JTextField txtMajor;
 	private JTextField txtEmail;
+	private int userCount = 1;
 	private JLabel lblPwdWrong;
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
@@ -44,7 +45,7 @@ public class SignPanel extends JPanel {
 
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
-		this.signPanel = this;
+		this.panel = this;
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -102,14 +103,14 @@ public class SignPanel extends JPanel {
 			public void keyReleased(KeyEvent e) {
 				if(txtPwd.getText().equals(txtPwdTF.getText())) {
 					passwordCheck = true;
-					signPanel.add(lblPwdCorrect);
+					panel.add(lblPwdCorrect);
 					lblPwdCorrect.setBounds(535, 205, 30, 30);
-					signPanel.remove(lblPwdWrong);
+					panel.remove(lblPwdWrong);
 				} else {
 					passwordCheck = false;
-					signPanel.add(lblPwdWrong);
+					panel.add(lblPwdWrong);
 					lblPwdWrong.setBounds(535, 205, 30, 30);
-					signPanel.remove(lblPwdCorrect);
+					panel.remove(lblPwdCorrect);
 				}
 			}
 		});
@@ -167,10 +168,10 @@ public class SignPanel extends JPanel {
 				}
 				
 				if(isOkToSignUp == true) {
-					JOptionPane.showMessageDialog(signPanel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
 					signUp();
 				} else {
-					JOptionPane.showMessageDialog(signPanel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -212,13 +213,14 @@ public class SignPanel extends JPanel {
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, signPanel, new YaMoYeoLogin(mf));
+			ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 		}
 	}
 	
 //	회원가입
 	public void signUp() {
 		userList.add(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(), txtArea.getText(), txtMajor.getText()));
+		userCount++;
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("userList.txt"));
@@ -226,9 +228,9 @@ public class SignPanel extends JPanel {
 				oos.writeObject(userList);
 			}
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(signPanel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(panel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(signPanel, "입출력 예외가 발생했습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(panel, "입출력 예외가 발생했습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			try {
 				oos.flush();
@@ -237,5 +239,6 @@ public class SignPanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
+		ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 	}
 }

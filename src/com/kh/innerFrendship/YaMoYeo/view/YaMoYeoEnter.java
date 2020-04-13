@@ -19,16 +19,26 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
+import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
+
+	private ArrayList<StudyRoom> roomList;
+	private ArrayList<User> userList;
+
 	private Collection<StudyRoom> roomList;
+
 
 	public YaMoYeoEnter() {}
 
@@ -40,28 +50,55 @@ public class YaMoYeoEnter extends JPanel {
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 		
-		ObjectInputStream ois = null;
-		try {
-			ois = new ObjectInputStream(new FileInputStream("roomList.txt"));
-
-			roomList = (ArrayList<StudyRoom>) ois.readObject();
-		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		} catch (ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
+		if(roomList == null) {
+			
+		} else {
+			ObjectInputStream ois = null;
+			try {
+				ois = new ObjectInputStream(new FileInputStream("roomList.txt"));
+				roomList = (ArrayList<StudyRoom>) ois.readObject();
+				
+				ois = new ObjectInputStream(new FileInputStream("userList.txt"));
+				userList = (ArrayList<User>) ois.readObject();
+			} catch (FileNotFoundException fnfe) {
+				fnfe.printStackTrace();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			} catch (ClassNotFoundException cnfe) {
+				cnfe.printStackTrace();
+			}
 		}
-		// 테이블 작성 시작
-		String[] headers = {"이름", "개설자", "참여자 수"};
-		String[][] contents = new String[roomList.size()][3];
 		
-		DefaultTableModel dtm = new DefaultTableModel(contents, headers);
+		// 테이블 작성 시작
+		String[] header = {"이름", "개설자", "참여자 수"};
+		String[][] contents = null;
+		
+		if(roomList == null) {
+			contents = new String[1][3];
+			contents[0] = new String[]{"", "", ""};
+		} else {
+			contents = new String[roomList.size()][3];
+			for(int i = 0; i < roomList.size(); i++) {
+				contents[i] = new String[]{roomList.get(i).getRoomName(),
+				userList.get(roomList.get(i).getMyNumber()).getName(),
+				Integer.toString(roomList.get(i).getMemberCount())};
+			}
+		}
+		
+		DefaultTableModel dtm = new DefaultTableModel(contents, header);
 		JTable roomListTable = new JTable(dtm);
+		
+		DefaultTableModel model = new DefaultTableModel(contents, header) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		
 		roomListTable.setSize(400, 425);
 		roomListTable.setLocation(100, 175);
 		// 테이블 작성 완료
+		
+
 		JButton back = new JButton("이전화면");
 		back.setBounds(0, 0, 100, 50);
 		
