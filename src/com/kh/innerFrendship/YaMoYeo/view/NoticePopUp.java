@@ -1,4 +1,4 @@
-package guiexercise2.view;
+package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Font;
