@@ -1,4 +1,4 @@
-package com.kh.innerFrendship.YaMoYeo.view;
+package guiexercise2.view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -32,6 +32,7 @@ public class NoticePopUp extends JPanel {
 		JLabel back = new JLabel(new ImageIcon(img1));
 		back.setSize(40, 40);
 		back.setLocation(10, 25);
+		back.addMouseListener(new Click());
 		
 		
 		JLabel title = new JLabel("공지1");
