@@ -32,8 +32,8 @@ public class StudyRoomOpen extends JPanel {
 	private JTextField txtMail;
 	private JTextField txtArea;
 	private JTextField txtMaxMember;
-	private ArrayList<StudyRoom> roomList;
-	private ArrayList<User> userList;
+	private ArrayList<StudyRoom> roomList = new ArrayList<StudyRoom>();
+	private ArrayList<User> userList = new ArrayList<User>();
 	private int myNumber;
 
 	public StudyRoomOpen(JFrame mf) {
