@@ -13,11 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class StudyRoom extends JPanel {
+public class YaMoYeoStudyRoom extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	
-	public StudyRoom(JFrame mf) {
+	public YaMoYeoStudyRoom(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
 		
