@@ -2,6 +2,8 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,7 +14,16 @@ import javax.swing.JTextField;
 
 public class FindMembersPopUp extends JPanel {
 
+	private JTextField idtf;
+	private JTextField pwtf;
+	private JFrame mf;
+	private JPanel panel;
+	
+	
 	public FindMembersPopUp(JFrame mf) {
+		
+		this.mf = mf;
+		this.panel = this;
 		
 		this.setLayout(null);
 		this.setSize(600, 600);
@@ -27,6 +38,7 @@ public class FindMembersPopUp extends JPanel {
 		JTextField emailtf = new JTextField(" 사용하셨던 e-mail 주소를 입력해주세요");
 		emailtf.setSize(350, 40);
 		emailtf.setLocation(130, 55);
+		emailtf.addMouseListener(new Clear());
 		
 		Image input = new ImageIcon("images/inputButton.PNG").getImage().getScaledInstance(200, 40, 0);
 		JButton button1 = new JButton(new ImageIcon(input));
@@ -40,9 +52,10 @@ public class FindMembersPopUp extends JPanel {
 		id.setSize(60, 60);
 		id.setLocation(48, 180);
 		
-		JTextField idtf = new JTextField(" ID입니다");
+		idtf = new JTextField(" ID입니다");
 		idtf.setSize(350, 40);
 		idtf.setLocation(130, 190);
+		idtf.setEditable(false);
 		
 		
 		
@@ -51,15 +64,17 @@ public class FindMembersPopUp extends JPanel {
 		lock.setSize(60, 60);
 		lock.setLocation(48, 250);
 		
-		JTextField pwtf = new JTextField(" 비밀번호입니다");
+		pwtf = new JTextField(" 비밀번호입니다");
 		pwtf.setSize(350, 40);
 		pwtf.setLocation(130, 260);
+		pwtf.setEditable(false);
 		
 		
 		Image check = new ImageIcon("images/checkButton.PNG").getImage().getScaledInstance(200, 40, 0);
 		JButton button2 = new JButton(new ImageIcon(check));
 		button2.setSize(200, 40);
 		button2.setLocation(150, 315);
+		button2.addMouseListener(new Click());
 		
 		
 		this.add(button2);
@@ -71,7 +86,30 @@ public class FindMembersPopUp extends JPanel {
 		this.add(emailtf);
 		this.add(email);
 		mf.add(this);
+		
+		
 	}
+	
+	class Clear extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			((JTextField) e.getComponent()).setText("");
+			idtf.setText("");
+			pwtf.setText("");
+		}
+		
+	
+		
+	}
+	
+	class Click extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
+		}
+		
+	}
+	
 	
 	
 	
