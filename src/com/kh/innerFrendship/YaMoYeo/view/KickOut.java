@@ -34,6 +34,13 @@ public class KickOut extends JPanel {
 		title.setLocation(210,20);
 		title.setSize(250,50);
 		title.setFont(new Font("돋움", Font.BOLD,40));
+		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setOpaque(true);
+		underLine.setLocation(210, 70);
+		underLine.setSize(165, 2);
+
 
 		JLabel title2 = new JLabel("조원의 강퇴 투표가 진행중입니다.");
 		title2.setLocation(110,100);
@@ -76,6 +83,7 @@ public class KickOut extends JPanel {
 		back.addMouseListener(new MyMouseAdapter());
 
 		this.add(title);
+		this.add(underLine);
 		this.add(title2);
 		this.add(txt);
 		this.add(btn);

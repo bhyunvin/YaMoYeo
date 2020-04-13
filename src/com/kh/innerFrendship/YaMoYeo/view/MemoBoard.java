@@ -33,6 +33,12 @@ public class MemoBoard extends JPanel {
 		title.setSize(250,40);
 		title.setFont(new Font("돋움", Font.BOLD, 18));
 		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setOpaque(true);
+		underLine.setLocation(180, 45);
+		underLine.setSize(245, 2);
+		
 		Image icon = new ImageIcon("images/memo11.jpg").getImage().getScaledInstance(220, 220, 0);
 		JLabel memo1 = new JLabel(new ImageIcon(icon));
 		memo1.setLocation(60, 70);
@@ -65,6 +71,7 @@ public class MemoBoard extends JPanel {
 		
 		
 		this.add(title);
+		this.add(underLine);
 		this.add(memo1);
 		this.add(memo2);
 		this.add(memo3);
