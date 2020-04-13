@@ -1,6 +1,7 @@
 package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -36,32 +37,58 @@ public class YaMoYeoLogin extends JPanel {
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 
-		JLabel id = new JLabel("ID");
-		JLabel pwd = new JLabel("비밀번호");
-
-		id.setBounds(200, 280, 100, 30);
-		pwd.setBounds(200, 320, 100, 30);
+		Image idImage = new ImageIcon("images/id.PNG").getImage().getScaledInstance(40, 40, 0);
+		JLabel id = new JLabel(new ImageIcon(idImage));
+		id.setBounds(120, 260, 40, 40);
+		
+		Image passwordImage = new ImageIcon("images/lock.PNG").getImage().getScaledInstance(40, 40, 0);
+		JLabel pwd = new JLabel(new ImageIcon(passwordImage));
+		pwd.setBounds(120, 310, 40, 40);
 
 		txtId = new JTextField();
 		txtPassword = new JPasswordField();
 
-		txtId.setBounds(260, 280, 100, 30);
-		txtPassword.setBounds(260, 320, 100, 30);
+		txtId.setBounds(170, 260, 280, 40);
+		txtPassword.setBounds(170, 310, 280, 40);
 
 		Image welcome = new ImageIcon("images/YaMoYeo.PNG").getImage().getScaledInstance(300, 100, 0);
 		JLabel label = new JLabel(new ImageIcon(welcome));
 		label.setSize(300, 100);
 		label.setLocation(150, 100);
-
-		JButton login = new JButton("로그인");
-		login.setSize(100, 50);
-		login.setLocation(200, 400);
+		
+		Image loginButton = new ImageIcon("images/login.PNG").getImage();
+		JButton login = new JButton(new ImageIcon(loginButton));
+		login.setSize(260, 40);
+		login.setLocation(160, 370);
 		login.addMouseListener(new Login());
 
-		JButton signUp = new JButton("회원가입");
-		signUp.setSize(100, 50);
-		signUp.setLocation(300, 400);
-		signUp.addMouseListener(new SignPanelAdapter());
+		JLabel signUp = new JLabel();
+		signUp.setText("아직 야모여 회원이 아니라면?");
+		signUp.setSize(200, 20);
+		signUp.setLocation(145, 450);
+		
+		JLabel signUpButton = new JLabel();
+		signUpButton.setText("회원가입");
+		signUpButton.setSize(60, 20);
+		signUpButton.setLocation(340, 450);
+		signUpButton.setForeground(Color.BLUE);
+		
+		JLabel findUser = new JLabel();
+		findUser.setText("ID/PW를 잊으셨다면?");
+		findUser.setSize(150, 20);
+		findUser.setLocation(195, 480);
+		
+		JLabel findUserButton = new JLabel();
+		findUserButton.setText("회원찾기");
+		findUserButton.setSize(60, 20);
+		findUserButton.setLocation(340, 480);
+		findUserButton.setForeground(Color.BLUE);
+		findUserButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new FindMembersPopUp(mf));
+			}
+		});
 
 		this.add(txtId);
 		this.add(txtPassword);
@@ -70,6 +97,10 @@ public class YaMoYeoLogin extends JPanel {
 		this.add(label);
 		this.add(login);
 		this.add(signUp);
+		this.add(findUser);
+		this.add(findUserButton);
+		this.add(signUp);
+		this.add(signUpButton);
 		
 		mf.add(this);
 	}
