@@ -63,9 +63,9 @@ public class YaMoYeoCalendar extends JPanel{
 
 		for(int i = 0; i<calArr.size(); i++) {
 			tempBtn = new JButton(calArr.get(i) + "");
-			if(i%7 == 0) {
+			if(i % 7 == 0) {
 				tempBtn.setForeground(Color.red);
-			} else if(i%7 == 6) {
+			} else if(i % 7 == 6) {
 				tempBtn.setForeground(Color.BLUE);
 			} 
 			this.add(tempBtn);
