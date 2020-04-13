@@ -92,6 +92,7 @@ public class RoomMemberManager extends JPanel {
 		manageTable.setSize(540, 450);
 		manageTable.setLocation(10, 125);
 		manageTable.setRowHeight(60);
+		manageTable.addMouseListener(new TableKickOut());
 
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
@@ -139,7 +140,13 @@ public class RoomMemberManager extends JPanel {
 	class TableKickOut extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			int rowNum = manageTable.getSelectedRowCount();
+			int selectedRow = manageTable.getSelectedRow();
+			int selectedCol = manageTable.getSelectedColumn();
+			DefaultTableModel dtm = (DefaultTableModel)manageTable.getModel();
+			
+			if(selectedRow >= 0 && selectedRow <= manageTable.getRowCount() && selectedCol == 5) {
+				ChangePanel.changePanel(mf, panel, new KickOut(mf));
+			}
 		}
 	}
 }
