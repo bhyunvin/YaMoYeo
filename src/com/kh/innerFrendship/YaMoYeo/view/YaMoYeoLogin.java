@@ -28,6 +28,7 @@ public class YaMoYeoLogin extends JPanel {
 	private JTextField txtId;
 	private JPasswordField txtPassword;
 	private ArrayList<User> userList;
+	private YaMoYeoEnter enter;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
@@ -133,8 +134,8 @@ public class YaMoYeoLogin extends JPanel {
 				userList = (ArrayList<User>)ois.readObject();
 				inputId = txtId.getText();
 				inputPassword = String.valueOf(txtPassword.getPassword());
-				
-				for(int i = 0; i < userList.size(); i++) {
+				int i = 0;
+				for(i = 0; i < userList.size(); i++) {
 					id = userList.get(i).getId();
 					password = userList.get(i).getPassword();
 					
@@ -148,6 +149,7 @@ public class YaMoYeoLogin extends JPanel {
 				
 				if(isOkToEnter == true) {
 					JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
+					enter.getMyNumber(userList.get(i).getUserNumber());
 					ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);

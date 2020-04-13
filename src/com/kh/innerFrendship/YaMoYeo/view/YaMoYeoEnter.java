@@ -2,8 +2,6 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -18,6 +16,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.User;
+
 
 public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
@@ -28,6 +28,7 @@ public class YaMoYeoEnter extends JPanel {
 			{"","",""},
 			{"","",""},
 			{"","",""},};
+	private int myNumber;
 
 	public YaMoYeoEnter(JFrame mf) {
 		this.mf = mf;
@@ -123,5 +124,9 @@ public class YaMoYeoEnter extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
 		}
+	}
+	
+	public void getMyNumber(int myNumber) {
+		this.myNumber = myNumber;
 	}
 }
