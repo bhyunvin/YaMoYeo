@@ -199,3 +199,4 @@ public class StudyRoomOpen extends JPanel {
 		this.myNumber = myNumber;
 	}
 }
+
