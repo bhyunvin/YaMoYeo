@@ -83,10 +83,6 @@ public class StudyRoom extends JPanel {
 		txt3.setSize(200,30);
 		txt3.setOpaque(false);
 		
-		JPanel cal = new YaMoYeoCalendar(mf);
-		cal.setSize(600, 270);
-		cal.setLocation(0, 300);
-		
 		this.add(title);
 		this.add(back);
 		this.add(menu);

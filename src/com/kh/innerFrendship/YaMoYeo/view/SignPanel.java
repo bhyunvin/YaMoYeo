@@ -40,7 +40,6 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	private int userCount = 1;
 	List<User> userList = new ArrayList<User>();
 
 	public SignPanel(JFrame mf) {
@@ -219,8 +218,7 @@ public class SignPanel extends JPanel {
 	
 //	회원가입
 	public void signUp() {
-		userList.add(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(), txtArea.getText(), txtMajor.getText(), userCount));
-		userCount++;
+		userList.add(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(), txtArea.getText(), txtMajor.getText()));
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("userList.txt"));
