@@ -66,6 +66,12 @@ public class StudyRoomOpen extends JPanel {
 		JLabel back = new JLabel(new ImageIcon(backImage));		
 		back.setLocation(15, 15);
 		back.setSize(40, 40);
+		back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
+			}
+		});
 		
 		JLabel lbTitle = new JLabel("스터디 일정 공유방 개설");
 		lbTitle.setLocation(190, 10);

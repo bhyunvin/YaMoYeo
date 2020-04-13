@@ -69,7 +69,6 @@ public class RoomMemberManager extends JPanel {
 			cnfe.printStackTrace();
 		}
 
-		// 회원을 불러와서 2차원배열에 2중 for문으로 집어넣으면 될 것 같아요
 		String[] header = {"번호", "이름", "이메일", "지역", "전공", "강퇴"};
 		String[][] contents = new String[userList.size()][6];
 		int roomUserCount = 0;
