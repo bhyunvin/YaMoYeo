@@ -29,7 +29,6 @@ public class StudyRoomOpen extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		this.setSize(600,600);
-		this.setLocation(100,100);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 		
@@ -43,7 +42,7 @@ public class StudyRoomOpen extends JPanel {
 		lbtitle.setLocation(65,80);
 		lbtitle.setSize(70,50);
 		
-		Image icon2 = new ImageIcon("images/rock.jpg").getImage().getScaledInstance(70, 60, 0);
+		Image icon2 = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(70, 60, 0);
 		JLabel lbrock = new JLabel(new ImageIcon(icon2));
 		lbrock.setLocation(65, 140);
 		lbrock.setSize(70,60);
@@ -72,6 +71,12 @@ public class StudyRoomOpen extends JPanel {
 		btn.setLocation(200, 500);
 		btn.setSize(200,40);
 		btn.setBackground(Color.WHITE);
+		btn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
+			}
+		});
 		
 		txtTitle = new JTextField();
 		txtTitle.setText("방 제목을 입력해주세요.");
@@ -119,7 +124,6 @@ public class StudyRoomOpen extends JPanel {
 		this.add(txtPeople);
 		
 		mf.add(this);
-		
 	}
 	
 	class Clear extends MouseAdapter {
@@ -127,5 +131,5 @@ public class StudyRoomOpen extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			((JTextField) e.getComponent()).setText("");
 		}
-	}	
+	}
 }
