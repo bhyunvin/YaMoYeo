@@ -33,12 +33,8 @@ public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
-
 	private ArrayList<StudyRoom> roomList;
 	private ArrayList<User> userList;
-
-	private Collection<StudyRoom> roomList;
-
 
 	public YaMoYeoEnter() {}
 

@@ -113,17 +113,6 @@ public class StudyRoomOpen extends JPanel {
 		JLabel lbpeople = new JLabel(new ImageIcon(icon6));
 		lbpeople.setLocation(67, 400);
 		lbpeople.setSize(70, 50);
-		
-		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
-		JLabel back = new JLabel(new ImageIcon(backImage));      
-		back.setLocation(15, 15);
-		back.setSize(40, 40);
-		back.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
-			}
-		});
 
 		JButton btn = new JButton("개설완료!");
 		btn.setLocation(200, 500);
