@@ -18,7 +18,7 @@ public class StudyRoomOpen extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private JTextField txtTitle;
-	private JTextField txtRock;
+	private JTextField txtLock;
 	private JTextField txtBook;
 	private JTextField txtMail;
 	private JTextField txtLocal;
@@ -78,10 +78,10 @@ public class StudyRoomOpen extends JPanel {
 		txtTitle.setBounds(170, 90, 350, 30);
 		txtTitle.addMouseListener(new Clear());	
 			
-		txtRock = new JTextField();
-		txtRock.setText("사용하실 비밀번호를 입력하세요.");
-		txtRock.setBounds(170, 160, 350, 30);
-		txtRock.addMouseListener(new Clear());
+		txtLock = new JTextField();
+		txtLock.setText("사용하실 비밀번호를 입력하세요.");
+		txtLock.setBounds(170, 160, 350, 30);
+		txtLock.addMouseListener(new Clear());
 		
 		txtBook = new JTextField();
 		txtBook.setText("공부 주제를 입력해주세요.");
@@ -112,7 +112,7 @@ public class StudyRoomOpen extends JPanel {
 		this.add(lblocal);
 		this.add(lbpeople);
 		this.add(txtTitle);
-		this.add(txtRock);
+		this.add(txtLock);
 		this.add(txtBook);
 		this.add(txtMail);
 		this.add(txtLocal);
