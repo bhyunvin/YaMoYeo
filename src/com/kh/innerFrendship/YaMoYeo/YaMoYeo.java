@@ -24,3 +24,4 @@ public class YaMoYeo extends JFrame {
 		new YaMoYeo();
 	}
 }
+

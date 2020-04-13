@@ -25,7 +25,7 @@ public class Notice extends JPanel {
 
 		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel back = new JLabel(new ImageIcon(backImage));		
-		back.setLocation(20, 20);
+		back.setLocation(15, 15);
 		back.setSize(40, 40);
 
 		JLabel label = new JLabel();

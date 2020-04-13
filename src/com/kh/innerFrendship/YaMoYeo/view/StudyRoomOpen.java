@@ -61,32 +61,37 @@ public class StudyRoomOpen extends JPanel {
 		this.setSize(600, 600);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
-
+    
+		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
+		JLabel back = new JLabel(new ImageIcon(backImage));		
+		back.setLocation(15, 15);
+		back.setSize(40, 40);
+		
 		JLabel lbTitle = new JLabel("스터디 일정 공유방 개설");
 		lbTitle.setLocation(190, 10);
 		lbTitle.setSize(250, 40);
 		lbTitle.setFont(new Font("돋움", Font.BOLD, 18));
-
+		
 		JLabel underLine = new JLabel();
 		underLine.setBackground(Color.BLACK);
+		underLine.setSize(230, 2);
+		underLine.setLocation(180, 50);
 		underLine.setOpaque(true);
-		underLine.setLocation(190, 45);
-		underLine.setSize(215, 2);
-
-		Image icon = new ImageIcon("images/Roomtitle.jpg").getImage().getScaledInstance(70, 50, 0);
+		
+		Image icon = new ImageIcon("images/Roomtitle.jpg").getImage().getScaledInstance(80, 50, 0);
 		JLabel lbtitle = new JLabel(new ImageIcon(icon));
-		lbtitle.setLocation(65, 80);
-		lbtitle.setSize(70, 50);
-
-		Image icon2 = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(70, 60, 0);
-		JLabel lblock = new JLabel(new ImageIcon(icon2));
-		lblock.setLocation(65, 140);
-		lblock.setSize(70, 60);
-
+		lbtitle.setLocation(65,80);
+		lbtitle.setSize(80,50);
+		
+		Image icon2 = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(60, 60, 0);
+		JLabel lbrock = new JLabel(new ImageIcon(icon2));
+		lbrock.setLocation(75, 140);
+		lbrock.setSize(60,60);
+		
 		Image icon3 = new ImageIcon("images/book.jpg").getImage().getScaledInstance(70, 50, 0);
 		JLabel lbbook = new JLabel(new ImageIcon(icon3));
-		lbbook.setLocation(65, 215);
-		lbbook.setSize(70, 50);
+		lbbook.setLocation(70, 215);
+		lbbook.setSize(70,50);
 
 		Image icon4 = new ImageIcon("images/mail.jpg").getImage().getScaledInstance(70, 40, 0);
 		JLabel lbmail = new JLabel(new ImageIcon(icon4));
@@ -135,20 +140,24 @@ public class StudyRoomOpen extends JPanel {
 		txtMail.setBounds(170, 285, 350, 30);
 		txtMail.addMouseListener(new Clear());
 
-		txtArea = new JTextField();
-		txtArea.setText("주로 활동하실 지역을 입력해주세요.");
-		txtArea.setBounds(170, 350, 350, 30);
-		txtArea.addMouseListener(new Clear());
+		
+		txtLocal = new JTextField();
+		txtLocal.setText("주로 활동하실 지역을 입력해주세요.");
+		txtLocal.setBounds(170, 350, 350, 30);
+		txtLocal.addMouseListener(new Clear());
+		
+		txtPeople = new JTextField();
+		txtPeople.setText("최대 인원수를 입력해주세요.");
+		txtPeople.setBounds(170, 410, 350, 30);
+		txtPeople.addMouseListener(new Clear());
 
-		txtMaxMember = new JTextField();
-		txtMaxMember.setText("최대 인원수를 입력해주세요.");
-		txtMaxMember.setBounds(170, 410, 350, 30);
-		txtMaxMember.addMouseListener(new Clear());
-
+		this.add(back);
 		this.add(btn);
 		this.add(lbTitle);
 		this.add(underLine);
-		this.add(lblock);
+		this.add(lbtitle);
+		this.add(lbrock);
+
 		this.add(lbbook);
 		this.add(lbmail);
 		this.add(lblocal);
