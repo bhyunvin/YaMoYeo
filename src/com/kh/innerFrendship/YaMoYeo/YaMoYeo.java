@@ -14,7 +14,7 @@ public class YaMoYeo extends JFrame {
 		this.setIconImage(new ImageIcon("images/ya.PNG").getImage());
 		this.setResizable(false);
 		
-		new YaMoYeoCalendar(this);
+		new StudyRoom(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
