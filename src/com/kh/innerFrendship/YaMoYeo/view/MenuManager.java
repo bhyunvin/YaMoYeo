@@ -33,7 +33,7 @@ public class MenuManager extends JPanel {
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ChangePanel.changePanel(mf, panel, new StudyRoom(mf));
+				ChangePanel.changePanel(mf, panel, new YaMoYeoStudyRoom(mf));
 			}
 		});
 
