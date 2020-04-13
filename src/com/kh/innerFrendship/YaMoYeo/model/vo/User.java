@@ -16,8 +16,6 @@ public class User implements Serializable {
 	private int userNumber; // 고유번호
 	private int userCount = 1;
 	
-	public User() {}
-	
 	public User(String id, String password, String name, String email, String area, String major) {
 		this.id = id;
 		this.password = password;
@@ -92,6 +90,4 @@ public class User implements Serializable {
 				+ name + ", email=" + email + ", area=" + area + ", major=" + major + ", userNumber=" + userNumber
 				+ "]";
 	}
-	
-	
 }
