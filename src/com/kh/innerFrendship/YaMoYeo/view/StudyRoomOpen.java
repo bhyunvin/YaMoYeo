@@ -37,6 +37,12 @@ public class StudyRoomOpen extends JPanel {
 		lbTitle.setSize(250,40);
 		lbTitle.setFont(new Font("돋움", Font.BOLD, 18));
 		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setOpaque(true);
+		underLine.setLocation(190, 45);
+		underLine.setSize(215, 2);
+		
 		Image icon = new ImageIcon("images/Roomtitle.jpg").getImage().getScaledInstance(70, 50, 0);
 		JLabel lbtitle = new JLabel(new ImageIcon(icon));
 		lbtitle.setLocation(65,80);
@@ -110,7 +116,7 @@ public class StudyRoomOpen extends JPanel {
 		
 		this.add(btn);
 		this.add(lbTitle);
-		this.add(lbtitle);
+		this.add(underLine);
 		this.add(lbrock);
 		this.add(lbbook);
 		this.add(lbmail);
