@@ -72,6 +72,12 @@ public class YaMoYeoLogin extends JPanel {
 		signUpButton.setSize(60, 20);
 		signUpButton.setLocation(340, 450);
 		signUpButton.setForeground(Color.BLUE);
+		signUpButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new SignPanel(mf));
+			}
+		});
 		
 		JLabel findUser = new JLabel();
 		findUser.setText("ID/PW를 잊으셨다면?");
