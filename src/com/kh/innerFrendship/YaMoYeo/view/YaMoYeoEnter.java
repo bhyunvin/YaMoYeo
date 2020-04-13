@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
@@ -31,8 +33,12 @@ public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
+
 	private ArrayList<StudyRoom> roomList;
 	private ArrayList<User> userList;
+
+	private Collection<StudyRoom> roomList;
+
 
 	public YaMoYeoEnter() {}
 
@@ -92,6 +98,7 @@ public class YaMoYeoEnter extends JPanel {
 		roomListTable.setLocation(100, 175);
 		// 테이블 작성 완료
 		
+
 		JButton back = new JButton("이전화면");
 		back.setBounds(0, 0, 100, 50);
 		

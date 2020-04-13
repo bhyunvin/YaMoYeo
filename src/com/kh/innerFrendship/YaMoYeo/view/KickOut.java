@@ -69,12 +69,16 @@ public class KickOut extends JPanel {
 		chk2.setFont(new Font("돋움",Font.BOLD,25));
 
 		
+		Image check = new ImageIcon("images/checkButton.PNG").getImage().getScaledInstance(200, 40, 0);
+		JButton btn = new JButton(new ImageIcon(check));
+		btn.setSize(200, 40);
+		btn.setLocation(200, 400);
 
-
-		JButton btn = new JButton("확인");
-		btn.setLocation(240,500);
-		btn.setSize(100,30);
-		btn.setBackground(Color.LIGHT_GRAY);
+		
+//		JButton btn = new JButton("확인");
+//		btn.setLocation(240,500);
+//		btn.setSize(100,30);
+//		btn.setBackground(Color.LIGHT_GRAY);
 
 		JButton back = new JButton(new ImageIcon("images/back.png"));
 		back.setLocation(20,20);
