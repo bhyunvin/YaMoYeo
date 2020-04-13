@@ -17,11 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 
@@ -42,11 +39,7 @@ public class YaMoYeoEnter extends JPanel {
 		this.setLayout(null);
 		
 		if(roomList == null) {
-			try {
-				FileOutputStream fos = new FileOutputStream("roomList.txt");
-			} catch (FileNotFoundException fnfe) {
-				fnfe.printStackTrace();
-			}
+			
 		} else {
 			ObjectInputStream ois = null;
 			try {
@@ -73,9 +66,9 @@ public class YaMoYeoEnter extends JPanel {
 		JTextField searchTxt = new JTextField("");
 		searchTxt.setBounds(152, 100, 373, 77);
 
-		Image icon = new ImageIcon("images/title.jpg").getImage().getScaledInstance(150, 50, 0);
+		Image icon = new ImageIcon("images/title.jpg").getImage().getScaledInstance(200, 60, 0);
 		JLabel title = new JLabel(new ImageIcon(icon));
-		title.setBounds(200, 10, 150, 100);
+		title.setBounds(200, 10, 200, 60);
 		
 		JButton registerBtn = new JButton("등록하기");
 		registerBtn.setBounds(490, 0, 100, 30);
