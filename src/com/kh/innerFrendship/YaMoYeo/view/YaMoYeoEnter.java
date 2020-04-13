@@ -6,10 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,8 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 
@@ -26,7 +28,7 @@ public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
-	private ArrayList<StudyRoom> roomList;
+	private Collection<StudyRoom> roomList;
 
 	public YaMoYeoEnter() {}
 
@@ -38,23 +40,28 @@ public class YaMoYeoEnter extends JPanel {
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 		
-		if(roomList == null) {
-			
-		} else {
-			ObjectInputStream ois = null;
-			try {
-				ois = new ObjectInputStream(new FileInputStream("roomList.txt"));
-				
-				roomList = (ArrayList<StudyRoom>) ois.readObject();
-			} catch (FileNotFoundException fnfe) {
-				fnfe.printStackTrace();
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			} catch (ClassNotFoundException cnfe) {
-				cnfe.printStackTrace();
-			}
-		}
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("roomList.txt"));
 
+			roomList = (ArrayList<StudyRoom>) ois.readObject();
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}
+		// 테이블 작성 시작
+		String[] headers = {"이름", "개설자", "참여자 수"};
+		String[][] contents = new String[roomList.size()][3];
+		
+		DefaultTableModel dtm = new DefaultTableModel(contents, headers);
+		JTable roomListTable = new JTable(dtm);
+		
+		roomListTable.setSize(400, 425);
+		roomListTable.setLocation(100, 175);
+		// 테이블 작성 완료
 		JButton back = new JButton("이전화면");
 		back.setBounds(0, 0, 100, 50);
 		
@@ -94,6 +101,7 @@ public class YaMoYeoEnter extends JPanel {
 		this.add(searchTxt);
 		this.add(back);
 		this.add(search);
+		this.add(roomListTable);
 
 		mf.add(this);
 	}
