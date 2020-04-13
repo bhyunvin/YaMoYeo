@@ -90,8 +90,8 @@ public class StudyRoomOpen extends JPanel {
 		
 		Image icon4 = new ImageIcon("images/mail.jpg").getImage().getScaledInstance(70, 40, 0);
 		JLabel lbmail = new JLabel(new ImageIcon(icon4));
-		lbmail.setLocation(65, 280);
-		lbmail.setSize(70,40);
+		lbmail.setLocation(70, 280);
+		lbmail.setSize(60,40);
 		
 		Image icon5 = new ImageIcon("images/local.jpg").getImage().getScaledInstance(70, 60, 0);
 		JLabel lblocal = new JLabel(new ImageIcon(icon5));
