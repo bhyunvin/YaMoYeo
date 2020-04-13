@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,6 +43,8 @@ public class StudyRoomOpen extends JPanel {
 		
 		ObjectInputStream ois = null;
 		try {
+			ois = new ObjectInputStream(new FileInputStream("userList.txt"));
+			
 			userList = (ArrayList<User>) ois.readObject();
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
@@ -98,6 +101,7 @@ public class StudyRoomOpen extends JPanel {
 		btn.setLocation(200, 500);
 		btn.setSize(200,40);
 		btn.setBackground(Color.WHITE);
+		btn.addMouseListener(new MakeRoom());
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

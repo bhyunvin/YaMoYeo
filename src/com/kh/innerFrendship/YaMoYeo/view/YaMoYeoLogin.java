@@ -33,6 +33,7 @@ public class YaMoYeoLogin extends JPanel {
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		enter = new YaMoYeoEnter();
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -134,6 +135,7 @@ public class YaMoYeoLogin extends JPanel {
 				userList = (ArrayList<User>)ois.readObject();
 				inputId = txtId.getText();
 				inputPassword = String.valueOf(txtPassword.getPassword());
+				
 				int i = 0;
 				for(i = 0; i < userList.size(); i++) {
 					id = userList.get(i).getId();
