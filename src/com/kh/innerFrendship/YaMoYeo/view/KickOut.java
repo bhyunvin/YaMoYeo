@@ -3,6 +3,8 @@ package com.kh.innerFrendship.YaMoYeo.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,8 +13,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+
 public class KickOut extends JPanel {
+	
+	private JFrame mf;
+	private JPanel panel;
+
+
 	public KickOut(JFrame mf) {
+		
+		this.mf = mf;
+		this.panel = this;
 
 		this.setSize(600,600);
 		this.setLocation(100,100);
@@ -50,6 +62,9 @@ public class KickOut extends JPanel {
 		chk2.setOpaque(false);
 		chk2.setFont(new Font("돋움",Font.BOLD,25));
 
+		
+
+
 		JButton btn = new JButton("확인");
 		btn.setLocation(240,500);
 		btn.setSize(100,30);
@@ -59,6 +74,7 @@ public class KickOut extends JPanel {
 		back.setLocation(20,20);
 		back.setSize(45,45);
 		back.setContentAreaFilled(false);
+		back.addMouseListener(new MyMouseAdapter());
 
 		this.add(title);
 		this.add(title2);
@@ -69,7 +85,18 @@ public class KickOut extends JPanel {
 		this.add(chk2);
 		this.add(back);
 		
+
 		mf.add(this);
 	}
+
+	class MyMouseAdapter extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ChangePanel.changePanel(mf, panel, new Notice(mf));
+			
+		}
+	}
+	
+	
 
 }
