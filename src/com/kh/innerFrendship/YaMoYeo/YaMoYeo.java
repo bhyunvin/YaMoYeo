@@ -14,7 +14,7 @@ public class YaMoYeo extends JFrame {
 		this.setIconImage(new ImageIcon("images/ya.PNG").getImage());
 		this.setResizable(false);
 		
-		new StudyRoom(this);
+		new RoomMemberManager(this);
 		
 //		new FindMembersPopUp(this);
 		
