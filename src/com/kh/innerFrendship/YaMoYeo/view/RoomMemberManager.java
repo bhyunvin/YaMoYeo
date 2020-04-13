@@ -81,7 +81,7 @@ public class RoomMemberManager extends JPanel {
 		for(int i = 0 ; i < tcm.getColumnCount() ; i++){
 			tcm.getColumn(i).setCellRenderer(dtcr);  
 		}
-
+		
 		DefaultTableCellRenderer renderer = new MyDefaultTableCellRenderer();
 		manageTable.getColumn("강퇴").setCellRenderer(renderer);
 
