@@ -28,10 +28,12 @@ public class YaMoYeoLogin extends JPanel {
 	private JTextField txtId;
 	private JPasswordField txtPassword;
 	private ArrayList<User> userList;
+	private YaMoYeoEnter enter;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		enter = new YaMoYeoEnter();
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -72,6 +74,12 @@ public class YaMoYeoLogin extends JPanel {
 		signUpButton.setSize(60, 20);
 		signUpButton.setLocation(340, 450);
 		signUpButton.setForeground(Color.BLUE);
+		signUpButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new SignPanel(mf));
+			}
+		});
 		
 		JLabel findUser = new JLabel();
 		findUser.setText("ID/PW를 잊으셨다면?");
@@ -128,7 +136,8 @@ public class YaMoYeoLogin extends JPanel {
 				inputId = txtId.getText();
 				inputPassword = String.valueOf(txtPassword.getPassword());
 				
-				for(int i = 0; i < userList.size(); i++) {
+				int i = 0;
+				for(i = 0; i < userList.size(); i++) {
 					id = userList.get(i).getId();
 					password = userList.get(i).getPassword();
 					
@@ -142,6 +151,7 @@ public class YaMoYeoLogin extends JPanel {
 				
 				if(isOkToEnter == true) {
 					JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
+					enter.getMyNumber(userList.get(i).getUserNumber());
 					ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);

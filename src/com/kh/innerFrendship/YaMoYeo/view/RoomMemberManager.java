@@ -6,6 +6,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,9 +24,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.User;
+
 public class RoomMemberManager extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
+	private ArrayList<User> userList;
+	private JTable manageTable;
 
 	public RoomMemberManager(JFrame mf) {
 		this.mf = mf;
@@ -48,30 +57,42 @@ public class RoomMemberManager extends JPanel {
 		underLine.setLocation(210, 65);
 		underLine.setOpaque(true);
 
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("userList.txt"));
+			userList = (ArrayList<User>) ois.readObject();
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		}
+
 		// 회원을 불러와서 2차원배열에 2중 for문으로 집어넣으면 될 것 같아요
 		String[] header = {"번호", "이름", "이메일", "지역", "전공", "강퇴"};
-		String[][] contents = new String[30][6];
+		String[][] contents = new String[userList.size()][6];
+		int roomUserCount = 0;
 
-		for(int i = 0; i < contents.length; i++) {
-			for(int j = 0; j < contents[i].length; j++) {
-				if(i == 0) {
-					contents[i] = new String[]{Integer.toString(i + 1), "개설자", "이메일" + i, "지역" + i, "전공" + i, ""};
-				} else {
-					contents[i] = new String[]{Integer.toString(i + 1), "조원" + i, "이메일" + i, "지역" + i, "전공" + i, ""};
-				}
-			}
+		while(roomUserCount < userList.size()) {
+			contents[roomUserCount] = new String[] {Integer.toString(roomUserCount + 1),
+					userList.get(roomUserCount).getName(), userList.get(roomUserCount).getEmail(),
+					userList.get(roomUserCount).getArea(), userList.get(roomUserCount).getMajor(),
+			""};
+			roomUserCount++;
 		}
-		
+
 		DefaultTableModel model = new DefaultTableModel(contents, header) {
-	        public boolean isCellEditable(int row, int column) {
-	                return false;
-	            }
-	        };
-		
-		JTable manageTable = new JTable(model);
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		manageTable = new JTable(model);
 		manageTable.setSize(540, 450);
 		manageTable.setLocation(10, 125);
 		manageTable.setRowHeight(60);
+		manageTable.addMouseListener(new TableKickOut());
 
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
@@ -112,8 +133,22 @@ public class RoomMemberManager extends JPanel {
 			if(column == 5){
 				comp = new JButton("강퇴투표");
 			}
-			
 			return comp;
 		}
 	}
+
+	class TableKickOut extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			int selectedRow = manageTable.getSelectedRow();
+			int selectedCol = manageTable.getSelectedColumn();
+			
+			if(selectedRow >= 0 && selectedRow <= manageTable.getRowCount() && selectedCol == 5) {
+				int index = (int) manageTable.getValueAt(selectedRow, 0);
+				userList.remove(index - 1);
+				ChangePanel.changePanel(mf, panel, new KickOut(mf));
+			}
+		}
+	}
 }
+

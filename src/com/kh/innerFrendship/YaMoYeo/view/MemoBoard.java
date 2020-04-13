@@ -14,10 +14,16 @@ import javax.swing.JPanel;
 
 public class MemoBoard extends JPanel {
 	
+	private JFrame mf;
+	private JPanel panel;
+	
+
 	public MemoBoard(JFrame mf) {
 		
+		this.mf = mf;
+		this.panel = this;
+		
 		this.setSize(600,600);
-		this.setLocation(100,100);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 		
@@ -47,6 +53,14 @@ public class MemoBoard extends JPanel {
 		btn.setLocation(395,380);
 		btn.setSize(70,70);
 		
+		JButton back = new JButton(new ImageIcon("images/back.png"));
+		back.setLocation(20,20);
+		back.setSize(45,45);
+		back.setContentAreaFilled(false);
+		back.addMouseListener(new MyMouseAdapter());
+		
+	
+		
 	
 		
 		
@@ -55,6 +69,7 @@ public class MemoBoard extends JPanel {
 		this.add(memo2);
 		this.add(memo3);
 		this.add(btn);
+		this.add(back);
 	
 		
 	
@@ -63,6 +78,14 @@ public class MemoBoard extends JPanel {
 		
 		
 		
+	}
+	
+	class MyMouseAdapter extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ChangePanel.changePanel(mf, panel, new Notice(mf));
+			
+		}
 	}
 	
 	

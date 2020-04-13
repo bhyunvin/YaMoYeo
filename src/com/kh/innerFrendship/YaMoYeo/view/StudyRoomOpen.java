@@ -5,6 +5,13 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,21 +20,44 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
+import com.kh.innerFrendship.YaMoYeo.model.vo.User;
+
 public class StudyRoomOpen extends JPanel {
-	
 	private JFrame mf;
 	private JPanel panel;
 	private JTextField txtTitle;
-	private JTextField txtLock;
-	private JTextField txtBook;
+	private JTextField txtPassword;
+	private JTextField txtSubject;
 	private JTextField txtMail;
-	private JTextField txtLocal;
-	private JTextField txtPeople;
+	private JTextField txtArea;
+	private JTextField txtMaxMember;
+	private ArrayList<StudyRoom> roomList;
+	private ArrayList<User> userList;
+	private int myNumber;
 
 	public StudyRoomOpen(JFrame mf) {
 		
 		this.mf = mf;
 		this.panel = this;
+		
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("userList.txt"));
+			
+			userList = (ArrayList<User>) ois.readObject();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		} finally {
+			try {
+				ois.close();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
+		
 		this.setSize(600,600);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
@@ -71,6 +101,7 @@ public class StudyRoomOpen extends JPanel {
 		btn.setLocation(200, 500);
 		btn.setSize(200,40);
 		btn.setBackground(Color.WHITE);
+		btn.addMouseListener(new MakeRoom());
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -83,30 +114,30 @@ public class StudyRoomOpen extends JPanel {
 		txtTitle.setBounds(170, 90, 350, 30);
 		txtTitle.addMouseListener(new Clear());	
 			
-		txtLock = new JTextField();
-		txtLock.setText("사용하실 비밀번호를 입력하세요.");
-		txtLock.setBounds(170, 160, 350, 30);
-		txtLock.addMouseListener(new Clear());
+		txtPassword = new JTextField();
+		txtPassword.setText("사용하실 비밀번호를 입력하세요.");
+		txtPassword.setBounds(170, 160, 350, 30);
+		txtPassword.addMouseListener(new Clear());
 		
-		txtBook = new JTextField();
-		txtBook.setText("공부 주제를 입력해주세요.");
-		txtBook.setBounds(170, 225, 350, 30);
-		txtBook.addMouseListener(new Clear());
+		txtSubject = new JTextField();
+		txtSubject.setText("공부 주제를 입력해주세요.");
+		txtSubject.setBounds(170, 225, 350, 30);
+		txtSubject.addMouseListener(new Clear());
 		
 		txtMail = new JTextField();
 		txtMail.setText("사용하실 E-mail 주소를 입력해주세요.");
 		txtMail.setBounds(170, 285, 350, 30);
 		txtMail.addMouseListener(new Clear());
 		
-		txtLocal = new JTextField();
-		txtLocal.setText("주로 활동하실 지역을 입력해주세요.");
-		txtLocal.setBounds(170, 350, 350, 30);
-		txtLocal.addMouseListener(new Clear());
+		txtArea = new JTextField();
+		txtArea.setText("주로 활동하실 지역을 입력해주세요.");
+		txtArea.setBounds(170, 350, 350, 30);
+		txtArea.addMouseListener(new Clear());
 		
-		txtPeople = new JTextField();
-		txtPeople.setText("최대 인원수를 입력해주세요.");
-		txtPeople.setBounds(170, 410, 350, 30);
-		txtPeople.addMouseListener(new Clear());
+		txtMaxMember = new JTextField();
+		txtMaxMember.setText("최대 인원수를 입력해주세요.");
+		txtMaxMember.setBounds(170, 410, 350, 30);
+		txtMaxMember.addMouseListener(new Clear());
 		
 		this.add(btn);
 		this.add(lbTitle);
@@ -117,11 +148,11 @@ public class StudyRoomOpen extends JPanel {
 		this.add(lblocal);
 		this.add(lbpeople);
 		this.add(txtTitle);
-		this.add(txtLock);
-		this.add(txtBook);
+		this.add(txtPassword);
+		this.add(txtSubject);
 		this.add(txtMail);
-		this.add(txtLocal);
-		this.add(txtPeople);
+		this.add(txtArea);
+		this.add(txtMaxMember);
 		
 		mf.add(this);
 	}
@@ -131,5 +162,34 @@ public class StudyRoomOpen extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			((JTextField) e.getComponent()).setText("");
 		}
+	}
+	
+	class MakeRoom extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			ObjectOutputStream oos = null;
+			
+			try {
+				oos = new ObjectOutputStream(new FileOutputStream("roomList.txt"));
+				
+				oos.writeObject(new StudyRoom(txtTitle.getText(), txtPassword.getText(), txtSubject.getText(),
+						txtMail.getText(), txtArea.getText(), Integer.parseInt(txtMaxMember.getText()), myNumber));
+			} catch (FileNotFoundException fnfe) {
+				fnfe.printStackTrace();
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			} finally {
+				try {
+					oos.flush();
+					oos.close();
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void getMyNumber(int myNumber) {
+		this.myNumber = myNumber;
 	}
 }
