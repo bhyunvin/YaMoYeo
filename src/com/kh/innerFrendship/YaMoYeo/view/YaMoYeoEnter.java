@@ -29,6 +29,8 @@ public class YaMoYeoEnter extends JPanel {
 			{"","",""},
 			{"","",""},};
 	private int myNumber;
+	
+	public YaMoYeoEnter() {}
 
 	public YaMoYeoEnter(JFrame mf) {
 		this.mf = mf;
