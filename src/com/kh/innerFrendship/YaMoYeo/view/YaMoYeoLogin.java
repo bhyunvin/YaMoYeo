@@ -1,12 +1,12 @@
 package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoLogin extends JPanel {
@@ -28,6 +29,7 @@ public class YaMoYeoLogin extends JPanel {
 	private JTextField txtId;
 	private JPasswordField txtPassword;
 	private ArrayList<User> userList;
+	private ArrayList<StudyRoom> roomList;
 	private YaMoYeoEnter enter;
 
 	public YaMoYeoLogin(JFrame mf) {
@@ -128,6 +130,7 @@ public class YaMoYeoLogin extends JPanel {
 			String inputId = "";
 			String inputPassword = "";
 			ObjectInputStream ois = null;
+			FileOutputStream fos = null;
 			boolean isOkToEnter = false;
 			
 			try {
@@ -149,6 +152,9 @@ public class YaMoYeoLogin extends JPanel {
 					}
 				}
 				
+				ois = new ObjectInputStream(new FileInputStream("roomList"));
+				roomList = (ArrayList<StudyRoom>) ois.readObject();
+				
 				if(isOkToEnter == true) {
 					JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
 					enter.getMyNumber(userList.get(i).getUserNumber());
@@ -156,9 +162,22 @@ public class YaMoYeoLogin extends JPanel {
 				} else {
 					JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 				}
-				
 			} catch (FileNotFoundException fnfe) {
-				JOptionPane.showMessageDialog(panel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
+				try {
+					fos = new FileOutputStream("roomList.txt");
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} finally {
+					try {
+						fos.flush();
+						fos.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(panel, "개설된 방이 하나도 없습니다. 처음으로 방을 만들어 보세요!", "방이 하나도 없습니다!", JOptionPane.ERROR_MESSAGE);
+				ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
 			} catch (IOException ioe) {
 				JOptionPane.showMessageDialog(panel, "입출력 예외가 발생했습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
 			} catch (ClassNotFoundException cnfe) {
