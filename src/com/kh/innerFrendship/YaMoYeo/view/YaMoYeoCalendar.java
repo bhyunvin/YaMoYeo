@@ -30,12 +30,12 @@ public class YaMoYeoCalendar extends JPanel{
 
 		int date = cal.get(Calendar.DATE);
 		int lastDay = cal.getActualMaximum(Calendar.DATE);
-		//ÀÌ¹ø ´Ş ¼¼ÆÃ//
+		//ì´ë²ˆ ë‹¬ ì„¸íŒ…//
 		for(int i = 0; i<lastDay; i++) {
 			calArr.add(i+1);
 		}
-		//Áö³­ ´Ş ¼¼ÆÃ ¿Ï·á
-		cal.set(Calendar.DATE, 1); //1ÀÏ ·Î ¼¼ÆÃ
+		//ì§€ë‚œ ë‹¬ ì„¸íŒ… ì™„ë£Œ
+		cal.set(Calendar.DATE, 1); //1ì¼ ë¡œ ì„¸íŒ…
 		int yoil = cal.get(Calendar.DAY_OF_WEEK); // 
 		int numOfPreMonth = yoil - 1;
 		cal.add(Calendar.MONTH,-1);
@@ -44,7 +44,7 @@ public class YaMoYeoCalendar extends JPanel{
 			calArr.add(0,lastDay);
 			lastDay--;
 		}
-		//´ÙÀ½ ´Ş ¼¼ÆÃ//
+		//ë‹¤ìŒ ë‹¬ ì„¸íŒ…//
 		cal.add(Calendar.MONTH,1);
 		lastDay = cal.getActualMaximum(Calendar.DATE);
 		cal.set(Calendar.DATE,lastDay);
@@ -55,7 +55,7 @@ public class YaMoYeoCalendar extends JPanel{
 			calArr.add(i+1);
 		}
 
-		//ÆĞ³Î·Î ±¸Çö//
+		//íŒ¨ë„ë¡œ êµ¬í˜„//
 		GridLayout gridLayout = new GridLayout(calArr.size()/7,7);
 		this.setLayout(gridLayout);
 
@@ -78,7 +78,7 @@ public class YaMoYeoCalendar extends JPanel{
 	//	class CalendarListener extends MouseAdapter {
 	//		@Override
 	//		public void mousePressed(MouseEvent e) {
-	//			// ³¯Â¥¸¦ ¹öÆ°À¸·Î ¸¸µé¾î  Å¬¸¯ ÈÄ ÇÒÀÏµî ÀÛ¼º ±â´É
+	//			// ë‚ ì§œë¥¼ ë²„íŠ¼ìœ¼ë¡œ ë§Œë“¤ì–´  í´ë¦­ í›„ í• ì¼ë“± ì‘ì„± ê¸°ëŠ¥
 	//	
 	//		}
 }
