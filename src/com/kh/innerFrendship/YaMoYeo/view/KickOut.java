@@ -15,7 +15,6 @@ public class KickOut extends JPanel {
 	public KickOut(JFrame mf) {
 
 		this.setSize(600,600);
-		this.setLocation(100,100);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 

@@ -17,7 +17,6 @@ public class MemoBoard extends JPanel {
 	public MemoBoard(JFrame mf) {
 		
 		this.setSize(600,600);
-		this.setLocation(100,100);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 		
