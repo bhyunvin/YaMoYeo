@@ -2,7 +2,9 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,15 +23,23 @@ public class Notice extends JPanel {
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 
-		JButton button = new JButton();
-		button.setLocation(20, 20);
-		button.setSize(80, 50);
+		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
+		JLabel back = new JLabel(new ImageIcon(backImage));		
+		back.setLocation(20, 20);
+		back.setSize(40, 40);
 
 		JLabel label = new JLabel();
-		label = new JLabel("[ 공지사항 ]");
+		label = new JLabel("공지사항");
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setSize(600, 150);
-		label.setFont(new Font("돋음", Font.BOLD, 35));
+		label.setFont(new Font("돋움", Font.BOLD, 35));
+		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setSize(162, 3);
+		underLine.setLocation(220, 100);
+		underLine.setOpaque(true);
+		
 
 		JTextField text = new JTextField("번  호");
 		text.setLocation(30, 150);
@@ -101,7 +111,7 @@ public class Notice extends JPanel {
 		btn4.setFont(new Font("돋음", Font.PLAIN, 20));
 		((JButton) btn4).setForeground(Color.BLACK);
 
-		JLabel label2 = new JLabel("[ 제목을 누르시면 공지사항을 확인할 수 있습니다. ]");
+		JLabel label2 = new JLabel("제목을 누르시면 공지사항을 확인할 수 있습니다.");
 		label2.setLocation(30, 420);
 		label2.setSize(540, 100);
 		label2.setFont(new Font("돋음", Font.BOLD, 20));
@@ -110,7 +120,8 @@ public class Notice extends JPanel {
 
 		this.add(label);
 		this.add(label2);
-		this.add(button);
+		this.add(underLine);
+		this.add(back);
 		this.add(text);
 		this.add(text2);
 		this.add(text3);
