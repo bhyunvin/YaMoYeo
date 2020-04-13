@@ -79,9 +79,9 @@ public class StudyRoomOpen extends JPanel {
 		lbtitle.setSize(70,50);
 		
 		Image icon2 = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(70, 60, 0);
-		JLabel lbrock = new JLabel(new ImageIcon(icon2));
-		lbrock.setLocation(65, 140);
-		lbrock.setSize(70,60);
+		JLabel lblock = new JLabel(new ImageIcon(icon2));
+		lblock.setLocation(65, 140);
+		lblock.setSize(70,60);
 		
 		Image icon3 = new ImageIcon("images/book.jpg").getImage().getScaledInstance(70, 50, 0);
 		JLabel lbbook = new JLabel(new ImageIcon(icon3));
@@ -148,7 +148,7 @@ public class StudyRoomOpen extends JPanel {
 		this.add(btn);
 		this.add(lbTitle);
 		this.add(underLine);
-		this.add(lbrock);
+		this.add(lblock);
 		this.add(lbbook);
 		this.add(lbmail);
 		this.add(lblocal);
