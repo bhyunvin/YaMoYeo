@@ -19,10 +19,10 @@ public class StudyRoom extends JPanel {
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 		
-		JLabel title = new JLabel("���͵�");
+		JLabel title = new JLabel("스터디");
 		title.setLocation(240,20);
 		title.setSize(250,50);
-		title.setFont(new Font("����", Font.BOLD,35));
+		title.setFont(new Font("돋움", Font.BOLD,35));
 		
 		JButton back = new JButton(new ImageIcon("images/back.png"));
 		back.setLocation(20,20);
@@ -35,18 +35,18 @@ public class StudyRoom extends JPanel {
 		menu.setContentAreaFilled(false);
 		
 		JCheckBox chk1 = new JCheckBox();
-		chk1.setLocation(50, 80);
-		chk1.setSize(100, 100);
+		chk1.setLocation(50, 100);
+		chk1.setSize(50, 50);
 		chk1.setOpaque(false);
 		
 		JCheckBox chk2 = new JCheckBox();
-		chk2.setLocation(50, 120);
-		chk2.setSize(100, 100);
+		chk2.setLocation(50, 145);
+		chk2.setSize(50, 50);
 		chk2.setOpaque(false);
 				
 		JCheckBox chk3 = new JCheckBox();
-		chk3.setLocation(50, 160);
-		chk3.setSize(100, 100);
+		chk3.setLocation(50, 190);
+		chk3.setSize(50, 50);
 		chk3.setOpaque(false);
 		
 		
@@ -62,7 +62,7 @@ public class StudyRoom extends JPanel {
 		txt2.setOpaque(false);
 		
 		JTextField txt3 = new JTextField("to do list");
-		txt3.setLocation(85, 200);
+		txt3.setLocation(85, 205);
 		txt3.setSize(200,30);
 		txt3.setOpaque(false);
 		
