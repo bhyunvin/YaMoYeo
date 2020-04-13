@@ -143,17 +143,16 @@ public class YaMoYeoLogin extends JPanel {
 				for(i = 0; i < userList.size(); i++) {
 					id = userList.get(i).getId();
 					password = userList.get(i).getPassword();
-					
-					if(!(id.equals(inputId) && password.equals(inputPassword))) {
-						isOkToEnter = false;
-					} else {
+					System.out.println(id);
+					System.out.println(password);
+					System.out.println(userList.size());
+					if((id.equals(inputId) && password.equals(inputPassword))) {
 						isOkToEnter = true;
 						break;
+					} else {
+						isOkToEnter = false;
 					}
 				}
-				
-				ois = new ObjectInputStream(new FileInputStream("roomList"));
-				roomList = (ArrayList<StudyRoom>) ois.readObject();
 				
 				if(isOkToEnter == true) {
 					JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
