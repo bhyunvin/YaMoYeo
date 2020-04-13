@@ -142,9 +142,10 @@ public class RoomMemberManager extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			int selectedRow = manageTable.getSelectedRow();
 			int selectedCol = manageTable.getSelectedColumn();
-			DefaultTableModel dtm = (DefaultTableModel)manageTable.getModel();
 			
 			if(selectedRow >= 0 && selectedRow <= manageTable.getRowCount() && selectedCol == 5) {
+				int index = (int) manageTable.getValueAt(selectedRow, 0);
+				userList.remove(index - 1);
 				ChangePanel.changePanel(mf, panel, new KickOut(mf));
 			}
 		}

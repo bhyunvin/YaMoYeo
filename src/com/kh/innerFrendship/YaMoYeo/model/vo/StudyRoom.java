@@ -1,28 +1,33 @@
 package com.kh.innerFrendship.YaMoYeo.model.vo;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 
 public class StudyRoom implements Serializable {
-//  문자열 방 이름
-//	문자열 방 비밀번호
-//	정수형 방 번호 (유저번호와 비교하여 개설자 여부 확인)
-//	일정 객체
-//	정수형 배열 강퇴된 유저번호 (유저번호와 비교하여 이전에 강퇴여부 확인)
-//	일정 오늘
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3773890462791718830L;
 	private String roomName;
 	private String roomPassword;
-	private int roomNumber; // 개설자 유저번호랑 똑같게
+	private int roomNumber;
+	private String subject;
+	private String email;
+	private String area;
+	private int maxMember;
 	private int[] outMembers;
 	private Date today = new Date(); // 오늘 날짜 저장
+	// 일정 arraylist
 	
-	public StudyRoom(String roomName, String roomPassword, int roomNumber, int[] outMembers, Date today) {
+	public StudyRoom(String roomName, String roomPassword, String subject, String email, String area,
+			int maxMember, int roomNumber) {
 		this.roomName = roomName;
 		this.roomPassword = roomPassword;
+		this.subject = subject;
+		this.email = email;
+		this.area = area;
+		this.maxMember = maxMember;
 		this.roomNumber = roomNumber;
-		this.outMembers = outMembers;
-		this.today = today;
 	}
 
 	public String getRoomName() {
@@ -46,7 +51,40 @@ public class StudyRoom implements Serializable {
 	}
 
 	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
+//		this.roomNumber = roomNumber;
+		// 유저 번호랑 같게
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public int getMaxMember() {
+		return maxMember;
+	}
+
+	public void setMaxMember(int maxMember) {
+		this.maxMember = maxMember;
 	}
 
 	public int[] getOutMembers() {
@@ -59,16 +97,6 @@ public class StudyRoom implements Serializable {
 
 	public Date getToday() {
 		return today;
-	}
-
-	public void setToday(Date today) {
-		this.today = today;
-	}
-
-	@Override
-	public String toString() {
-		return "StudyRoom [roomName=" + roomName + ", roomPassword=" + roomPassword + ", roomNumber=" + roomNumber
-				+ ", outMembers=" + Arrays.toString(outMembers) + ", today=" + today + "]";
 	}
 	
 }
