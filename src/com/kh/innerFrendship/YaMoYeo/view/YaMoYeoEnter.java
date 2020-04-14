@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,12 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
@@ -33,13 +28,15 @@ public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
-	private ArrayList<StudyRoom> roomList;
+	private ArrayList roomList;
 
 	public YaMoYeoEnter() {}
 
 	public YaMoYeoEnter(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		
+		roomList = readFile();
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -134,5 +131,27 @@ public class YaMoYeoEnter extends JPanel {
 
 	public void getMyNumber(int myNumber) {
 		this.myNumber = myNumber;
+	}
+	
+	public ArrayList readFile() {
+		ArrayList list = null;
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("roomList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				StudyRoom studyRoom = (StudyRoom) ois.readObject();
+				list.add(studyRoom);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
 	}
 }

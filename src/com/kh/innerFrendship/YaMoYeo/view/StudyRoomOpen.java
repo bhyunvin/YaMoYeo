@@ -3,6 +3,8 @@ package com.kh.innerFrendship.YaMoYeo.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
@@ -31,32 +33,11 @@ public class StudyRoomOpen extends JPanel {
 	private JTextField txtSubject;
 	private JTextField txtMail;
 	private JTextField txtArea;
-	private JTextField txtMaxMember;
-	private ArrayList<StudyRoom> roomList = new ArrayList<StudyRoom>();
-	private ArrayList<User> userList = new ArrayList<User>();
 	private int myNumber;
 
 	public StudyRoomOpen(JFrame mf) {
-
 		this.mf = mf;
 		this.panel = this;
-
-		ObjectInputStream ois = null;
-		try {
-			ois = new ObjectInputStream(new FileInputStream("userList.txt"));
-
-			userList = (ArrayList<User>) ois.readObject();
-		} catch (ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		} finally {
-			try {
-				ois.close();
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			}
-		}
 
 		this.setSize(600, 600);
 		this.setLayout(null);
@@ -118,7 +99,22 @@ public class StudyRoomOpen extends JPanel {
 		btn.setLocation(200, 500);
 		btn.setSize(200, 40);
 		btn.setBackground(Color.WHITE);
-		btn.addMouseListener(new MakeRoom());
+		
+		btn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				String roomName = txtTitle.getText();
+				String roomPassword = txtPassword.getText();
+				String roomSubject = txtSubject.getText();
+				String roomEmail = txtMail.getText();
+				String roomArea = txtArea.getText();
+				
+				StudyRoom studyRoom = new StudyRoom(roomName, roomPassword, roomSubject, roomEmail, roomArea, myNumber);
+				
+				makeRoom(studyRoom);
+			}
+		});
+		
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -151,11 +147,6 @@ public class StudyRoomOpen extends JPanel {
 		txtArea.setBounds(170, 350, 350, 30);
 		txtArea.addMouseListener(new Clear());
 
-		txtMaxMember = new JTextField();
-		txtMaxMember.setText("최대 인원수를 입력해주세요.");
-		txtMaxMember.setBounds(170, 410, 350, 30);
-		txtMaxMember.addMouseListener(new Clear());
-
 		this.add(btn);
 		this.add(lbTitle);
 		this.add(lbtitle);
@@ -171,7 +162,6 @@ public class StudyRoomOpen extends JPanel {
 		this.add(txtSubject);
 		this.add(txtMail);
 		this.add(txtArea);
-		this.add(txtMaxMember);
 
 		mf.add(this);
 	}
@@ -182,28 +172,24 @@ public class StudyRoomOpen extends JPanel {
 			((JTextField) e.getComponent()).setText("");
 		}
 	}
-
-	class MakeRoom extends MouseAdapter {
-		@Override
-		public void mousePressed(MouseEvent e) {
-			ObjectOutputStream oos = null;
-
+	
+	public void makeRoom(StudyRoom studyroom) {
+		ObjectOutputStream oos = null;
+		
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("roomList.txt", true));
+			
+			oos.writeObject(studyroom);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				oos = new ObjectOutputStream(new FileOutputStream("roomList.txt"));
-
-				oos.writeObject(new StudyRoom(txtTitle.getText(), txtPassword.getText(), txtSubject.getText(),
-						txtMail.getText(), txtArea.getText(), Integer.parseInt(txtMaxMember.getText()), myNumber));
-			} catch (FileNotFoundException fnfe) {
-				fnfe.printStackTrace();
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
-			} finally {
-				try {
-					oos.flush();
-					oos.close();
-				} catch (IOException ioe) {
-					ioe.printStackTrace();
-				}
+				oos.flush();
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
