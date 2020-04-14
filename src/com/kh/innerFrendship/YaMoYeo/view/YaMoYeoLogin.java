@@ -31,13 +31,11 @@ public class YaMoYeoLogin extends JPanel {
 	private JTextField txtId;
 	private JPasswordField txtPassword;
 	private List<User> userList;
-	private List<StudyRoom> roomList = new ArrayList<StudyRoom>();
-	private YaMoYeoEnter enter = new YaMoYeoEnter();
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
-		readFile();
+		userList = readFile();
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
@@ -137,11 +135,12 @@ public class YaMoYeoLogin extends JPanel {
 			for(int i = 0; i < userList.size(); i++) {
 				id = userList.get(i).getId();
 				password = userList.get(i).getPassword();
-				if(!(inputId.equals(id) && inputPwd.equals(password))) {
-					isOkToLogin = false;
-				} else {
+				
+				if(inputId.equals(id) && inputPwd.equals(password)) {
 					isOkToLogin = true;
 					break;
+				} else {
+					isOkToLogin = false;
 				}
 			}
 			
@@ -161,25 +160,26 @@ public class YaMoYeoLogin extends JPanel {
 		}
 	}
 	
-	public void readFile() {
-		userList = new ArrayList<User>();
-		FileInputStream fis = null;
+	public ArrayList readFile() {
+		List<User> userList = new ArrayList<>();
+		
 		try {
-			fis = new FileInputStream("userList.txt");
-			ObjectInputStream ois = new ObjectInputStream(fis);
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("userList.txt"));
 			
 			User user = (User) ois.readObject();
 			userList.add(user);
 			
 			ois.close();
 		} catch (FileNotFoundException e1) {
-			return;
+			return null;
 		} catch (EOFException eofe) {
-			return;
+			return (ArrayList) userList;
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		return (ArrayList) userList;
 	}
 }
