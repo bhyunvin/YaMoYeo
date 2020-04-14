@@ -67,33 +67,28 @@ public class StudyRoomOpen extends JPanel {
 
 		Image icon = new ImageIcon("images/Roomtitle.jpg").getImage().getScaledInstance(70, 50, 0);
 		JLabel lbtitle = new JLabel(new ImageIcon(icon));
-		lbtitle.setLocation(65, 80);
+		lbtitle.setLocation(65, 95);
 		lbtitle.setSize(70, 50);
 
 		Image icon2 = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(70, 60, 0);
 		JLabel lblock = new JLabel(new ImageIcon(icon2));
-		lblock.setLocation(65, 140);
+		lblock.setLocation(65, 170);
 		lblock.setSize(70, 60);
 
 		Image icon3 = new ImageIcon("images/book.jpg").getImage().getScaledInstance(70, 50, 0);
 		JLabel lbbook = new JLabel(new ImageIcon(icon3));
-		lbbook.setLocation(65, 215);
+		lbbook.setLocation(65, 255);
 		lbbook.setSize(70, 50);
 
-		Image icon4 = new ImageIcon("images/mail.jpg").getImage().getScaledInstance(60, 50, 0);
+		Image icon4 = new ImageIcon("images/mail.jpg").getImage().getScaledInstance(60, 60, 0);
 		JLabel lbmail = new JLabel(new ImageIcon(icon4));
-		lbmail.setLocation(70, 280);
-		lbmail.setSize(60, 50);
+		lbmail.setLocation(70, 330);
+		lbmail.setSize(60, 60);
 
-		Image icon5 = new ImageIcon("images/local.jpg").getImage().getScaledInstance(70, 60, 0);
+		Image icon5 = new ImageIcon("images/local.jpg").getImage().getScaledInstance(70, 65, 0);
 		JLabel lblocal = new JLabel(new ImageIcon(icon5));
-		lblocal.setLocation(63, 335);
-		lblocal.setSize(70, 60);
-
-		Image icon6 = new ImageIcon("images/people.jpg").getImage().getScaledInstance(70, 50, 0);
-		JLabel lbpeople = new JLabel(new ImageIcon(icon6));
-		lbpeople.setLocation(67, 400);
-		lbpeople.setSize(70, 50);
+		lblocal.setLocation(63, 405);
+		lblocal.setSize(70, 65);
 
 		JButton btn = new JButton("개설완료!");
 		btn.setLocation(200, 500);
@@ -122,29 +117,36 @@ public class StudyRoomOpen extends JPanel {
 			}
 		});
 
+		Font f = new Font("돋움", Font.BOLD, 15);
+		
 		txtTitle = new JTextField();
 		txtTitle.setText("방 제목을 입력해주세요.");
-		txtTitle.setBounds(170, 90, 350, 30);
+		txtTitle.setBounds(170, 90, 350, 60);
+		txtTitle.setFont(f);
 		txtTitle.addMouseListener(new Clear());
 
 		txtPassword = new JTextField();
 		txtPassword.setText("사용하실 비밀번호를 입력하세요.");
-		txtPassword.setBounds(170, 160, 350, 30);
+		txtPassword.setBounds(170, 170, 350, 60);
+		txtPassword.setFont(f);
 		txtPassword.addMouseListener(new Clear());
 
 		txtSubject = new JTextField();
 		txtSubject.setText("공부 주제를 입력해주세요.");
-		txtSubject.setBounds(170, 225, 350, 30);
+		txtSubject.setBounds(170, 250, 350, 60);
+		txtSubject.setFont(f);
 		txtSubject.addMouseListener(new Clear());
 
 		txtMail = new JTextField();
 		txtMail.setText("사용하실 E-mail 주소를 입력해주세요.");
-		txtMail.setBounds(170, 285, 350, 30);
+		txtMail.setBounds(170, 330, 350, 60);
+		txtMail.setFont(f);
 		txtMail.addMouseListener(new Clear());
 
 		txtArea = new JTextField();
 		txtArea.setText("주로 활동하실 지역을 입력해주세요.");
-		txtArea.setBounds(170, 350, 350, 30);
+		txtArea.setBounds(170, 410, 350, 60);
+		txtArea.setFont(f);
 		txtArea.addMouseListener(new Clear());
 
 		this.add(btn);
@@ -155,7 +157,6 @@ public class StudyRoomOpen extends JPanel {
 		this.add(lbbook);
 		this.add(lbmail);
 		this.add(lblocal);
-		this.add(lbpeople);
 		this.add(back);
 		this.add(txtTitle);
 		this.add(txtPassword);
