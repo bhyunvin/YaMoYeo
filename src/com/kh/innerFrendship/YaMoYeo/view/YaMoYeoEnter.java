@@ -73,9 +73,8 @@ public class YaMoYeoEnter extends JPanel {
 		};
 		
 		roomListTable = new JTable(model);
-		roomListTable.setSize(450, 400);
-		roomListTable.setLocation(75, 175);
 		roomListTable.setRowHeight(60);
+		roomListTable.addMouseListener(new Enter());
 		
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
@@ -87,8 +86,8 @@ public class YaMoYeoEnter extends JPanel {
 		}
 		
 		JScrollPane scroll = new JScrollPane(roomListTable);
-		scroll.setSize(450, 400);
-		scroll.setLocation(25, 100);
+		scroll.setSize(450, 395);
+		scroll.setLocation(75, 175);
 		// 테이블 작성 완료
 
 		JButton back = new JButton("이전화면");
@@ -130,7 +129,7 @@ public class YaMoYeoEnter extends JPanel {
 		this.add(searchTxt);
 		this.add(back);
 		this.add(search);
-		this.add(roomListTable);
+		this.add(scroll);
 
 		mf.add(this);
 	}
@@ -206,5 +205,20 @@ public class YaMoYeoEnter extends JPanel {
 		} 
 		
 		return list;
+	}
+	
+	class Enter extends MouseAdapter {
+		boolean isOkToEnter = false;
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			int selectedRow = roomListTable.getSelectedRow();
+			int selectedCol = roomListTable.getSelectedColumn();
+			
+			if(selectedRow >= 0 && selectedRow <= roomListTable.getRowCount()) {
+				int index = Integer.parseInt(roomListTable.getValueAt(selectedRow, 0).toString());
+				
+			}
+		}
 	}
 }
