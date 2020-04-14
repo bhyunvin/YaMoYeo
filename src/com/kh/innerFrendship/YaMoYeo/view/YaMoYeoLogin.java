@@ -33,6 +33,7 @@ public class YaMoYeoLogin extends JPanel {
 	private JPanel panel;
 	private JTextField txtId;
 	private JPasswordField txtPassword;
+	private YaMoYeoEnter enter;
 	private ArrayList userList;
 
 	public YaMoYeoLogin(JFrame mf) {
@@ -134,26 +135,25 @@ public class YaMoYeoLogin extends JPanel {
 			String inputPwd = String.valueOf(txtPassword.getPassword());
 			String id = "";
 			String password = "";
+			int myNumber = 0;
 			boolean isOkToLogin = false;
 			
-//			if(userList == null) {
-				
-//			} else {
-				for(int i = 0; i < userList.size(); i++) {
-					id = ((User) userList.get(i)).getId();
-					password = ((User) userList.get(i)).getPassword();
-					
-					if(inputId.equals(id) && inputPwd.equals(password)) {
-						isOkToLogin = true;
-						break;
-					} else {
-						isOkToLogin = false;
-					}
+			for(int i = 0; i < userList.size(); i++) {
+				id = ((User) userList.get(i)).getId();
+				password = ((User) userList.get(i)).getPassword();
+
+				if(inputId.equals(id) && inputPwd.equals(password)) {
+					isOkToLogin = true;
+					myNumber = ((User) userList.get(i)).getUserNumber();
+					break;
+				} else {
+					isOkToLogin = false;
 				}
-//			}
+			}
 			
 			if(isOkToLogin == true) {
 				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
+				enter.getMyNumber(myNumber);
 				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
 			} else {
 				JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);
