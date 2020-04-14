@@ -94,7 +94,7 @@ public class SignPanel extends JPanel {
 		
 		Image passwordCorrect = new ImageIcon("images/OK.PNG").getImage().getScaledInstance(30, 30, 0);
 		lblPwdCorrect = new JLabel(new ImageIcon(passwordCorrect));
-		
+	
 		txtPwdTF = new JTextField(20);
 		txtPwdTF.setText("비밀번호 한번 더 입력하세요");
 		txtPwdTF.addMouseListener(new Clear());
