@@ -47,7 +47,7 @@ public class YaMoYeoLoading extends JPanel {
 		Thread t = new Thread(new Runnable() {
 		      public void run() {
 		        try {
-					Thread.sleep(2000);
+					Thread.sleep(1100);
 					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 				} catch (InterruptedException e) {
 					e.printStackTrace();

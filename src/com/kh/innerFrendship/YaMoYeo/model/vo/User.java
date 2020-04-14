@@ -14,17 +14,15 @@ public class User implements Serializable {
 	private String area; // 지역
 	private String major; // 전공
 	private int userNumber; // 고유번호
-	private int userCount = 1;
 	
-	public User(String id, String password, String name, String email, String area, String major) {
+	public User(String id, String password, String name, String email, String area, String major, int userNumber) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.area = area;
 		this.major = major;
-		this.userNumber = userCount;
-		userCount++;
+		this.userNumber = userNumber;
 	}
 	
 	public String getId() {

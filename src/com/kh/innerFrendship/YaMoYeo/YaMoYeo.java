@@ -15,7 +15,7 @@ public class YaMoYeo extends JFrame {
 		this.setResizable(false);
 
 
-		new MyInfo(this);
+		new YaMoYeoLogin(this);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);

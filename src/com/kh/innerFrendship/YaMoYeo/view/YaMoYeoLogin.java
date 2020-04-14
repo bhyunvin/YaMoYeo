@@ -5,9 +5,9 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -22,24 +22,28 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoLogin extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4889478794334192789L;
 	private JFrame mf;
 	private JPanel panel;
 	private JTextField txtId;
 	private JPasswordField txtPassword;
-	private List<User> userList;
+	private ArrayList userList;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
-		userList = readFile();
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
-
+		
+		userList = readFile();
+		
 		Image idImage = new ImageIcon("images/id.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel id = new JLabel(new ImageIcon(idImage));
 		id.setBounds(120, 260, 40, 40);
@@ -132,17 +136,21 @@ public class YaMoYeoLogin extends JPanel {
 			String password = "";
 			boolean isOkToLogin = false;
 			
-			for(int i = 0; i < userList.size(); i++) {
-				id = userList.get(i).getId();
-				password = userList.get(i).getPassword();
+//			if(userList == null) {
 				
-				if(inputId.equals(id) && inputPwd.equals(password)) {
-					isOkToLogin = true;
-					break;
-				} else {
-					isOkToLogin = false;
+//			} else {
+				for(int i = 0; i < userList.size(); i++) {
+					id = ((User) userList.get(i)).getId();
+					password = ((User) userList.get(i)).getPassword();
+					
+					if(inputId.equals(id) && inputPwd.equals(password)) {
+						isOkToLogin = true;
+						break;
+					} else {
+						isOkToLogin = false;
+					}
 				}
-			}
+//			}
 			
 			if(isOkToLogin == true) {
 				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
@@ -161,25 +169,24 @@ public class YaMoYeoLogin extends JPanel {
 	}
 	
 	public ArrayList readFile() {
-		List<User> userList = new ArrayList<>();
-		
+		ArrayList list = null;
+		FileInputStream fis = null;
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("userList.txt"));
+			fis = new FileInputStream("userList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				User user = (User) ois.readObject();
+				list.add(user);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
 			
-			User user = (User) ois.readObject();
-			userList.add(user);
-			
-			ois.close();
-		} catch (FileNotFoundException e1) {
-			return null;
-		} catch (EOFException eofe) {
-			return (ArrayList) userList;
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		
-		return (ArrayList) userList;
+		return list;
 	}
 }
