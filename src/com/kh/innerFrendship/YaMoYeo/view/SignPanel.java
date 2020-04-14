@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,16 +44,18 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	private ArrayList<User> userList = new ArrayList<User>();
-
+	private List<User> userList;
+	private User user;
+	
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
-		readFile();
 		
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
+		
+		userList = readFile();
 		
 		JLabel lbltitle = new JLabel("회원가입");
 		lbltitle.setFont(new Font("돋움", Font.BOLD, 36));
@@ -172,13 +175,9 @@ public class SignPanel extends JPanel {
 				
 				if(isOkToSignUp == true) {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
-					signUp(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(),
-							txtArea.getText(), txtMajor.getText()));
-					
-					System.out.println("userList의 사이즈는 : " + userList.size());
-					for(int i = 0; i < userList.size(); i++) {
-						System.out.println(userList.get(i).getId());
-					}
+					user = new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(),
+							txtArea.getText(), txtMajor.getText());
+					signUp(user);
 				} else {
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -229,9 +228,14 @@ public class SignPanel extends JPanel {
 	public void signUp(User user) {
 		ObjectOutputStream oos = null;
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("userList.txt"));
-			userList.add(user);
+			oos = new ObjectOutputStream(
+					new BufferedOutputStream(
+							new FileOutputStream("userList.txt", true)));
+			
 			oos.writeObject(user);
+			
+			oos.flush();
+			oos.close();
 		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
 		} catch (IOException ioe) {
@@ -241,24 +245,31 @@ public class SignPanel extends JPanel {
 		ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 	}
 	
-	public void readFile() {
+	public ArrayList readFile() {
 		FileInputStream fis = null;
+		List<User> userList = new ArrayList<User>();
+		
 		try {
 			fis = new FileInputStream("userList.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
+			System.out.println(userList.size());
+			
 			User user = (User) ois.readObject();
-			userList.add(user);
+			for(int i = 0; i < userList.size(); i++) {
+				userList.add(user);
+			}
 			
 			ois.close();
 		} catch (FileNotFoundException e1) {
-			return;
+			return null;
 		} catch (EOFException eofe) {
-			return;
+			return (ArrayList) userList;
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return (ArrayList) userList;
 	}
 }
