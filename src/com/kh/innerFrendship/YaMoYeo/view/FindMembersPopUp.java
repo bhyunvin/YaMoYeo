@@ -42,7 +42,7 @@ public class FindMembersPopUp extends JPanel {
 		Image input = new ImageIcon("images/inputButton.PNG").getImage().getScaledInstance(200, 40, 0);
 		JButton button1 = new JButton(new ImageIcon(input));
 		button1.setSize(200, 40);
-		button1.setLocation(175, 150);
+		button1.setLocation(205, 160);
 			
 		
 		
@@ -71,7 +71,7 @@ public class FindMembersPopUp extends JPanel {
 		Image check = new ImageIcon("images/checkButton.PNG").getImage().getScaledInstance(200, 40, 0);
 		JButton button2 = new JButton(new ImageIcon(check));
 		button2.setSize(200, 40);
-		button2.setLocation(175, 365);
+		button2.setLocation(205, 380);
 		button2.addMouseListener(new Click());
 		
 		

@@ -9,9 +9,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.EOFException;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class SignPanel extends JPanel {
 	private JFrame mf;
-	private JPanel signPanel;
+	private JPanel panel;
 	private JTextField txtPwd;
 	private JTextField txtPwdTF;
 	private JTextField txtId;
@@ -40,12 +43,13 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	List<User> userList = new ArrayList<User>();
+	private ArrayList<User> userList = new ArrayList<User>();
 
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
-		this.signPanel = this;
-
+		this.panel = this;
+		readFile();
+		
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
@@ -102,14 +106,14 @@ public class SignPanel extends JPanel {
 			public void keyReleased(KeyEvent e) {
 				if(txtPwd.getText().equals(txtPwdTF.getText())) {
 					passwordCheck = true;
-					signPanel.add(lblPwdCorrect);
+					panel.add(lblPwdCorrect);
 					lblPwdCorrect.setBounds(535, 205, 30, 30);
-					signPanel.remove(lblPwdWrong);
+					panel.remove(lblPwdWrong);
 				} else {
 					passwordCheck = false;
-					signPanel.add(lblPwdWrong);
+					panel.add(lblPwdWrong);
 					lblPwdWrong.setBounds(535, 205, 30, 30);
-					signPanel.remove(lblPwdCorrect);
+					panel.remove(lblPwdCorrect);
 				}
 			}
 		});
@@ -161,16 +165,22 @@ public class SignPanel extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if((txtPwd.getText() != null) && (txtPwdTF.getText() != null) && (txtId.getText() != null) && (txtName.getText() != null)
-					&& (txtArea.getText() != null) && (txtMajor.getText() != null) && (txtEmail.getText() != null) && (passwordCheck == true)) {
+				if((!txtPwd.getText().equals("")) && (!txtPwdTF.getText().equals("")) && (!txtId.getText().equals("")) && (!txtName.getText().equals(""))
+					&& (!txtArea.getText().equals("")) && (!txtMajor.getText().equals("")) && (!txtEmail.getText().equals("")) && (passwordCheck == true)) {
 					isOkToSignUp = true;
 				}
 				
 				if(isOkToSignUp == true) {
-					JOptionPane.showMessageDialog(signPanel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
-					signUp();
+					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
+					signUp(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(),
+							txtArea.getText(), txtMajor.getText()));
+					
+					System.out.println("userList의 사이즈는 : " + userList.size());
+					for(int i = 0; i < userList.size(); i++) {
+						System.out.println(userList.get(i).getId());
+					}
 				} else {
-					JOptionPane.showMessageDialog(signPanel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -201,7 +211,7 @@ public class SignPanel extends JPanel {
 
 		mf.add(this);
 	}
-
+	
 	class Clear extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
@@ -212,30 +222,43 @@ public class SignPanel extends JPanel {
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, signPanel, new YaMoYeoLogin(mf));
+			ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 		}
 	}
 	
-//	회원가입
-	public void signUp() {
-		userList.add(new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(), txtArea.getText(), txtMajor.getText()));
+	public void signUp(User user) {
 		ObjectOutputStream oos = null;
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("userList.txt"));
-			for(int i = 0; i < userList.size(); i++) {
-				oos.writeObject(userList);
-			}
-		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(signPanel, "user.txt파일이 존재하지 않습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(signPanel, "입출력 예외가 발생했습니다. 개발진에게 문의해주세요.", "에러", JOptionPane.ERROR_MESSAGE);
-		} finally {
-			try {
-				oos.flush();
-				oos.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			userList.add(user);
+			oos.writeObject(user);
+		} catch (FileNotFoundException fnfe) {
+			fnfe.printStackTrace();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+		
+		ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
+	}
+	
+	public void readFile() {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("userList.txt");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			User user = (User) ois.readObject();
+			userList.add(user);
+			
+			ois.close();
+		} catch (FileNotFoundException e1) {
+			return;
+		} catch (EOFException eofe) {
+			return;
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 }
