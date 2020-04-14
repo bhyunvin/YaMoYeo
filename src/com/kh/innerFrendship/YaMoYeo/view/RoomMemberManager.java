@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,7 +30,7 @@ import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 public class RoomMemberManager extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
-	private ArrayList<User> userList;
+	private ArrayList userList;
 	private JTable manageTable;
 
 	public RoomMemberManager(JFrame mf) {
@@ -38,6 +39,8 @@ public class RoomMemberManager extends JPanel {
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
+		
+		userList = readFile();
 
 		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel back = new JLabel(new ImageIcon(backImage));
@@ -57,26 +60,14 @@ public class RoomMemberManager extends JPanel {
 		underLine.setLocation(210, 65);
 		underLine.setOpaque(true);
 
-		ObjectInputStream ois = null;
-		try {
-			ois = new ObjectInputStream(new FileInputStream("userList.txt"));
-			userList = (ArrayList<User>) ois.readObject();
-		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		} catch (ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
-		}
-
 		String[] header = {"번호", "이름", "이메일", "지역", "전공", "강퇴"};
 		String[][] contents = new String[userList.size()][6];
 		int roomUserCount = 0;
 
 		while(roomUserCount < userList.size()) {
 			contents[roomUserCount] = new String[] {Integer.toString(roomUserCount + 1),
-					userList.get(roomUserCount).getName(), userList.get(roomUserCount).getEmail(),
-					userList.get(roomUserCount).getArea(), userList.get(roomUserCount).getMajor(),
+					((User) userList.get(roomUserCount)).getName(), ((User) userList.get(roomUserCount)).getEmail(),
+					((User) userList.get(roomUserCount)).getArea(), ((User) userList.get(roomUserCount)).getMajor(),
 			""};
 			roomUserCount++;
 		}
@@ -143,11 +134,33 @@ public class RoomMemberManager extends JPanel {
 			int selectedCol = manageTable.getSelectedColumn();
 			
 			if(selectedRow >= 0 && selectedRow <= manageTable.getRowCount() && selectedCol == 5) {
-				int index = (int) manageTable.getValueAt(selectedRow, 0);
+				int index = Integer.parseInt(manageTable.getValueAt(selectedRow, 0).toString());
 				userList.remove(index - 1);
 				ChangePanel.changePanel(mf, panel, new KickOut(mf));
 			}
 		}
+	}
+	
+	public ArrayList readFile() {
+		ArrayList list = null;
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("userList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				User user = (User) ois.readObject();
+				list.add(user);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
 	}
 }
 
