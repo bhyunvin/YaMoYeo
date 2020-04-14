@@ -9,8 +9,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,6 +31,10 @@ import javax.swing.JTextField;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class SignPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5592443955694293436L;
 	private JFrame mf;
 	private JPanel panel;
 	private JTextField txtPwd;
@@ -44,8 +48,7 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	private List<User> userList;
-	private User user;
+	private int userCount = 1;
 	
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
@@ -54,8 +57,6 @@ public class SignPanel extends JPanel {
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
-		
-		userList = readFile();
 		
 		JLabel lbltitle = new JLabel("회원가입");
 		lbltitle.setFont(new Font("돋움", Font.BOLD, 36));
@@ -168,16 +169,28 @@ public class SignPanel extends JPanel {
 		btnSubmit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if((!txtPwd.getText().equals("")) && (!txtPwdTF.getText().equals("")) && (!txtId.getText().equals("")) && (!txtName.getText().equals(""))
-					&& (!txtArea.getText().equals("")) && (!txtMajor.getText().equals("")) && (!txtEmail.getText().equals("")) && (passwordCheck == true)) {
+				String id = txtId.getText();
+				String password = txtPwd.getText();
+				String passwordChk = txtPwdTF.getText();
+				String name = txtName.getText();
+				String area = txtArea.getText();
+				String major = txtMajor.getText();
+				String email = txtEmail.getText();
+				
+				if((!id.equals("")) && (!password.equals("")) && (!passwordChk.equals(""))
+						&& (!name.equals("")) && (!area.equals(""))
+						&& (!major.equals("")) && (!email.equals(""))
+						&& (passwordCheck == true)) {
 					isOkToSignUp = true;
 				}
 				
 				if(isOkToSignUp == true) {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
-					user = new User(txtId.getText(), txtPwd.getText(), txtName.getText(), txtEmail.getText(),
-							txtArea.getText(), txtMajor.getText());
+//					String id, String password, String name, String email, String area, String major, int userNumber
+					User user = new User(id, password, name, email, area, major, userCount);
 					signUp(user);
+					userCount++;
+					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
 				}
@@ -227,49 +240,21 @@ public class SignPanel extends JPanel {
 	
 	public void signUp(User user) {
 		ObjectOutputStream oos = null;
+		
 		try {
-			oos = new ObjectOutputStream(
-					new BufferedOutputStream(
-							new FileOutputStream("userList.txt", true)));
-			
+			oos = new ObjectOutputStream(new FileOutputStream("userList.txt", true));
 			oos.writeObject(user);
-			
-			oos.flush();
-			oos.close();
-		} catch (FileNotFoundException fnfe) {
-			fnfe.printStackTrace();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-		
-		ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
-	}
-	
-	public ArrayList readFile() {
-		FileInputStream fis = null;
-		List<User> userList = new ArrayList<User>();
-		
-		try {
-			fis = new FileInputStream("userList.txt");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			
-			System.out.println(userList.size());
-			
-			User user = (User) ois.readObject();
-			for(int i = 0; i < userList.size(); i++) {
-				userList.add(user);
-			}
-			
-			ois.close();
-		} catch (FileNotFoundException e1) {
-			return null;
-		} catch (EOFException eofe) {
-			return (ArrayList) userList;
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				oos.flush();
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		return (ArrayList) userList;
 	}
 }
