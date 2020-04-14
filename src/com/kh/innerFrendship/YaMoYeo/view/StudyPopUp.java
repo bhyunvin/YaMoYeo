@@ -3,8 +3,11 @@ package com.kh.innerFrendship.YaMoYeo.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,17 +15,34 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class StudyPopUp extends JPanel {
+	
+	private JFrame mf;
+	private JPanel panel;
 
 	public StudyPopUp(JFrame mf) {
+		
+		this.mf = mf;
+		this.panel = this;
 		  
 		this.setLayout(null);
 		this.setSize(600, 600);
 		this.setBackground(new Color(232,221,201));
 		 	
-		Image image = new ImageIcon("img/back.PNG").getImage().getScaledInstance(40, 40, 0);
-		JLabel label = new JLabel(new ImageIcon(image));
-		label.setSize(40, 40);
-		label.setLocation(10, 10);
+//		Image image = new ImageIcon("img/back.PNG").getImage().getScaledInstance(40, 40, 0);
+//		JLabel label = new JLabel(new ImageIcon(image));
+//		label.setSize(40, 40);
+//		label.setLocation(10, 10);
+		
+		JButton back = new JButton(new ImageIcon("images/back.png"));
+		back.setLocation(10,10);
+		back.setSize(50,50);
+		back.setContentAreaFilled(false);
+		back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new YaMoYeoStudyRoom(mf));
+			}
+		});
 		
 		JLabel label2 = new JLabel("3월 10일의 스터디 일정");
 		label2.setSize(260, 40);
@@ -99,7 +119,8 @@ public class StudyPopUp extends JPanel {
 		this.add(hourlist);
 		this.add(label3);
 		this.add(label2);
-		this.add(label);
+	//	this.add(label);
+		this.add(back);
 		mf.add(this);
 	}
 }
