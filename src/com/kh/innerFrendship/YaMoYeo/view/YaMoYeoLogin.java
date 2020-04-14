@@ -5,13 +5,10 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.EOFException;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +30,7 @@ public class YaMoYeoLogin extends JPanel {
 	private JPanel panel;
 	private JTextField txtId;
 	private JPasswordField txtPassword;
-	private YaMoYeoEnter enter;
+	private YaMoYeoEnter enter = new YaMoYeoEnter();
 	private ArrayList userList;
 
 	public YaMoYeoLogin(JFrame mf) {

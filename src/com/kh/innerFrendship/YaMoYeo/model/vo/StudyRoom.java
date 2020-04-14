@@ -14,20 +14,16 @@ public class StudyRoom implements Serializable {
 	private String subject;
 	private String email;
 	private String area;
-	private int maxMember;
-	private int[] outMembers;
 	private Date today = new Date(); // 오늘 날짜 저장
 	private int memberCount = 1;
 	private int myNumber;
 	// 일정 arraylist
-	public StudyRoom(String roomName, String roomPassword, String subject, String email, String area, int maxMember,
-			int myNumber) {
+	public StudyRoom(String roomName, String roomPassword, String subject, String email, String area, int myNumber) {
 		this.roomName = roomName;
 		this.roomPassword = roomPassword;
 		this.subject = subject;
 		this.email = email;
 		this.area = area;
-		this.maxMember = maxMember;
 		this.myNumber = myNumber;
 		roomNumber++;
 	}
@@ -66,18 +62,6 @@ public class StudyRoom implements Serializable {
 	}
 	public void setArea(String area) {
 		this.area = area;
-	}
-	public int getMaxMember() {
-		return maxMember;
-	}
-	public void setMaxMember(int maxMember) {
-		this.maxMember = maxMember;
-	}
-	public int[] getOutMembers() {
-		return outMembers;
-	}
-	public void setOutMembers(int[] outMembers) {
-		this.outMembers = outMembers;
 	}
 	public Date getToday() {
 		return today;
