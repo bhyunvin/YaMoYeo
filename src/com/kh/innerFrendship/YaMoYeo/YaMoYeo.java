@@ -14,9 +14,10 @@ public class YaMoYeo extends JFrame {
 		this.setIconImage(new ImageIcon("images/ya.PNG").getImage());
 		this.setResizable(false);
 
-		new KickOut(this);
+		new MyInfo(this);
 		
-		
+
+//		new SignPanel(this);
 		
 		
 		
