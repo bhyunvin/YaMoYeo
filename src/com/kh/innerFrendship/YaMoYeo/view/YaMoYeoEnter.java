@@ -26,12 +26,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
+import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
-	private ArrayList roomList;
+	private ArrayList<StudyRoom> roomList;
+	private ArrayList<User> userList;
 	private JTable roomListTable;
 
 	public YaMoYeoEnter() {}
@@ -41,6 +43,7 @@ public class YaMoYeoEnter extends JPanel {
 		this.panel = this;
 		
 		roomList = readFile();
+		userList = readUser();
 
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -57,10 +60,11 @@ public class YaMoYeoEnter extends JPanel {
 		}
 		
 		for(int i = 0; i < roomList.size(); i++) {
-			
+			contents[i] = new String[] {
+					roomList.get(i).getRoomName(),
+					userList.get(roomList.get(i).getMyNumber()).getName(),
+					String.valueOf(roomList.get(i).getMemberCount())};
 		}
-		
-		DefaultTableModel dtm = new DefaultTableModel(contents, header);
 		
 		DefaultTableModel model = new DefaultTableModel(contents, header) {
 			public boolean isCellEditable(int row, int column) {
@@ -69,6 +73,9 @@ public class YaMoYeoEnter extends JPanel {
 		};
 		
 		roomListTable = new JTable(model);
+		roomListTable.setSize(450, 400);
+		roomListTable.setLocation(75, 175);
+		roomListTable.setRowHeight(60);
 		
 		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
 		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
@@ -79,13 +86,10 @@ public class YaMoYeoEnter extends JPanel {
 			tcm.getColumn(i).setCellRenderer(dtcr);  
 		}
 		
-		roomListTable.setSize(400, 425);
-		
 		JScrollPane scroll = new JScrollPane(roomListTable);
-		scroll.setSize(400, 425);
+		scroll.setSize(450, 400);
 		scroll.setLocation(25, 100);
 		// 테이블 작성 완료
-		
 
 		JButton back = new JButton("이전화면");
 		back.setBounds(0, 0, 100, 50);
@@ -170,6 +174,28 @@ public class YaMoYeoEnter extends JPanel {
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				StudyRoom studyRoom = (StudyRoom) ois.readObject();
 				list.add(studyRoom);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
+	}
+	
+	public ArrayList readUser() {
+		ArrayList list = null;
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("userList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				User user = (User) ois.readObject();
+				list.add(user);
 			}
 		} catch (EOFException e) {
 			return list;
