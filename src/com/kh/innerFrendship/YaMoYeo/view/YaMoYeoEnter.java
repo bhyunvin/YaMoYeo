@@ -16,19 +16,23 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
-import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
 	private ArrayList roomList;
+	private JTable roomListTable;
 
 	public YaMoYeoEnter() {}
 
@@ -46,8 +50,17 @@ public class YaMoYeoEnter extends JPanel {
 		String[] header = {"이름", "개설자", "참여자 수"};
 		String[][] contents = null;
 		
+		if(roomList == null) {
+			contents = new String[1][3];
+		} else {
+			contents = new String[roomList.size()][3];
+		}
+		
+		for(int i = 0; i < roomList.size(); i++) {
+			
+		}
+		
 		DefaultTableModel dtm = new DefaultTableModel(contents, header);
-		JTable roomListTable = new JTable(dtm);
 		
 		DefaultTableModel model = new DefaultTableModel(contents, header) {
 			public boolean isCellEditable(int row, int column) {
@@ -55,8 +68,22 @@ public class YaMoYeoEnter extends JPanel {
 			}
 		};
 		
+		roomListTable = new JTable(model);
+		
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
+		dtcr.setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
+
+		TableColumnModel tcm = roomListTable.getColumnModel() ; // 정렬할 테이블의 컬럼모델을 가져옴
+
+		for(int i = 0 ; i < tcm.getColumnCount() ; i++){
+			tcm.getColumn(i).setCellRenderer(dtcr);  
+		}
+		
 		roomListTable.setSize(400, 425);
-		roomListTable.setLocation(100, 175);
+		
+		JScrollPane scroll = new JScrollPane(roomListTable);
+		scroll.setSize(400, 425);
+		scroll.setLocation(25, 100);
 		// 테이블 작성 완료
 		
 
