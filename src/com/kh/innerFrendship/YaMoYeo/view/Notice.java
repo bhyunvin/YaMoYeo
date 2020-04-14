@@ -3,6 +3,8 @@ package com.kh.innerFrendship.YaMoYeo.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +29,12 @@ public class Notice extends JPanel {
 		JLabel back = new JLabel(new ImageIcon(backImage));		
 		back.setLocation(15, 15);
 		back.setSize(40, 40);
+		back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new YaMoYeoStudyRoom(mf));
+			}
+		});
 
 		JLabel label = new JLabel();
 		label = new JLabel("공지사항");
