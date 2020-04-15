@@ -10,22 +10,22 @@ public class StudyRoom implements Serializable {
 	private static final long serialVersionUID = -3773890462791718830L;
 	private String roomName;
 	private String roomPassword;
-	private int roomNumber = 1;
 	private String subject;
 	private String email;
 	private String area;
 	private Date today = new Date(); // 오늘 날짜 저장
+	private int roomNumber;
 	private int memberCount = 1;
 	private int myNumber;
-	// 일정 arraylist
-	public StudyRoom(String roomName, String roomPassword, String subject, String email, String area, int myNumber) {
+	
+	public StudyRoom(String roomName, String roomPassword, String subject, String email, String area, int roomNumber, int myNumber) {
 		this.roomName = roomName;
 		this.roomPassword = roomPassword;
 		this.subject = subject;
 		this.email = email;
 		this.area = area;
 		this.myNumber = myNumber;
-		roomNumber++;
+		this.roomNumber = roomNumber;
 	}
 	public String getRoomName() {
 		return roomName;
@@ -38,12 +38,6 @@ public class StudyRoom implements Serializable {
 	}
 	public void setRoomPassword(String roomPassword) {
 		this.roomPassword = roomPassword;
-	}
-	public int getRoomNumber() {
-		return roomNumber;
-	}
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
 	}
 	public String getSubject() {
 		return subject;
@@ -78,11 +72,17 @@ public class StudyRoom implements Serializable {
 	public int getMyNumber() {
 		return myNumber;
 	}
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+	public int getRoomNumber() {
+		return roomNumber;
+	}
 	
 	@Override
 	public String toString() {
-		return "StudyRoom [roomName=" + roomName + ", roomPassword=" + roomPassword + ", roomNumber=" + roomNumber
-				+ ", subject=" + subject + ", email=" + email + ", area=" + area + ", today=" + today + ", memberCount="
+		return "StudyRoom [roomName=" + roomName + ", roomPassword=" + roomPassword +
+				 ", subject=" + subject + ", email=" + email + ", area=" + area + ", today=" + today + ", memberCount="
 				+ memberCount + ", myNumber=" + myNumber + "]";
 	}
 }
