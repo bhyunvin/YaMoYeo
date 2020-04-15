@@ -78,4 +78,11 @@ public class StudyRoom implements Serializable {
 	public int getMyNumber() {
 		return myNumber;
 	}
+	
+	@Override
+	public String toString() {
+		return "StudyRoom [roomName=" + roomName + ", roomPassword=" + roomPassword + ", roomNumber=" + roomNumber
+				+ ", subject=" + subject + ", email=" + email + ", area=" + area + ", today=" + today + ", memberCount="
+				+ memberCount + ", myNumber=" + myNumber + "]";
+	}
 }
