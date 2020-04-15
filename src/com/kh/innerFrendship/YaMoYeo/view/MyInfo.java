@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.TextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class MyInfo extends JPanel {
 
@@ -33,6 +33,12 @@ public class MyInfo extends JPanel {
 		JLabel backBtn = new JLabel(new ImageIcon(back));
 		backBtn.setSize(40, 40);
 		backBtn.setLocation(0, 20);
+		backBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
+			}
+		});
 
 		JLabel title = new JLabel("내 정보");
 		title.setSize(190, 42);
