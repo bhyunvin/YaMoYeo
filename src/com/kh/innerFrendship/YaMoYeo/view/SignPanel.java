@@ -48,7 +48,7 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	private int userCount = 1;
+	private int userCount = 0;
 	
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
@@ -188,8 +188,9 @@ public class SignPanel extends JPanel {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
 //					String id, String password, String name, String email, String area, String major, int userNumber
 					User user = new User(id, password, name, email, area, major, userCount);
-					signUp(user);
 					userCount++;
+					signUp(user);
+					System.out.println(user);
 					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
