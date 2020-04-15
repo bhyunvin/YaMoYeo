@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,8 +34,11 @@ public class YaMoYeoStudyRoom extends JPanel {
 	private List<StudyRoom> roomList = new ArrayList<>();
 	private int myNumber;
 	private int roomNumber;
-	String[] toDoArray = new String[3];
+	private String[] toDoArray;
 	private StudyRoom sr;
+	private JTextField txt;
+	private JTextField txt2;
+	private JTextField txt3;
 	
 	public YaMoYeoStudyRoom() {}
 	
@@ -42,10 +46,13 @@ public class YaMoYeoStudyRoom extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		
-		roomList = readFile();
 		getRoomNumber();
 		
+		roomList = readFile();
+		
 		sr = roomList.get(roomNumber);
+		
+		toDoArray = new String[3];
 		
 		this.setSize(600, 600);
 		this.setLayout(null);
@@ -93,7 +100,7 @@ public class YaMoYeoStudyRoom extends JPanel {
 		chk3.setSize(50, 50);
 		chk3.setOpaque(false);
 		
-		JTextField txt = new JTextField("to do list");
+		txt = new JTextField("to do list");
 		txt.setLocation(85, 110);
 		txt.setSize(200,30);
 		txt.setOpaque(false);
@@ -103,10 +110,11 @@ public class YaMoYeoStudyRoom extends JPanel {
 			public void keyReleased(KeyEvent e) {
 				toDoArray[0] = txt.getText();
 				txt.setText(toDoArray[0]);
+				fileOutput();
 			}
 		});
 		
-		JTextField txt2 = new JTextField("to do list");
+		txt2 = new JTextField("to do list");
 		txt2.setLocation(85, 155);
 		txt2.setSize(200,30);
 		txt2.setOpaque(false);
@@ -116,10 +124,11 @@ public class YaMoYeoStudyRoom extends JPanel {
 			public void keyReleased(KeyEvent e) {
 				toDoArray[1] = txt2.getText();
 				txt2.setText(toDoArray[1]);
+				fileOutput();
 			}
 		});
 		
-		JTextField txt3 = new JTextField("to do list");
+		txt3 = new JTextField("to do list");
 		txt3.setLocation(85, 205);
 		txt3.setSize(200,30);
 		txt3.setOpaque(false);
@@ -132,6 +141,8 @@ public class YaMoYeoStudyRoom extends JPanel {
 				fileOutput();
 			}
 		});
+		
+		fileInput();
 		
 		this.add(title);
 		this.add(back);
@@ -199,13 +210,10 @@ public class YaMoYeoStudyRoom extends JPanel {
 	}
 	
 	public void fileOutput() {
-		System.out.println(toDoArray[0]);
-		System.out.println(toDoArray[1]);
-		System.out.println(toDoArray[2]);
-		
 		DataOutputStream dos = null;
+		File file = new File("todoList" + sr.getRoomName() + ".txt");
 		try {
-			dos = new DataOutputStream(new FileOutputStream("todoList" + sr.getRoomName() + ".txt"));
+			dos = new DataOutputStream(new FileOutputStream(file));
 			
 			dos.writeUTF(toDoArray[0]);
 			dos.writeUTF(toDoArray[1]);
@@ -218,6 +226,34 @@ public class YaMoYeoStudyRoom extends JPanel {
 			try {
 				dos.flush();
 				dos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void fileInput() {
+		DataInputStream dis = null;
+		File file = new File("todoList" + sr.getRoomName() + ".txt");
+		try {
+			dis = new DataInputStream(new FileInputStream(file));
+
+			for(int i = 0; i < 3; i++) {
+				toDoArray[i] = dis.readUTF();
+			}
+			
+			txt.setText(toDoArray[0]);
+			txt2.setText(toDoArray[1]);
+			txt3.setText(toDoArray[2]);
+		} catch (FileNotFoundException e) {
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(dis != null) {
+					dis.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
