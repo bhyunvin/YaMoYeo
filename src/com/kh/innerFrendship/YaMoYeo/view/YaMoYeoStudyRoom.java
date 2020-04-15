@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,19 +19,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
+
 public class YaMoYeoStudyRoom extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
+	private int roomNumber;
+	private List<StudyRoom> roomList = new ArrayList<>();
+	private StudyRoom studyRoom;
+	
+	public YaMoYeoStudyRoom() {}
 	
 	public YaMoYeoStudyRoom(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		roomList = readFile();
+		studyRoom = roomList.get(roomNumber);
 		
 		this.setSize(600,600);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
 		
-		JLabel title = new JLabel("스터디");
+		JLabel title = new JLabel();
+		title.setText(studyRoom.getRoomName());
 		title.setLocation(240, 20);
 		title.setSize(250, 50);
 		title.setFont(new Font("돋움", Font.BOLD,35));
@@ -93,5 +109,31 @@ public class YaMoYeoStudyRoom extends JPanel {
 		this.add(txt3);
 		
 		mf.add(this);
+	}
+	
+	public ArrayList readFile() {
+		ArrayList list = null;
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("roomList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				StudyRoom studyRoom = (StudyRoom) ois.readObject();
+				list.add(studyRoom);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
+	}
+	
+	public void getRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 }

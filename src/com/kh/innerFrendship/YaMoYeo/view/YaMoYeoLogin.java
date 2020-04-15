@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
 import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class YaMoYeoLogin extends JPanel {
@@ -32,6 +33,7 @@ public class YaMoYeoLogin extends JPanel {
 	private JPasswordField txtPassword;
 	private YaMoYeoEnter enter = new YaMoYeoEnter();
 	private ArrayList userList;
+	private ArrayList roomList;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
@@ -147,8 +149,12 @@ public class YaMoYeoLogin extends JPanel {
 					isOkToLogin = false;
 				}
 			}
+			roomList = readRoom();
 			
-			if(isOkToLogin == true) {
+			if(isOkToLogin == true && roomList == null) {
+				JOptionPane.showMessageDialog(panel, "방이 한개도 없습니다. 처음으로 방을 만들어보세요!", "오류", JOptionPane.ERROR_MESSAGE);
+				ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
+			} else if(isOkToLogin == true) {
 				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
 				enter.getMyNumber(myNumber);
 				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
@@ -175,6 +181,28 @@ public class YaMoYeoLogin extends JPanel {
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				User user = (User) ois.readObject();
 				list.add(user);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
+	}
+	
+	public ArrayList readRoom() {
+		ArrayList list = null;
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("roomList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				StudyRoom studyRoom = (StudyRoom) ois.readObject();
+				list.add(studyRoom);
 			}
 		} catch (EOFException e) {
 			return list;

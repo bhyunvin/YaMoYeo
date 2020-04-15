@@ -32,9 +32,13 @@ public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private int myNumber;
+	private String roomPassword;
 	private ArrayList<StudyRoom> roomList;
 	private ArrayList<User> userList;
 	private JTable roomListTable;
+	private StudyRoom studyRoom;
+	private int roomNumber;
+	private YaMoYeoStudyRoom ymysr = new YaMoYeoStudyRoom();
 
 	public YaMoYeoEnter() {}
 
@@ -213,11 +217,32 @@ public class YaMoYeoEnter extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			int selectedRow = roomListTable.getSelectedRow();
-			int selectedCol = roomListTable.getSelectedColumn();
 			
 			if(selectedRow >= 0 && selectedRow <= roomListTable.getRowCount()) {
-				int index = Integer.parseInt(roomListTable.getValueAt(selectedRow, 0).toString());
-				
+				String roomName = roomListTable.getValueAt(selectedRow, 0).toString();
+				int i = 0;
+				for(i = 0; i < roomList.size(); i++) {
+					if(roomName.equals(roomList.get(i).getRoomName())) {
+						roomPassword = roomList.get(i).getRoomPassword();
+						break;
+					}
+				}
+			}
+			
+			checkPassword();
+		}
+	}
+	
+	public void checkPassword() {
+		String inputPassword = JOptionPane.showInputDialog(panel, "비밀번호를 입력하세요", "", JOptionPane.QUESTION_MESSAGE);
+	
+		if(inputPassword != null) {
+			if(inputPassword.equals(roomPassword)) {
+				JOptionPane.showMessageDialog(panel, "비밀번호가 일치합니다", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
+				ChangePanel.changePanel(mf, panel, new YaMoYeoStudyRoom(mf));
+			} else if(!inputPassword.equals(roomPassword)) {
+				JOptionPane.showMessageDialog(panel, "비밀번호가 틀렸습니다", "비밀번호 오류", JOptionPane.ERROR_MESSAGE);
+				checkPassword();
 			}
 		}
 	}
