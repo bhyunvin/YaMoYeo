@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -36,9 +39,6 @@ public class YaMoYeoEnter extends JPanel {
 	private ArrayList<StudyRoom> roomList;
 	private ArrayList<User> userList;
 	private JTable roomListTable;
-	private StudyRoom studyRoom;
-	private int roomNumber;
-	private YaMoYeoStudyRoom ymysr = new YaMoYeoStudyRoom();
 
 	public YaMoYeoEnter() {}
 
@@ -66,7 +66,7 @@ public class YaMoYeoEnter extends JPanel {
 		for(int i = 0; i < roomList.size(); i++) {
 			contents[i] = new String[] {
 					roomList.get(i).getRoomName(),
-					userList.get(roomList.get(i).getMyNumber()).getName(),
+					userList.get(roomList.get(i).getMyNumber() - 1).getName(),
 					String.valueOf(roomList.get(i).getMemberCount())};
 		}
 		
@@ -212,18 +212,37 @@ public class YaMoYeoEnter extends JPanel {
 	}
 	
 	class Enter extends MouseAdapter {
-		boolean isOkToEnter = false;
-		
 		@Override
 		public void mousePressed(MouseEvent e) {
 			int selectedRow = roomListTable.getSelectedRow();
 			
 			if(selectedRow >= 0 && selectedRow <= roomListTable.getRowCount()) {
 				String roomName = roomListTable.getValueAt(selectedRow, 0).toString();
-				int i = 0;
-				for(i = 0; i < roomList.size(); i++) {
+				
+				for(int i = 0; i < roomList.size(); i++) {
 					if(roomName.equals(roomList.get(i).getRoomName())) {
 						roomPassword = roomList.get(i).getRoomPassword();
+						
+						DataOutputStream dos = null;
+						try {
+							dos = new DataOutputStream(new FileOutputStream("roomNumber.txt"));
+						
+							dos.writeInt(i);
+						} catch (FileNotFoundException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						} finally {
+							if(dos != null) {
+								try {
+									dos.flush();
+									dos.close();
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
+							}
+						}
+						
 						break;
 					}
 				}
