@@ -148,7 +148,7 @@ public class YaMoYeoLogin extends JPanel {
 				if(inputId.equals(id) && inputPwd.equals(password)) {
 					isOkToLogin = true;
 					myNumber = ((User) userList.get(i)).getUserNumber();
-					num = ((User) userList.get(i)).getUserNumber();
+					num = myNumber;
 					break;
 				} else {
 					isOkToLogin = false;

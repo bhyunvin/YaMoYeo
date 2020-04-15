@@ -80,11 +80,11 @@ public class User implements Serializable {
 	public void setUserNumber(int userNumber) {
 		this.userNumber = userNumber;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", password=" + password + ", name="
-				+ name + ", email=" + email + ", area=" + area + ", major=" + major + ", userNumber=" + userNumber
-				+ "]";
+		return "User [id=" + id + ", password=" + password + ", name=" + name + ", email=" + email + ", area=" + area
+				+ ", major=" + major + ", userNumber=" + userNumber + "]";
 	}
+	
 }
