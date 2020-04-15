@@ -2,12 +2,16 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -29,6 +33,8 @@ public class YaMoYeoStudyRoom extends JPanel {
 	private List<StudyRoom> roomList = new ArrayList<>();
 	private int myNumber;
 	private int roomNumber;
+	String[] toDoArray = new String[3];
+	private StudyRoom sr;
 	
 	public YaMoYeoStudyRoom() {}
 	
@@ -39,8 +45,7 @@ public class YaMoYeoStudyRoom extends JPanel {
 		roomList = readFile();
 		getRoomNumber();
 		
-		StudyRoom sr = roomList.get(roomNumber);
-		System.out.println(roomNumber);
+		sr = roomList.get(roomNumber);
 		
 		this.setSize(600, 600);
 		this.setLayout(null);
@@ -92,16 +97,41 @@ public class YaMoYeoStudyRoom extends JPanel {
 		txt.setLocation(85, 110);
 		txt.setSize(200,30);
 		txt.setOpaque(false);
+		txt.addMouseListener(new Clear());
+		txt.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				toDoArray[0] = txt.getText();
+				txt.setText(toDoArray[0]);
+			}
+		});
 		
 		JTextField txt2 = new JTextField("to do list");
 		txt2.setLocation(85, 155);
 		txt2.setSize(200,30);
 		txt2.setOpaque(false);
+		txt2.addMouseListener(new Clear());
+		txt2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				toDoArray[1] = txt2.getText();
+				txt2.setText(toDoArray[1]);
+			}
+		});
 		
 		JTextField txt3 = new JTextField("to do list");
 		txt3.setLocation(85, 205);
 		txt3.setSize(200,30);
 		txt3.setOpaque(false);
+		txt3.addMouseListener(new Clear());
+		txt3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				toDoArray[2] = txt3.getText();
+				txt3.setText(toDoArray[2]);
+				fileOutput();
+			}
+		});
 		
 		this.add(title);
 		this.add(back);
@@ -158,6 +188,33 @@ public class YaMoYeoStudyRoom extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	class Clear extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			((JTextField) e.getComponent()).setText("");
+		}
+	}
+	
+	public void fileOutput() {
+		System.out.println(toDoArray[0]);
+		System.out.println(toDoArray[1]);
+		System.out.println(toDoArray[2]);
+		
+		BufferedWriter bw = null;
+		try {
+			bw = new BufferedWriter(new FileWriter("todoList" + sr.getRoomName() + ".txt"));
+			if(toDoArray[0] != null && toDoArray[1] != null && toDoArray[2] != null) {
+				bw.write(toDoArray[0]);
+				bw.write(toDoArray[1]);
+				bw.write(toDoArray[2]);
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 }
