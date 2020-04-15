@@ -93,6 +93,17 @@ public class YaMoYeoEnter extends JPanel {
 		scroll.setSize(450, 395);
 		scroll.setLocation(75, 175);
 		// 테이블 작성 완료
+		
+		Image info = new ImageIcon("images/개설.jpg").getImage().getScaledInstance(60, 60, 0);
+		JLabel myInfo = new JLabel(new ImageIcon(info));
+		myInfo.setSize(60, 60);
+		myInfo.setLocation(530, 110);
+		myInfo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new MyInfo(mf));
+			}
+		});
 
 		JButton back = new JButton("이전화면");
 		back.setBounds(0, 0, 100, 50);
@@ -126,6 +137,7 @@ public class YaMoYeoEnter extends JPanel {
 
 		back.addMouseListener(new MyMouseAdapter());
 
+		this.add(myInfo);
 		this.add(profileBtn);
 		this.add(alramBtn);
 		this.add(registerBtn);

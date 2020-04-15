@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -34,6 +37,7 @@ public class YaMoYeoLogin extends JPanel {
 	private YaMoYeoEnter enter = new YaMoYeoEnter();
 	private ArrayList userList;
 	private ArrayList roomList;
+	private int num;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
@@ -144,6 +148,7 @@ public class YaMoYeoLogin extends JPanel {
 				if(inputId.equals(id) && inputPwd.equals(password)) {
 					isOkToLogin = true;
 					myNumber = ((User) userList.get(i)).getUserNumber();
+					num = ((User) userList.get(i)).getUserNumber();
 					break;
 				} else {
 					isOkToLogin = false;
@@ -154,9 +159,11 @@ public class YaMoYeoLogin extends JPanel {
 			if(isOkToLogin == true && roomList == null) {
 				JOptionPane.showMessageDialog(panel, "방이 한개도 없습니다. 처음으로 방을 만들어보세요!", "오류", JOptionPane.ERROR_MESSAGE);
 				ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
+				outPutMyNumber();
 			} else if(isOkToLogin == true) {
 				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
 				enter.getMyNumber(myNumber);
+				outPutMyNumber();
 				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
 			} else {
 				JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);
@@ -213,5 +220,28 @@ public class YaMoYeoLogin extends JPanel {
 		} 
 		
 		return list;
+	}
+	
+	public void outPutMyNumber() {
+		DataOutputStream dos = null;
+		try {
+			dos = new DataOutputStream(new FileOutputStream("myNumber.txt"));
+		
+			dos.writeInt(num);
+			System.out.println(num);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} finally {
+			if(dos != null) {
+				try {
+					dos.flush();
+					dos.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
 	}
 }
