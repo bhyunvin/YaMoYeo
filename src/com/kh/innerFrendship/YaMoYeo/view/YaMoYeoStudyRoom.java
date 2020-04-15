@@ -6,12 +6,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -203,18 +203,24 @@ public class YaMoYeoStudyRoom extends JPanel {
 		System.out.println(toDoArray[1]);
 		System.out.println(toDoArray[2]);
 		
-		BufferedWriter bw = null;
+		DataOutputStream dos = null;
 		try {
-			bw = new BufferedWriter(new FileWriter("todoList" + sr.getRoomName() + ".txt"));
-			if(toDoArray[0] != null && toDoArray[1] != null && toDoArray[2] != null) {
-				bw.write(toDoArray[0]);
-				bw.write(toDoArray[1]);
-				bw.write(toDoArray[2]);
-			}
+			dos = new DataOutputStream(new FileOutputStream("todoList" + sr.getRoomName() + ".txt"));
+			
+			dos.writeUTF(toDoArray[0]);
+			dos.writeUTF(toDoArray[1]);
+			dos.writeUTF(toDoArray[2]);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		} finally {
+			try {
+				dos.flush();
+				dos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
