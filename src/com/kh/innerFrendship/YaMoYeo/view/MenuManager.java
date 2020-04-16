@@ -72,7 +72,7 @@ public class MenuManager extends JPanel {
 			}
 		});
 
-		JButton btn4 = new JButton("조원 강퇴 투표");
+		JButton btn4 = new JButton("조원 강퇴");
 		btn4.setLocation(300, 50);
 		btn4.setSize(150, 550);
 		btn4.setBackground(new Color(240, 149, 125));

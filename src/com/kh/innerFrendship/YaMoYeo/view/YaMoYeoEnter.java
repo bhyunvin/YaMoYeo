@@ -18,9 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -54,14 +52,14 @@ public class YaMoYeoEnter extends JPanel {
 		this.setLayout(null);
 		
 		// 테이블 작성 시작
-		String[] header = {"이름", "개설자", "참여자 수"};
+		String[] header = {"방 이름", "지역", "공부 주제"};
 		String[][] contents = new String[roomList.size()][3];
 		
 		for(int i = 0; i < roomList.size(); i++) {
 			contents[i] = new String[] {
 					roomList.get(i).getRoomName(),
-					Integer.toString(roomList.get(roomNumber).getRoomNumber()) + "번 유저의 방",
-					String.valueOf(roomList.get(i).getMemberCount())};
+					roomList.get(i).getArea(),
+					roomList.get(i).getSubject()};
 		}
 		
 		DefaultTableModel model = new DefaultTableModel(contents, header) {
@@ -217,7 +215,6 @@ public class YaMoYeoEnter extends JPanel {
 			
 			if(selectedRow >= 0 && selectedRow <= roomListTable.getRowCount()) {
 				String roomName = roomListTable.getValueAt(selectedRow, 0).toString();
-				
 				for(int i = 0; i < roomList.size(); i++) {
 					if(roomName.equals(roomList.get(i).getRoomName())) {
 						roomPassword = roomList.get(i).getRoomPassword();
