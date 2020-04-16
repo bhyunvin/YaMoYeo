@@ -12,15 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
 public class NoticePopUp extends JPanel {
-
 	private JFrame mf;
 	private JPanel panel;
 	
-	
 	public NoticePopUp(JFrame mf) {
-		
 		this.mf = mf;
 		this.panel = this;
 		
@@ -34,7 +30,6 @@ public class NoticePopUp extends JPanel {
 		back.setLocation(10, 25);
 		back.addMouseListener(new Click());
 		
-		
 		JLabel title = new JLabel("공지1");
 		title.setSize(250, 80);
 		title.setLocation(240, 5);
@@ -46,21 +41,16 @@ public class NoticePopUp extends JPanel {
 		underLine.setLocation(227, 64);
 		underLine.setSize(105, 2);
 		
-		
 		JTextField noticetf = new JTextField();
 		noticetf.setSize(500, 420);
 		noticetf.setLocation(40, 90);
-		
-		
 		
 		this.add(noticetf);
 		this.add(underLine);
 		this.add(title);
 		this.add(back);
 		mf.add(this);
-		
 	}
-	
 	
 	class Click extends MouseAdapter {
 		@Override

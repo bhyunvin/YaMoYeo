@@ -11,7 +11,6 @@ public class YaMoYeoMainFrame extends JFrame {
 		this.setIconImage(new ImageIcon("images/ya.PNG").getImage());
 		this.setResizable(false);
 		
-		// 클래스 나 자신(JFrame)을 매개변수로 하여 YaMoYeoLoading을 호출합니다
 		new YaMoYeoLoading(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

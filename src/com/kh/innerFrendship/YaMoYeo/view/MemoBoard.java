@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +14,6 @@ import javax.swing.JPanel;
 public class MemoBoard extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
-	private JComponent image;
 	private JLabel memoLabel1;
 	private JLabel memoLabel2;
 	private JLabel memoLabel3;

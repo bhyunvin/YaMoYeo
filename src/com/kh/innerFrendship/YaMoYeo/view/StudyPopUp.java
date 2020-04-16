@@ -27,11 +27,6 @@ public class StudyPopUp extends JPanel {
 		this.setLayout(null);
 		this.setSize(600, 600);
 		this.setBackground(new Color(232,221,201));
-		 	
-//		Image image = new ImageIcon("img/back.PNG").getImage().getScaledInstance(40, 40, 0);
-//		JLabel label = new JLabel(new ImageIcon(image));
-//		label.setSize(40, 40);
-//		label.setLocation(10, 10);
 		
 		JButton back = new JButton(new ImageIcon("images/back.png"));
 		back.setLocation(10,10);
@@ -119,7 +114,6 @@ public class StudyPopUp extends JPanel {
 		this.add(hourlist);
 		this.add(label3);
 		this.add(label2);
-	//	this.add(label);
 		this.add(back);
 		mf.add(this);
 	}

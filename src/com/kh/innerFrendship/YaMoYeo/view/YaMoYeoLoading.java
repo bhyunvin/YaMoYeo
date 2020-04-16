@@ -16,7 +16,6 @@ public class YaMoYeoLoading extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		
-		// 사이즈, 배경색, 레이아웃 설정
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
@@ -31,7 +30,6 @@ public class YaMoYeoLoading extends JPanel {
 		welcome2.setLocation(65, 350);
 		welcome2.setFont(new Font("돋움", Font.BOLD, 36));
 		
-		// 이미지라벨
 		JLabel image = new JLabel(new ImageIcon(new ImageIcon("images/YaMoYeo.PNG").getImage().getScaledInstance(300, 100, 0)));
 		image.setLocation(150, 230);
 		image.setSize(300, 100);
@@ -42,8 +40,6 @@ public class YaMoYeoLoading extends JPanel {
 		
 		mf.add(this);		
 		
-		// 구글링으로 찾아낸 시간 지연
-		// swing에선 Thread.sleep를 그냥 쓰면 안먹는다고 합니다
 		Thread t = new Thread(new Runnable() {
 		      public void run() {
 		        try {

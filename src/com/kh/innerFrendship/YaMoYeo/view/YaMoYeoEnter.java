@@ -139,17 +139,14 @@ public class YaMoYeoEnter extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			int result = JOptionPane.showConfirmDialog(panel, "로그아웃 하시겠습니까?", "이전화면", JOptionPane.YES_NO_OPTION);
-			// 사용자가 "예", "아니오"의 선택 없이 다이얼로그 창을 닫은 경우
+			
 			if (result == JOptionPane.CLOSED_OPTION) {
 				ChangePanel.changePanel(mf, panel, panel);
-				// 예를 선택한 경우
 			} else if (result == JOptionPane.YES_OPTION) {
 				ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 			} else {
-				// 사용자가 "아니오"를 선택 한 경우
 				ChangePanel.changePanel(mf, panel, panel);
 			}
-
 		}
 	}
 

@@ -208,7 +208,6 @@ public class SignPanel extends JPanel {
 			}
 		});
 		
-		
 		txtEmail = new JTextField();
 		txtEmail.setText("이메일을 입력하세요");
 		txtEmail.addMouseListener(new Clear());
@@ -300,7 +299,6 @@ public class SignPanel extends JPanel {
 				
 				if(isOkToSignUp == true) {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
-//					String id, String password, String name, String email, String area, String major, int userNumber
 					User user = new User(id, password, name, email, area, major, userCount);
 					signUp(user);
 					userCount++;

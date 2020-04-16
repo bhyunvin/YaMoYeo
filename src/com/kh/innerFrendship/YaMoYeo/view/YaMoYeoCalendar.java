@@ -2,8 +2,6 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -15,11 +13,11 @@ public class YaMoYeoCalendar extends JPanel{
 	private JFrame mf;
 	private JPanel yaMoYeoEnter;
 	private JButton tempBtn;
-	private JPanel YaMoYeaCalender;
+	private JPanel panel;
 
 	public YaMoYeoCalendar(JFrame mf){
 		this.mf = mf;
-		this.YaMoYeaCalender = this;
+		this.panel = this;
 
 		setSize(600,600);
 		

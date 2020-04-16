@@ -6,11 +6,9 @@ import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
