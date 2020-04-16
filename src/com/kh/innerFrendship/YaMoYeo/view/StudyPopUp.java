@@ -18,6 +18,11 @@ public class StudyPopUp extends JPanel {
 	
 	private JFrame mf;
 	private JPanel panel;
+	private JTextField tf3;
+	private JTextField tf4;
+	private JTextField tf5;
+	private JTextField tf6;
+	private JTextField tf7;
 
 	public StudyPopUp(JFrame mf) {
 		
@@ -28,15 +33,13 @@ public class StudyPopUp extends JPanel {
 		this.setSize(600, 600);
 		this.setBackground(new Color(232,221,201));
 		 	
-//		Image image = new ImageIcon("img/back.PNG").getImage().getScaledInstance(40, 40, 0);
-//		JLabel label = new JLabel(new ImageIcon(image));
-//		label.setSize(40, 40);
-//		label.setLocation(10, 10);
 		
 		JButton back = new JButton(new ImageIcon("images/back.png"));
 		back.setLocation(10,10);
 		back.setSize(50,50);
 		back.setContentAreaFilled(false);
+//		back.setOpaque(false);
+		back.setBorderPainted(false);
 		back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -49,7 +52,15 @@ public class StudyPopUp extends JPanel {
 		label2.setLocation(170, 10);
 		label2.setFont(new Font("돋움", Font.BOLD, 23));
 		
-		Image image2 = new ImageIcon("img/save.PNG").getImage().getScaledInstance(40, 40, 0);
+		
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setSize(290, 2);
+		underLine.setLocation(150, 50);
+		underLine.setOpaque(true);
+	
+		
+		Image image2 = new ImageIcon("images/save.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel label3 = new JLabel(new ImageIcon(image2));
 		label3.setSize(40, 40);
 		label3.setLocation(520, 10);
@@ -87,26 +98,34 @@ public class StudyPopUp extends JPanel {
 		label5.setLocation(440, 73);
 		label5.setFont(new Font("돋움", Font.BOLD, 20));
 		
-		JTextField tf3 = new JTextField("장소를 입력해주세요");
+		
+		tf3 = new JTextField("장소를 입력해주세요");
 		tf3.setSize(350, 50);
 		tf3.setLocation(120, 130);
+		tf3.addMouseListener(new Clear());
 		
-		JTextField tf4 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
+		tf4 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
 		tf4.setSize(350, 50);
 		tf4.setLocation(120, 190);		
+		tf4.addMouseListener(new Clear());
 		
-		JTextField tf5 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
+		tf5 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
 		tf5.setSize(350, 50);
 		tf5.setLocation(120, 250);
+		tf5.addMouseListener(new Clear());
 		
-		JTextField tf6 = new JTextField("해야할 일, 공부범위는 최대 3개까지 입력 가능합니다.");
+		
+		tf6 = new JTextField("해야할 일, 공부범위는 최대 3개까지 입력 가능합니다.");
 		tf6.setSize(350, 50);
 		tf6.setLocation(120, 310);
+		tf6.addMouseListener(new Clear());
 		
-		JTextField tf7 = new JTextField("과제, 특이사항 등이 있다면 입력해주세요.");
+		tf7 = new JTextField("과제, 특이사항 등이 있다면 입력해주세요.");
 		tf7.setSize(350, 50);
-		tf7.setLocation(120, 370);		
+		tf7.setLocation(120, 370);
+		tf7.addMouseListener(new Clear());
 				
+		
 		this.add(tf7);
 		this.add(tf6);
 		this.add(tf5);
@@ -118,9 +137,19 @@ public class StudyPopUp extends JPanel {
 		this.add(label4);
 		this.add(hourlist);
 		this.add(label3);
+		this.add(underLine);
 		this.add(label2);
-	//	this.add(label);
 		this.add(back);
+		
 		mf.add(this);
 	}
+	
+	
+	class Clear extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			((JTextField) e.getComponent()).setText("");
+		}
+	}
+	
 }
