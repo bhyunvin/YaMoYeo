@@ -5,17 +5,28 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Notice extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
+	public static int myNumber;
+	public static int roomNumber;
+	private JButton btn;
+	private JButton btn2;
+	private JButton btn3;
+	private JButton btn4;
+	
+	public Notice() {}
 
 	public Notice(JFrame mf) {
 		this.mf = mf;
@@ -47,7 +58,6 @@ public class Notice extends JPanel {
 		underLine.setSize(162, 3);
 		underLine.setLocation(220, 100);
 		underLine.setOpaque(true);
-		
 
 		JTextField text = new JTextField("번  호");
 		text.setLocation(30, 150);
@@ -91,33 +101,33 @@ public class Notice extends JPanel {
 		text6.setFont(new Font("돋음", Font.BOLD, 15));
 		text6.setHorizontalAlignment(JTextField.CENTER);
 
-		JButton btn = new JButton("공지사항 1");
+		btn = new JButton("공지사항 1");
 		btn.setLocation(130, 200);
 		btn.setSize(440, 50);
 		btn.setBackground(Color.WHITE);
 		btn.setFont(new Font("돋음", Font.PLAIN, 20));
-		((JButton) btn).setForeground(Color.BLACK);
+		btn.setForeground(Color.BLACK);
 
-		JButton btn2 = new JButton("공지사항 2");
+		btn2 = new JButton("공지사항 2");
 		btn2.setLocation(130, 250);
 		btn2.setSize(440, 50);
 		btn2.setBackground(Color.WHITE);
 		btn2.setFont(new Font("돋음", Font.PLAIN, 20));
-		((JButton) btn2).setForeground(Color.BLACK);
+		btn2.setForeground(Color.BLACK);
 
-		JButton btn3 = new JButton("공지사항 3");
+		btn3 = new JButton("공지사항 3");
 		btn3.setLocation(130, 300);
 		btn3.setSize(440, 50);
 		btn3.setBackground(Color.WHITE);
 		btn3.setFont(new Font("돋음", Font.PLAIN, 20));
-		((JButton) btn3).setForeground(Color.BLACK);
+		btn3.setForeground(Color.BLACK);
 
-		JButton btn4 = new JButton("공지사항 4");
+		btn4 = new JButton("공지사항 4");
 		btn4.setLocation(130, 350);
 		btn4.setSize(440, 50);
 		btn4.setBackground(Color.WHITE);
 		btn4.setFont(new Font("돋음", Font.PLAIN, 20));
-		((JButton) btn4).setForeground(Color.BLACK);
+		btn4.setForeground(Color.BLACK);
 
 		JLabel label2 = new JLabel("제목을 누르시면 공지사항을 확인할 수 있습니다.");
 		label2.setLocation(30, 420);
@@ -125,6 +135,8 @@ public class Notice extends JPanel {
 		label2.setFont(new Font("돋음", Font.BOLD, 20));
 		label2.setHorizontalAlignment(JLabel.CENTER);
 		label2.setOpaque(false);
+		
+		check();
 
 		this.add(label);
 		this.add(label2);
@@ -142,7 +154,49 @@ public class Notice extends JPanel {
 		this.add(btn4);
 
 		mf.add(this);
-
 	}
-
+	
+	public void check() {
+		if(myNumber == roomNumber) {
+			btn.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					String notice1 = JOptionPane.showInputDialog(panel, "공지사항 1 입력", "입력", JOptionPane.PLAIN_MESSAGE);
+					btn.setText(notice1);
+				}
+			});
+			
+			btn2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					String notice2 = JOptionPane.showInputDialog(panel, "공지사항 2 입력", "입력", JOptionPane.PLAIN_MESSAGE);
+					btn2.setText(notice2);
+				}
+			});
+			
+			btn3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					String notice3 = JOptionPane.showInputDialog(panel, "공지사항 3 입력", "입력", JOptionPane.PLAIN_MESSAGE);
+					btn3.setText(notice3);
+				}
+			});
+			
+			btn4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					String notice4 = JOptionPane.showInputDialog(panel, "공지사항 4 입력", "입력", JOptionPane.PLAIN_MESSAGE);
+					btn4.setText(notice4);
+				}
+			});
+		} 
+	}
+	
+	public void getMyNumber(int myNumber) {
+		this.myNumber = myNumber;
+	}
+	
+	public void getRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 }
