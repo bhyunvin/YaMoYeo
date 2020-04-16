@@ -15,12 +15,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class StudyPopUp extends JPanel {
-	
 	private JFrame mf;
 	private JPanel panel;
+	private JTextField tf3;
+	private JTextField tf4;
+	private JTextField tf5;
+	private JTextField tf6;
+	private JTextField tf7;
 
 	public StudyPopUp(JFrame mf) {
-		
 		this.mf = mf;
 		this.panel = this;
 		  
@@ -32,6 +35,7 @@ public class StudyPopUp extends JPanel {
 		back.setLocation(10,10);
 		back.setSize(50,50);
 		back.setContentAreaFilled(false);
+		back.setBorderPainted(false);
 		back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -44,15 +48,23 @@ public class StudyPopUp extends JPanel {
 		label2.setLocation(170, 10);
 		label2.setFont(new Font("돋움", Font.BOLD, 23));
 		
-		Image image2 = new ImageIcon("img/save.PNG").getImage().getScaledInstance(40, 40, 0);
+		JLabel underLine = new JLabel();
+		underLine.setBackground(Color.BLACK);
+		underLine.setSize(290, 2);
+		underLine.setLocation(150, 50);
+		underLine.setOpaque(true);
+		
+		Image image2 = new ImageIcon("images/OK.PNG").getImage().getScaledInstance(40, 40, 0);
 		JLabel label3 = new JLabel(new ImageIcon(image2));
 		label3.setSize(40, 40);
 		label3.setLocation(520, 10);
 		
 		String[] hour = new String[24];
+		
 		for(int i = 0; i < 24; i++) {
 			hour[i] = Integer.toString(i);
 		}
+		
 		JComboBox hourlist = new JComboBox(hour);
 		hourlist.setSize(115, 40);
 		hourlist.setLocation(120, 70);
@@ -63,7 +75,9 @@ public class StudyPopUp extends JPanel {
 		label4.setFont(new Font("돋움", Font.BOLD, 20));
 		
 		int temp = 0;
+		
 		String[] min = new String[12];	
+		
 		for(int i = 0; i < 12; i++) {
 			if(i == 0) {
 				min[i] = "0";
@@ -82,26 +96,31 @@ public class StudyPopUp extends JPanel {
 		label5.setLocation(440, 73);
 		label5.setFont(new Font("돋움", Font.BOLD, 20));
 		
-		JTextField tf3 = new JTextField("장소를 입력해주세요");
+		tf3 = new JTextField("장소를 입력해주세요");
 		tf3.setSize(350, 50);
 		tf3.setLocation(120, 130);
+		tf3.addMouseListener(new Clear());
 		
-		JTextField tf4 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
+		tf4 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
 		tf4.setSize(350, 50);
 		tf4.setLocation(120, 190);		
+		tf4.addMouseListener(new Clear());
 		
-		JTextField tf5 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
+		tf5 = new JTextField("해야할 일, 공부범위 등을 입력해주세요");
 		tf5.setSize(350, 50);
 		tf5.setLocation(120, 250);
+		tf5.addMouseListener(new Clear());
 		
-		JTextField tf6 = new JTextField("해야할 일, 공부범위는 최대 3개까지 입력 가능합니다.");
+		tf6 = new JTextField("해야할 일, 공부범위는 최대 3개까지 입력 가능합니다.");
 		tf6.setSize(350, 50);
 		tf6.setLocation(120, 310);
+		tf6.addMouseListener(new Clear());
 		
-		JTextField tf7 = new JTextField("과제, 특이사항 등이 있다면 입력해주세요.");
+		tf7 = new JTextField("과제, 특이사항 등이 있다면 입력해주세요.");
 		tf7.setSize(350, 50);
-		tf7.setLocation(120, 370);		
-				
+		tf7.setLocation(120, 370);
+		tf7.addMouseListener(new Clear());
+		
 		this.add(tf7);
 		this.add(tf6);
 		this.add(tf5);
@@ -113,8 +132,17 @@ public class StudyPopUp extends JPanel {
 		this.add(label4);
 		this.add(hourlist);
 		this.add(label3);
+		this.add(underLine);
 		this.add(label2);
 		this.add(back);
+		
 		mf.add(this);
+	}
+	
+	class Clear extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			((JTextField) e.getComponent()).setText("");
+		}
 	}
 }
