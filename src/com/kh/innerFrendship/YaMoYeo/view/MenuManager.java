@@ -82,8 +82,12 @@ public class MenuManager extends JPanel {
 			KickOut ko = new KickOut();
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ko.getUserIndex(userIndex);
-				ChangePanel.changePanel(mf, panel, new KickOut(mf));
+				if(myNumber == roomNumber) {
+					ko.getUserIndex(userIndex);
+					ChangePanel.changePanel(mf, panel, new KickOut(mf));
+				} else {
+					JOptionPane.showMessageDialog(panel, "개설자가 아닙니다.", "오류", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
