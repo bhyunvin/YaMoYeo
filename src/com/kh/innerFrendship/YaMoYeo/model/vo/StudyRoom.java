@@ -14,7 +14,7 @@ public class StudyRoom implements Serializable {
 	private String email;
 	private String area;
 	private Date today = new Date(); // 오늘 날짜 저장
-	private int roomNumber;
+	private int roomNumber; // 고유번호
 	private int memberCount = 1;
 	
 	public StudyRoom(String roomName, String roomPassword, String subject, String email, String area, int roomNumber) {

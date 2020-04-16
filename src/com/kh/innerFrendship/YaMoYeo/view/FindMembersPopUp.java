@@ -46,6 +46,17 @@ public class FindMembersPopUp extends JPanel {
 		emailtf.setLocation(155, 95);
 		emailtf.addMouseListener(new Clear());
 		
+		Image backImage = new ImageIcon("images/back.png").getImage().getScaledInstance(56, 56, 0);
+		JLabel back = new JLabel(new ImageIcon(backImage));
+		back.setSize(56, 56);
+		back.setLocation(5, 10);
+		back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
+			}
+		});
+		
 		Image input = new ImageIcon("images/inputButton.PNG").getImage().getScaledInstance(200, 40, 0);
 		JButton button1 = new JButton(new ImageIcon(input));
 		button1.setSize(200, 40);
@@ -104,6 +115,7 @@ public class FindMembersPopUp extends JPanel {
 		this.add(button1);
 		this.add(emailtf);
 		this.add(email);
+		this.add(back);
 		mf.add(this);
 	}
 	

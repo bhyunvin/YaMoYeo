@@ -40,13 +40,13 @@ public class MyInfo extends JPanel {
 		Font f = new Font("돋움", Font.BOLD, 20);
 
 		this.setSize(600, 600);
-		this.setBackground(new Color(232, 221, 204));
+		this.setBackground(new Color(234, 208, 184));
 		this.setLayout(null);
 
-		Image back = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
+		Image back = new ImageIcon("images/back.PNG").getImage().getScaledInstance(56, 56, 0);
 		JLabel backBtn = new JLabel(new ImageIcon(back));
-		backBtn.setSize(40, 40);
-		backBtn.setLocation(0, 20);
+		backBtn.setSize(56, 56);
+		backBtn.setLocation(5, 10);
 		backBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

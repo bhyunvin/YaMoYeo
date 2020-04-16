@@ -40,15 +40,17 @@ public class StudyRoomOpen extends JPanel {
 	public StudyRoomOpen(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		
+		System.out.println("방 개설시 myNumber : " + myNumber);
 
 		this.setSize(600, 600);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
     
-		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(40, 40, 0);
+		Image backImage = new ImageIcon("images/back.PNG").getImage().getScaledInstance(56, 56, 0);
 		JLabel back = new JLabel(new ImageIcon(backImage));		
-		back.setLocation(15, 15);
-		back.setSize(40, 40);
+		back.setLocation(5, 10);
+		back.setSize(56, 56);
 		back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
