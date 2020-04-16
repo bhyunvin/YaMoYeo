@@ -4,12 +4,9 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -34,11 +31,14 @@ import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 public class YaMoYeoEnter extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
-	private int myNumber;
+	public static int myNumber;
+	public static int roomNumber;
 	private String roomPassword;
 	private ArrayList<StudyRoom> roomList;
 	private ArrayList<User> userList;
 	private JTable roomListTable;
+	private YaMoYeoStudyRoom ymysr = new YaMoYeoStudyRoom();
+	private StudyRoomOpen sro = new StudyRoomOpen();
 
 	public YaMoYeoEnter() {}
 
@@ -66,7 +66,7 @@ public class YaMoYeoEnter extends JPanel {
 		for(int i = 0; i < roomList.size(); i++) {
 			contents[i] = new String[] {
 					roomList.get(i).getRoomName(),
-					userList.get(roomList.get(i).getMyNumber() - 1).getName(),
+					userList.get(myNumber).getName(),
 					String.valueOf(roomList.get(i).getMemberCount())};
 		}
 		
@@ -101,6 +101,8 @@ public class YaMoYeoEnter extends JPanel {
 		myInfo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				MyInfo myInfo = new MyInfo();
+				myInfo.getMyNumber(myNumber);
 				ChangePanel.changePanel(mf, panel, new MyInfo(mf));
 			}
 		});
@@ -123,6 +125,12 @@ public class YaMoYeoEnter extends JPanel {
 		JButton registerBtn = new JButton("등록하기");
 		registerBtn.setBounds(490, 0, 100, 30);
 		registerBtn.setBackground(Color.WHITE);
+		registerBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				sro.getMyNumber(myNumber);
+			}
+		});
 		registerBtn.addMouseListener(new Change());
 
 		JButton alramBtn = new JButton(new ImageIcon("images/alram.PNG"));
@@ -234,27 +242,7 @@ public class YaMoYeoEnter extends JPanel {
 				for(int i = 0; i < roomList.size(); i++) {
 					if(roomName.equals(roomList.get(i).getRoomName())) {
 						roomPassword = roomList.get(i).getRoomPassword();
-						
-						DataOutputStream dos = null;
-						try {
-							dos = new DataOutputStream(new FileOutputStream("roomNumber.txt"));
-						
-							dos.writeInt(i);
-						} catch (FileNotFoundException e1) {
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						} finally {
-							if(dos != null) {
-								try {
-									dos.flush();
-									dos.close();
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
-							}
-						}
-						
+						roomNumber = i;
 						break;
 					}
 				}
@@ -270,6 +258,8 @@ public class YaMoYeoEnter extends JPanel {
 		if(inputPassword != null) {
 			if(inputPassword.equals(roomPassword)) {
 				JOptionPane.showMessageDialog(panel, "비밀번호가 일치합니다", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
+				ymysr.getMyNumber(myNumber);
+				ymysr.getRoomNumber(roomNumber);
 				ChangePanel.changePanel(mf, panel, new YaMoYeoStudyRoom(mf));
 			} else if(!inputPassword.equals(roomPassword)) {
 				JOptionPane.showMessageDialog(panel, "비밀번호가 틀렸습니다", "비밀번호 오류", JOptionPane.ERROR_MESSAGE);

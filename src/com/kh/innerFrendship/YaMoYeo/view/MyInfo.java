@@ -24,7 +24,7 @@ import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 public class MyInfo extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
-	private int myNumber;
+	public static int myNumber;
 	private ArrayList<User> userList;
 	
 	public MyInfo() {}
@@ -34,8 +34,6 @@ public class MyInfo extends JPanel {
 		this.panel = this;
 		
 		userList = readUser();
-		
-		getMyNumber();
 		
 		User user = userList.get(myNumber);
 		
@@ -174,22 +172,7 @@ public class MyInfo extends JPanel {
 		return list;
 	}
 	
-	public void getMyNumber() {
-		DataInputStream dis = null;
-		try {
-			dis = new DataInputStream(new FileInputStream("myNumber.txt"));
-			
-			myNumber = dis.readInt();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				dis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	public void getMyNumber(int myNumber) {
+		this.myNumber = myNumber;
 	}
 }

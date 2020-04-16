@@ -33,8 +33,9 @@ public class StudyRoomOpen extends JPanel {
 	private JTextField txtSubject;
 	private JTextField txtMail;
 	private JTextField txtArea;
-	private int myNumber;
-	private int roomNumber = 1;
+	public static int myNumber;
+	
+	public StudyRoomOpen() {}
 
 	public StudyRoomOpen(JFrame mf) {
 		this.mf = mf;
@@ -105,8 +106,8 @@ public class StudyRoomOpen extends JPanel {
 				String roomEmail = txtMail.getText();
 				String roomArea = txtArea.getText();
 				
-				StudyRoom studyRoom = new StudyRoom(roomName, roomPassword, roomSubject, roomEmail, roomArea, myNumber, roomNumber);
-				roomNumber++;
+				StudyRoom studyRoom = new StudyRoom(roomName, roomPassword, roomSubject, roomEmail, roomArea, myNumber);
+				System.out.println("방 개설시 myNumber : " + myNumber);
 				makeRoom(studyRoom);
 			}
 		});

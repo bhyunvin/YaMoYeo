@@ -35,9 +35,10 @@ public class YaMoYeoLogin extends JPanel {
 	private JTextField txtId;
 	private JPasswordField txtPassword;
 	private YaMoYeoEnter enter = new YaMoYeoEnter();
+	private StudyRoomOpen sro = new StudyRoomOpen();
 	private ArrayList userList;
 	private ArrayList roomList;
-	private int num;
+	public static int myNumber;
 
 	public YaMoYeoLogin(JFrame mf) {
 		this.mf = mf;
@@ -138,7 +139,7 @@ public class YaMoYeoLogin extends JPanel {
 			String inputPwd = String.valueOf(txtPassword.getPassword());
 			String id = "";
 			String password = "";
-			int myNumber = 0;
+			int num = 0;
 			boolean isOkToLogin = false;
 			
 			for(int i = 0; i < userList.size(); i++) {
@@ -147,8 +148,7 @@ public class YaMoYeoLogin extends JPanel {
 
 				if(inputId.equals(id) && inputPwd.equals(password)) {
 					isOkToLogin = true;
-					myNumber = ((User) userList.get(i)).getUserNumber();
-					num = myNumber;
+					num = ((User) userList.get(i)).getUserNumber();
 					break;
 				} else {
 					isOkToLogin = false;
@@ -158,12 +158,12 @@ public class YaMoYeoLogin extends JPanel {
 			
 			if(isOkToLogin == true && roomList == null) {
 				JOptionPane.showMessageDialog(panel, "방이 한개도 없습니다. 처음으로 방을 만들어보세요!", "오류", JOptionPane.ERROR_MESSAGE);
+				enter.getMyNumber(num);
+				sro.getMyNumber(num);
 				ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
-				outPutMyNumber();
 			} else if(isOkToLogin == true) {
 				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
-				enter.getMyNumber(myNumber);
-				outPutMyNumber();
+				enter.getMyNumber(num);
 				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
 			} else {
 				JOptionPane.showMessageDialog(panel, "로그인에 실패했습니다", "로그인 실패", JOptionPane.ERROR_MESSAGE);
@@ -220,28 +220,5 @@ public class YaMoYeoLogin extends JPanel {
 		} 
 		
 		return list;
-	}
-	
-	public void outPutMyNumber() {
-		DataOutputStream dos = null;
-		try {
-			dos = new DataOutputStream(new FileOutputStream("myNumber.txt"));
-		
-			dos.writeInt(num);
-			System.out.println(num);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} finally {
-			if(dos != null) {
-				try {
-					dos.flush();
-					dos.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
 	}
 }
