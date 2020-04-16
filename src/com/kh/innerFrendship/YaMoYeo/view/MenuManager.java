@@ -18,15 +18,13 @@ public class MenuManager extends JPanel {
 	private JPanel panel;
 	public static int myNumber;
 	public static int roomNumber;
+	public int userIndex;
 	
 	public MenuManager() {}
 
 	public MenuManager(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
-		
-		System.out.println("myNumber menu = " + myNumber);
-		System.out.println("roomNumber menu = " + roomNumber);
 		
 		this.setSize(600, 600);
 		this.setLayout(null);
@@ -78,8 +76,10 @@ public class MenuManager extends JPanel {
 		btn4.setFont(new Font("돋음", Font.BOLD, 17));
 		btn4.setForeground(Color.BLACK);
 		btn4.addMouseListener(new MouseAdapter() {
+			KickOut ko = new KickOut();
 			@Override
 			public void mousePressed(MouseEvent e) {
+				ko.getUserIndex(userIndex);
 				ChangePanel.changePanel(mf, panel, new KickOut(mf));
 			}
 		});
@@ -125,5 +125,9 @@ public class MenuManager extends JPanel {
 	
 	public void getRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
+	}
+	
+	public void getUserIndex(int index) {
+		userIndex = index;
 	}
 }

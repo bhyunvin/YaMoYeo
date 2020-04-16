@@ -57,7 +57,7 @@ public class KickOut extends JPanel {
 		title2.setSize(400, 50);
 		title2.setFont(new Font("돋움", Font.BOLD, 25));
 
-		JLabel txt = new JLabel("조원의 강제퇴장에");
+		JLabel txt = new JLabel(((User) userList.get(userIndex)).getName() + "의 강제퇴장에");
 		txt.setLocation(200, 180);
 		txt.setSize(210, 50);
 		txt.setFont(new Font("돋움", Font.BOLD, 25));
@@ -113,7 +113,7 @@ public class KickOut extends JPanel {
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, panel, new Notice(mf));
+			ChangePanel.changePanel(mf, panel, new MenuManager(mf));
 
 		}
 	}

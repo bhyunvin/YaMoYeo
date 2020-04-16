@@ -80,8 +80,6 @@ public class YaMoYeoStudyRoom extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				MenuManager mm = new MenuManager();
-				System.out.println("myNumber sr = " + myNumber);
-				System.out.println("roomNumber sr = " + sr.getRoomNumber());
 				mm.getMyNumber(myNumber);
 				mm.getRoomNumber(sr.getRoomNumber());
 				ChangePanel.changePanel(mf, panel, new MenuManager(mf));
