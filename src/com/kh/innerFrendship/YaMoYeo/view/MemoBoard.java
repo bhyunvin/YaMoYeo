@@ -121,7 +121,6 @@ public class MemoBoard extends JPanel {
 				} else {
 					JOptionPane.showMessageDialog(null, "메모창이 저장되었습니다.", "완료", JOptionPane.INFORMATION_MESSAGE);
 					bw.write(txt1.getText() + "/");
-					bw.close();
 				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
