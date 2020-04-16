@@ -134,12 +134,14 @@ public class RoomMemberManager extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			KickOut ko = new KickOut();
+			MenuManager mm = new MenuManager();
 			int selectedRow = manageTable.getSelectedRow();
 			int selectedCol = manageTable.getSelectedColumn();
 			
 			if(selectedRow >= 0 && selectedRow <= manageTable.getRowCount() && selectedCol == 5) {
 				int index = Integer.parseInt(manageTable.getValueAt(selectedRow, 0).toString()) - 1;
 				ko.getUserIndex(index);
+				mm.getUserIndex(index);
 				ChangePanel.changePanel(mf, panel, new KickOut(mf));
 			}
 		}

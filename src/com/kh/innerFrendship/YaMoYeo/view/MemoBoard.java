@@ -74,8 +74,8 @@ public class MemoBoard extends JPanel {
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			repaint();
-			ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
+			panel.repaint();
+			ChangePanel.changePanel(mf, panel, new MenuManager(mf));
 		}
 	}
 
@@ -84,11 +84,11 @@ public class MemoBoard extends JPanel {
 		public void mousePressed(MouseEvent e) {
 			txt1 = new JTextField();
 			txt1.setBounds(100, 100, 160, 30);
-			mf.add(txt1);
+			panel.add(txt1);
 			rm1 = new JButton(new ImageIcon("images/minus.png"));
 			rm1.setBounds(70, 70, 30, 30);
-			mf.add(rm1);
-			mf.repaint();
+			panel.add(rm1);
+			panel.repaint();
 			rm1.addMouseListener(new rmAdapter());
 		}
 	}
@@ -96,17 +96,11 @@ public class MemoBoard extends JPanel {
 	class rmAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			mf.remove(txt1);
-			mf.remove(rm1);
-			mf.repaint();
+			panel.remove(txt1);
+			panel.remove(rm1);
+			panel.repaint();
 		}
 
-		class MyMouseAdapter extends MouseAdapter {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
-			}
-		}
 	}
 
 	class saveMemoAdapter implements ActionListener {
