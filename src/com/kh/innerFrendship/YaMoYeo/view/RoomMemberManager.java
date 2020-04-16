@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -134,12 +133,13 @@ public class RoomMemberManager extends JPanel {
 	class TableKickOut extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
+			KickOut ko = new KickOut();
 			int selectedRow = manageTable.getSelectedRow();
 			int selectedCol = manageTable.getSelectedColumn();
 			
 			if(selectedRow >= 0 && selectedRow <= manageTable.getRowCount() && selectedCol == 5) {
-				int index = Integer.parseInt(manageTable.getValueAt(selectedRow, 0).toString());
-				userList.remove(index - 1);
+				int index = Integer.parseInt(manageTable.getValueAt(selectedRow, 0).toString()) - 1;
+				ko.getUserIndex(index);
 				ChangePanel.changePanel(mf, panel, new KickOut(mf));
 			}
 		}
