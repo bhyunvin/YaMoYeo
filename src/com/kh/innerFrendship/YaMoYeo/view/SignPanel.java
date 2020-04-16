@@ -9,7 +9,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,11 +45,15 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	public static int userCount = 0;
+	public static int userCount;
 	
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
 		this.panel = this;
+		
+		Font font = new Font("돋움", Font.BOLD, 14);
+		
+		setUserCount();
 		
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -67,6 +73,18 @@ public class SignPanel extends JPanel {
 		Image id = new ImageIcon("images/id.PNG").getImage();
 		JLabel lblId = new JLabel(new ImageIcon(id));
 		lblId.setBounds(30, 70, 56, 56);
+		lblId.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel idLbl = new JLabel("아이디");
+				idLbl.setSize(56, 56);
+				idLbl.setLocation(30, 70);
+				idLbl.setFont(font);
+				panel.remove(lblId);
+				panel.add(idLbl);
+				panel.repaint();
+			}
+		});
 		
 		txtId = new JTextField(20);
 		txtId.setText("아이디를 입력하세요");
@@ -76,6 +94,18 @@ public class SignPanel extends JPanel {
 		Image password = new ImageIcon("images/lock.jpg").getImage().getScaledInstance(56, 56, 0);
 		JLabel lblPwd = new JLabel(new ImageIcon(password));
 		lblPwd.setBounds(30, 130, 56, 56);
+		lblPwd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel pwdLbl = new JLabel("패스워드");
+				pwdLbl.setSize(66, 56);
+				pwdLbl.setLocation(30, 130);
+				pwdLbl.setFont(font);
+				panel.remove(lblPwd);
+				panel.add(pwdLbl);
+				panel.repaint();
+			}
+		});
 		
 		txtPwd = new JTextField(20);
 		txtPwd.setText("비밀번호를 입력하세요");
@@ -85,6 +115,23 @@ public class SignPanel extends JPanel {
 		Image passwordIsCorrect = new ImageIcon("images/passwordIsCorrect.png").getImage().getScaledInstance(52, 52, 0);
 		JLabel lblPwdIsCorrect = new JLabel(new ImageIcon(passwordIsCorrect));
 		lblPwdIsCorrect.setBounds(30, 195, 56, 56);
+		lblPwdIsCorrect.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel pwdIsCorrectLbl1 = new JLabel("비밀번호");
+				pwdIsCorrectLbl1.setSize(66, 56);
+				pwdIsCorrectLbl1.setLocation(30, 175);
+				pwdIsCorrectLbl1.setFont(font);
+				JLabel pwdIsCorrectLbl2 = new JLabel("확인");
+				pwdIsCorrectLbl2.setSize(66, 56);
+				pwdIsCorrectLbl2.setLocation(42, 201);
+				pwdIsCorrectLbl2.setFont(font);
+				panel.remove(lblPwdIsCorrect);
+				panel.add(pwdIsCorrectLbl1);
+				panel.add(pwdIsCorrectLbl2);
+				panel.repaint();
+			}
+		});
 		
 		Image passwordWrong = new ImageIcon("images/wrong.PNG").getImage().getScaledInstance(30, 30, 0);
 		lblPwdWrong = new JLabel(new ImageIcon(passwordWrong));
@@ -108,11 +155,13 @@ public class SignPanel extends JPanel {
 					panel.add(lblPwdCorrect);
 					lblPwdCorrect.setBounds(535, 205, 30, 30);
 					panel.remove(lblPwdWrong);
+					panel.repaint();
 				} else {
 					passwordCheck = false;
 					panel.add(lblPwdWrong);
 					lblPwdWrong.setBounds(535, 205, 30, 30);
 					panel.remove(lblPwdCorrect);
+					panel.repaint();
 				}
 			}
 		});
@@ -120,6 +169,18 @@ public class SignPanel extends JPanel {
 		Image name = new ImageIcon("images/name.PNG").getImage();
 		JLabel lblName = new JLabel(new ImageIcon(name));
 		lblName.setBounds(30, 250, 56, 56);
+		lblName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel nameLbl = new JLabel("이름");
+				nameLbl.setSize(66, 56);
+				nameLbl.setLocation(30, 250);
+				nameLbl.setFont(font);
+				panel.remove(lblName);
+				panel.add(nameLbl);
+				panel.repaint();
+			}
+		});
 		
 		txtName = new JTextField(20);
 		txtName.setText("이름을 입력하세요");
@@ -129,6 +190,19 @@ public class SignPanel extends JPanel {
 		Image email = new ImageIcon("images/mail.jpg").getImage().getScaledInstance(52, 48, 0);
 		JLabel lblEmail = new JLabel(new ImageIcon(email));
 		lblEmail.setBounds(30, 310, 56, 56);
+		lblEmail.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel emailLbl = new JLabel("이메일");
+				emailLbl.setSize(66, 56);
+				emailLbl.setLocation(30, 310);
+				emailLbl.setFont(font);
+				panel.remove(lblEmail);
+				panel.add(emailLbl);
+				panel.repaint();
+			}
+		});
+		
 		
 		txtEmail = new JTextField();
 		txtEmail.setText("이메일을 입력하세요");
@@ -138,6 +212,18 @@ public class SignPanel extends JPanel {
 		Image area = new ImageIcon("images/local.jpg").getImage().getScaledInstance(56, 56, 0);
 		JLabel lblArea = new JLabel(new ImageIcon(area));
 		lblArea.setBounds(27, 370, 56, 56);
+		lblArea.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel areaLbl = new JLabel("지역");
+				areaLbl.setSize(66, 56);
+				areaLbl.setLocation(30, 370);
+				areaLbl.setFont(font);
+				panel.remove(lblArea);
+				panel.add(areaLbl);
+				panel.repaint();
+			}
+		});
 		
 		txtArea = new JTextField();
 		txtArea.setText("지역을 입력하세요");
@@ -147,6 +233,18 @@ public class SignPanel extends JPanel {
 		Image major = new ImageIcon("images/major.png").getImage();
 		JLabel lblMajor = new JLabel(new ImageIcon(major));
 		lblMajor.setBounds(28, 430, 56, 56);
+		lblMajor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JLabel majorLbl = new JLabel("관심분야");
+				majorLbl.setSize(66, 56);
+				majorLbl.setLocation(30, 430);
+				majorLbl.setFont(font);
+				panel.remove(lblMajor);
+				panel.add(majorLbl);
+				panel.repaint();
+			}
+		});
 		
 		txtMajor = new JTextField();
 		txtMajor.setText("전공을 입력하세요");
@@ -183,8 +281,29 @@ public class SignPanel extends JPanel {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
 //					String id, String password, String name, String email, String area, String major, int userNumber
 					User user = new User(id, password, name, email, area, major, userCount);
+					System.out.println("가입 userCount : " + userCount);
 					signUp(user);
 					userCount++;
+					System.out.println("userCount++ : " + userCount);
+					
+					DataOutputStream dos = null;
+					try {
+						dos = new DataOutputStream(new FileOutputStream("userCount.txt"));
+						
+						dos.writeInt(userCount);
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} finally {
+						try {
+							dos.flush();
+							dos.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					
 					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
@@ -247,6 +366,27 @@ public class SignPanel extends JPanel {
 			try {
 				oos.flush();
 				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void setUserCount() {
+		DataInputStream dis = null;
+		try {
+			dis = new DataInputStream(new FileInputStream("userCount.txt"));
+			
+			userCount = dis.readInt();
+		} catch (FileNotFoundException e) {
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(dis != null) {
+					dis.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -59,12 +59,12 @@ public class YaMoYeoStudyRoom extends JPanel {
 		JLabel title = new JLabel(sr.getRoomName());
 		title.setLocation(240, 20);
 		title.setSize(250, 50);
-		title.setFont(new Font("돋움", Font.BOLD,35));
+		title.setFont(new Font("돋움", Font.BOLD, 35));
 		
-		Image backImage = new ImageIcon("images/back.png").getImage().getScaledInstance(45, 45, 0);
+		Image backImage = new ImageIcon("images/back.png").getImage().getScaledInstance(56, 56, 0);
 		JLabel back = new JLabel(new ImageIcon(backImage));
-		back.setLocation(20, 20);
-		back.setSize(45, 45);
+		back.setLocation(5, 10);
+		back.setSize(56, 56);
 		back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

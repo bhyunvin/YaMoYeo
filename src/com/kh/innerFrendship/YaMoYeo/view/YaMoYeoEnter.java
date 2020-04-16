@@ -55,18 +55,12 @@ public class YaMoYeoEnter extends JPanel {
 		
 		// 테이블 작성 시작
 		String[] header = {"이름", "개설자", "참여자 수"};
-		String[][] contents = null;
-		
-		if(roomList == null) {
-			contents = new String[1][3];
-		} else {
-			contents = new String[roomList.size()][3];
-		}
+		String[][] contents = new String[roomList.size()][3];
 		
 		for(int i = 0; i < roomList.size(); i++) {
 			contents[i] = new String[] {
 					roomList.get(i).getRoomName(),
-					userList.get(roomList.get(roomNumber).getRoomNumber()).getName(),
+					Integer.toString(roomList.get(roomNumber).getRoomNumber()) + "번 유저의 방",
 					String.valueOf(roomList.get(i).getMemberCount())};
 		}
 		
@@ -90,8 +84,8 @@ public class YaMoYeoEnter extends JPanel {
 		}
 		
 		JScrollPane scroll = new JScrollPane(roomListTable);
-		scroll.setSize(450, 395);
-		scroll.setLocation(75, 175);
+		scroll.setSize(450, 500);
+		scroll.setLocation(75, 75);
 		// 테이블 작성 완료
 		
 		Image info = new ImageIcon("images/개설.jpg").getImage().getScaledInstance(60, 60, 0);
@@ -107,23 +101,18 @@ public class YaMoYeoEnter extends JPanel {
 			}
 		});
 
-		JButton back = new JButton("이전화면");
-		back.setBounds(0, 0, 100, 50);
-		
-		Image searchIcon = new ImageIcon("images/searchIcon.PNG").getImage().getScaledInstance(77, 77, 0);
-		JLabel search = new JLabel(new ImageIcon(searchIcon));
-		search.setBounds(75, 100, 77, 77);
-		search.setBorder(new LineBorder(Color.BLACK, 1));
-
-		JTextField searchTxt = new JTextField("");
-		searchTxt.setBounds(152, 100, 373, 77);
+		Image backImage = new ImageIcon("images/back.png").getImage().getScaledInstance(56, 56, 0);
+		JLabel back = new JLabel(new ImageIcon(backImage));
+		back.setBounds(5, 10, 56, 56);
+		back.addMouseListener(new MyMouseAdapter());
 
 		Image icon = new ImageIcon("images/title.jpg").getImage().getScaledInstance(200, 60, 0);
 		JLabel title = new JLabel(new ImageIcon(icon));
 		title.setBounds(200, 10, 200, 60);
 		
-		JButton registerBtn = new JButton("등록하기");
-		registerBtn.setBounds(490, 0, 100, 30);
+		Image registerImage = new ImageIcon("images/등록하기.png").getImage();
+		JButton registerBtn = new JButton(new ImageIcon(registerImage));
+		registerBtn.setBounds(490, 0, 100, 60);
 		registerBtn.setBackground(Color.WHITE);
 		registerBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -133,26 +122,16 @@ public class YaMoYeoEnter extends JPanel {
 		});
 		registerBtn.addMouseListener(new Change());
 
-		JButton alramBtn = new JButton(new ImageIcon("images/alram.PNG"));
-		alramBtn.setBounds(510, 50, 60, 60);
-		alramBtn.setBorderPainted(false);
-		alramBtn.setContentAreaFilled(false);
-
 		JButton profileBtn = new JButton(new ImageIcon("images/profile.PNG"));
 		profileBtn.setBounds(510, 120, 60, 60);
 		profileBtn.setBorderPainted(false);
 		profileBtn.setContentAreaFilled(false);
 
-		back.addMouseListener(new MyMouseAdapter());
-
 		this.add(myInfo);
 		this.add(profileBtn);
-		this.add(alramBtn);
 		this.add(registerBtn);
 		this.add(title);
-		this.add(searchTxt);
 		this.add(back);
-		this.add(search);
 		this.add(scroll);
 
 		mf.add(this);
