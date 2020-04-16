@@ -9,16 +9,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -48,7 +43,7 @@ public class SignPanel extends JPanel {
 	private JLabel lblPwdCorrect;
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
-	private int userCount = 0;
+	public static int userCount = 0;
 	
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
@@ -188,9 +183,8 @@ public class SignPanel extends JPanel {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
 //					String id, String password, String name, String email, String area, String major, int userNumber
 					User user = new User(id, password, name, email, area, major, userCount);
-					userCount++;
 					signUp(user);
-					System.out.println(user);
+					userCount++;
 					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
@@ -221,7 +215,7 @@ public class SignPanel extends JPanel {
 
 		setSize(600, 600);
 		setVisible(true);
-
+		
 		mf.add(this);
 	}
 	

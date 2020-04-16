@@ -32,8 +32,8 @@ public class YaMoYeoStudyRoom extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
 	private List<StudyRoom> roomList = new ArrayList<>();
-	private int myNumber;
-	private int roomNumber;
+	public static int myNumber;
+	public static int roomNumber;
 	private String[] toDoArray;
 	private StudyRoom sr;
 	private JTextField txt;
@@ -46,11 +46,12 @@ public class YaMoYeoStudyRoom extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		
-		getRoomNumber();
-		
 		roomList = readFile();
 		
 		sr = roomList.get(roomNumber);
+		
+		System.out.println("myNumber : " + myNumber);
+		System.out.println("roomNumber : " + roomList.get(roomNumber).getRoomNumber());
 		
 		toDoArray = new String[3];
 		
@@ -183,23 +184,8 @@ public class YaMoYeoStudyRoom extends JPanel {
 		this.myNumber = myNumber;
 	}
 	
-	public void getRoomNumber() {
-		DataInputStream dis = null;
-		try {
-			dis = new DataInputStream(new FileInputStream("roomNumber.txt"));
-			
-			roomNumber = dis.readInt();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				dis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	public void getRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 	
 	class Clear extends MouseAdapter {
