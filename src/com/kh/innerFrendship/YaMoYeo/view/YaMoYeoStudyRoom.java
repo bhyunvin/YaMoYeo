@@ -39,7 +39,6 @@ public class YaMoYeoStudyRoom extends JPanel {
 	private JTextField txt;
 	private JTextField txt2;
 	private JTextField txt3;
-	public MenuManager mm = new MenuManager();
 	
 	public YaMoYeoStudyRoom() {}
 	
@@ -80,9 +79,41 @@ public class YaMoYeoStudyRoom extends JPanel {
 		menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				MenuManager mm = new MenuManager();
+				System.out.println("myNumber sr = " + myNumber);
+				System.out.println("roomNumber sr = " + sr.getRoomNumber());
 				mm.getMyNumber(myNumber);
-				mm.getRoomNumber(roomNumber);
+				mm.getRoomNumber(sr.getRoomNumber());
 				ChangePanel.changePanel(mf, panel, new MenuManager(mf));
+			}
+		});
+		
+		Image month4 = new ImageIcon("images/4월.jpg").getImage().getScaledInstance(600, 300, 0);
+		JLabel m4 = new JLabel(new ImageIcon(month4));
+		m4.setSize(600, 300);
+		m4.setLocation(0, 270);
+		this.add(m4);
+		
+		Image month5 = new ImageIcon("images/5월.jpg").getImage().getScaledInstance(600, 300, 0);
+		JLabel m5 = new JLabel(new ImageIcon(month5));
+		m5.setSize(600, 300);
+		m5.setLocation(0, 270);
+		
+		m4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel.remove(m4);
+				panel.add(m5);
+				panel.repaint();
+			}
+		});
+		
+		m5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				panel.remove(m5);
+				panel.add(m4);
+				panel.repaint();
 			}
 		});
 		

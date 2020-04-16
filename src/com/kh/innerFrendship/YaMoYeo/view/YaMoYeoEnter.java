@@ -260,6 +260,8 @@ public class YaMoYeoEnter extends JPanel {
 				JOptionPane.showMessageDialog(panel, "비밀번호가 일치합니다", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
 				ymysr.getMyNumber(myNumber);
 				ymysr.getRoomNumber(roomNumber);
+				System.out.println("myNumber enter = " + myNumber);
+				System.out.println("roomNumber enter = " + roomNumber);
 				ChangePanel.changePanel(mf, panel, new YaMoYeoStudyRoom(mf));
 			} else if(!inputPassword.equals(roomPassword)) {
 				JOptionPane.showMessageDialog(panel, "비밀번호가 틀렸습니다", "비밀번호 오류", JOptionPane.ERROR_MESSAGE);

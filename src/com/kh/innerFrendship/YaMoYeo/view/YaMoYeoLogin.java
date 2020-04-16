@@ -158,8 +158,8 @@ public class YaMoYeoLogin extends JPanel {
 			
 			if(isOkToLogin == true && roomList == null) {
 				JOptionPane.showMessageDialog(panel, "방이 한개도 없습니다. 처음으로 방을 만들어보세요!", "오류", JOptionPane.ERROR_MESSAGE);
-				enter.getMyNumber(num);
 				sro.getMyNumber(num);
+				enter.getMyNumber(num);
 				ChangePanel.changePanel(mf, panel, new StudyRoomOpen(mf));
 			} else if(isOkToLogin == true) {
 				JOptionPane.showMessageDialog(panel, "로그인에 성공했습니다", "로그인 성공", JOptionPane.PLAIN_MESSAGE);
