@@ -2,6 +2,7 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -50,9 +51,6 @@ public class YaMoYeoStudyRoom extends JPanel {
 		
 		sr = roomList.get(roomNumber);
 		
-		System.out.println("myNumber : " + myNumber);
-		System.out.println("roomNumber : " + roomList.get(roomNumber).getRoomNumber());
-		
 		toDoArray = new String[3];
 		
 		this.setSize(600, 600);
@@ -64,10 +62,10 @@ public class YaMoYeoStudyRoom extends JPanel {
 		title.setSize(250, 50);
 		title.setFont(new Font("돋움", Font.BOLD,35));
 		
-		JButton back = new JButton(new ImageIcon("images/back.png"));
+		Image backImage = new ImageIcon("images/back.png").getImage().getScaledInstance(45, 45, 0);
+		JLabel back = new JLabel(new ImageIcon(backImage));
 		back.setLocation(20, 20);
 		back.setSize(45, 45);
-		back.setContentAreaFilled(false);
 		back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -75,10 +73,10 @@ public class YaMoYeoStudyRoom extends JPanel {
 			}
 		});
 		
-		JButton menu = new JButton(new ImageIcon("images/menu.png"));
+		Image menuImage = new ImageIcon("images/menu.PNG").getImage().getScaledInstance(64, 64, 0);
+		JLabel menu = new JLabel(new ImageIcon(menuImage));
 		menu.setLocation(530, 15);
-		menu.setSize(50, 50);
-		menu.setContentAreaFilled(false);
+		menu.setSize(64, 64);
 		menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
