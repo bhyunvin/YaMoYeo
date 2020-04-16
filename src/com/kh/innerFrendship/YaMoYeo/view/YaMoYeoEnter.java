@@ -66,7 +66,7 @@ public class YaMoYeoEnter extends JPanel {
 		for(int i = 0; i < roomList.size(); i++) {
 			contents[i] = new String[] {
 					roomList.get(i).getRoomName(),
-					userList.get(myNumber).getName(),
+					userList.get(roomList.get(roomNumber).getRoomNumber()).getName(),
 					String.valueOf(roomList.get(i).getMemberCount())};
 		}
 		
