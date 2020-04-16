@@ -154,6 +154,8 @@ public class KickOut extends JPanel {
 					JOptionPane.showMessageDialog(panel, ((User) userList.get(userIndex)).getName() + "이/가 강퇴되었습니다", "강퇴", JOptionPane.INFORMATION_MESSAGE);
 					userList.remove(userIndex);
 				}
+			} else {
+				ChangePanel.changePanel(mf, panel, new MenuManager(mf));
 			}
 		}
 	}

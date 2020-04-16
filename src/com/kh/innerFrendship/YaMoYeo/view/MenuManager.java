@@ -50,8 +50,11 @@ public class MenuManager extends JPanel {
 		btn2.setFont(new Font("돋음", Font.BOLD, 18));
 		btn2.setForeground(Color.BLACK);
 		btn2.addMouseListener(new MouseAdapter() {
+			Notice notice = new Notice();
 			@Override
 			public void mousePressed(MouseEvent e) {
+				notice.getMyNumber(myNumber);
+				notice.getRoomNumber(roomNumber);
 				ChangePanel.changePanel(mf, panel, new Notice(mf));
 			}
 		});

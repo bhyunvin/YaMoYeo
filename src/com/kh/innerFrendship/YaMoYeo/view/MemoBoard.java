@@ -2,6 +2,7 @@ package com.kh.innerFrendship.YaMoYeo.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -45,15 +46,14 @@ public class MemoBoard extends JPanel {
 		underLine.setOpaque(true);
 		underLine.setLocation(180, 45);
 		underLine.setSize(245, 2);
-
-		JButton plus = new JButton(new ImageIcon("images/plus.png"));
+		
+		Image plusImage = new ImageIcon("images/plus.png").getImage().getScaledInstance(50, 50, 0);
+		JLabel plus = new JLabel(new ImageIcon(plusImage));
 		plus.setBounds(500, 40, 50, 50);
-		plus.setContentAreaFilled(false);
 
-		JButton back = new JButton(new ImageIcon("images/back.png"));
+		JLabel back = new JLabel(new ImageIcon("images/back.png"));
 		back.setLocation(20, 20);
 		back.setSize(45, 45);
-		back.setContentAreaFilled(false);
 
 		JButton save = new JButton(new ImageIcon("images/save.png"));
 		save.setBounds(500, 100, 40, 40);
