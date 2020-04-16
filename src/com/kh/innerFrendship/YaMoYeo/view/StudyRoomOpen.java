@@ -3,17 +3,12 @@ package com.kh.innerFrendship.YaMoYeo.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.innerFrendship.YaMoYeo.model.vo.StudyRoom;
-import com.kh.innerFrendship.YaMoYeo.model.vo.User;
 
 public class StudyRoomOpen extends JPanel {
 	private JFrame mf;
@@ -41,8 +35,6 @@ public class StudyRoomOpen extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		
-		System.out.println("방 개설시 myNumber : " + myNumber);
-
 		this.setSize(600, 600);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
@@ -109,7 +101,6 @@ public class StudyRoomOpen extends JPanel {
 				String roomArea = txtArea.getText();
 				
 				StudyRoom studyRoom = new StudyRoom(roomName, roomPassword, roomSubject, roomEmail, roomArea, myNumber);
-				System.out.println("방 개설시 myNumber : " + myNumber);
 				makeRoom(studyRoom);
 			}
 		});

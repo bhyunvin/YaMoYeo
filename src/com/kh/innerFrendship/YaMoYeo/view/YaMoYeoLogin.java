@@ -142,18 +142,24 @@ public class YaMoYeoLogin extends JPanel {
 			int num = 0;
 			boolean isOkToLogin = false;
 			
-			for(int i = 0; i < userList.size(); i++) {
-				id = ((User) userList.get(i)).getId();
-				password = ((User) userList.get(i)).getPassword();
+			if(userList == null) {
+				JOptionPane.showMessageDialog(panel, "회원이 없습니다. 처음으로 가입해보세요!", "오류", JOptionPane.ERROR_MESSAGE);
+				ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
+			} else {
+				for(int i = 0; i < userList.size(); i++) {
+					id = ((User) userList.get(i)).getId();
+					password = ((User) userList.get(i)).getPassword();
 
-				if(inputId.equals(id) && inputPwd.equals(password)) {
-					isOkToLogin = true;
-					num = ((User) userList.get(i)).getUserNumber();
-					break;
-				} else {
-					isOkToLogin = false;
+					if(inputId.equals(id) && inputPwd.equals(password)) {
+						isOkToLogin = true;
+						num = ((User) userList.get(i)).getUserNumber();
+						break;
+					} else {
+						isOkToLogin = false;
+					}
 				}
 			}
+			
 			roomList = readRoom();
 			
 			if(isOkToLogin == true && roomList == null) {

@@ -11,11 +11,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,6 +49,7 @@ public class SignPanel extends JPanel {
 	private boolean isOkToSignUp;
 	private boolean passwordCheck;
 	public static int userCount;
+	private ArrayList userList;
 	
 	public SignPanel(JFrame mf) {
 		this.mf = mf;
@@ -54,6 +58,7 @@ public class SignPanel extends JPanel {
 		Font font = new Font("돋움", Font.BOLD, 14);
 		
 		setUserCount();
+		userList = readUser();
 		
 		this.setSize(600, 600);
 		this.setBackground(new Color(234, 208, 184));
@@ -269,11 +274,27 @@ public class SignPanel extends JPanel {
 				String area = txtArea.getText();
 				String major = txtMajor.getText();
 				String email = txtEmail.getText();
+				boolean idCheck = false;
+				if(userList != null) {
+					for(int i = 0; i < userList.size(); i++) {
+						if(id.equals(((User) userList.get(i)).getId())) {
+							idCheck = false;
+							break;
+						} else {
+							idCheck = true;
+						}
+					}
+					
+					JOptionPane.showMessageDialog(panel, "중복된 아이디가 있습니다. 회원 찾기를 이용해보세요", "오류", JOptionPane.ERROR_MESSAGE);
+					ChangePanel.changePanel(mf, panel, new FindMembersPopUp(mf));
+					panel.repaint();
+					mf.repaint();
+				}
 				
 				if((!id.equals("")) && (!password.equals("")) && (!passwordChk.equals(""))
 						&& (!name.equals("")) && (!area.equals(""))
 						&& (!major.equals("")) && (!email.equals(""))
-						&& (passwordCheck == true)) {
+						&& (passwordCheck == true) && (idCheck == true)) {
 					isOkToSignUp = true;
 				}
 				
@@ -281,10 +302,8 @@ public class SignPanel extends JPanel {
 					JOptionPane.showMessageDialog(panel, "회원가입이 완료되었습니다!", "환영합니다", JOptionPane.INFORMATION_MESSAGE);
 //					String id, String password, String name, String email, String area, String major, int userNumber
 					User user = new User(id, password, name, email, area, major, userCount);
-					System.out.println("가입 userCount : " + userCount);
 					signUp(user);
 					userCount++;
-					System.out.println("userCount++ : " + userCount);
 					
 					DataOutputStream dos = null;
 					try {
@@ -305,7 +324,7 @@ public class SignPanel extends JPanel {
 					}
 					
 					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
-				} else {
+				} else if (isOkToSignUp == false && idCheck == true){
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -391,5 +410,27 @@ public class SignPanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public ArrayList readUser() {
+		ArrayList list = null;
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream("userList.txt");
+			list = new ArrayList();
+			while(true){
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				User user = (User) ois.readObject();
+				list.add(user);
+			}
+		} catch (EOFException e) {
+			return list;
+		} catch (FileNotFoundException fnfe) {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return list;
 	}
 }
