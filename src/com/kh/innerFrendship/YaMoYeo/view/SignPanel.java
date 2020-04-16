@@ -273,27 +273,11 @@ public class SignPanel extends JPanel {
 				String area = txtArea.getText();
 				String major = txtMajor.getText();
 				String email = txtEmail.getText();
-				boolean idCheck = false;
-				if(userList != null) {
-					for(int i = 0; i < userList.size(); i++) {
-						if(id.equals(((User) userList.get(i)).getId())) {
-							idCheck = false;
-							break;
-						} else {
-							idCheck = true;
-						}
-					}
-					
-					JOptionPane.showMessageDialog(panel, "중복된 아이디가 있습니다. 회원 찾기를 이용해보세요", "오류", JOptionPane.ERROR_MESSAGE);
-					ChangePanel.changePanel(mf, panel, new FindMembersPopUp(mf));
-					panel.repaint();
-					mf.repaint();
-				}
 				
 				if((!id.equals("")) && (!password.equals("")) && (!passwordChk.equals(""))
 						&& (!name.equals("")) && (!area.equals(""))
 						&& (!major.equals("")) && (!email.equals(""))
-						&& (passwordCheck == true) && (idCheck == true)) {
+						&& (passwordCheck == true)) {
 					isOkToSignUp = true;
 				}
 				
@@ -322,7 +306,7 @@ public class SignPanel extends JPanel {
 					}
 					
 					ChangePanel.changePanel(mf, panel, new YaMoYeoLogin(mf));
-				} else if (isOkToSignUp == false && idCheck == true){
+				} else if (isOkToSignUp == false){
 					JOptionPane.showMessageDialog(panel, "일부 항목을 작성하지 않았거나 패스워드 확인에 실패했습니다", "", JOptionPane.ERROR_MESSAGE);
 				}
 			}
