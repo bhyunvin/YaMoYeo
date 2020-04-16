@@ -10,11 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuManager extends JPanel {
 	private JFrame mf;
 	private JPanel panel;
+	public static int myNumber;
+	public static int roomNumber;
+	
+	public MenuManager() {}
 
 	public MenuManager(JFrame mf) {
 		this.mf = mf;
@@ -85,7 +90,11 @@ public class MenuManager extends JPanel {
 		btn5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				ChangePanel.changePanel(mf, panel, new RoomMemberManager(mf));
+				if(myNumber == roomNumber) {
+					ChangePanel.changePanel(mf, panel, new RoomMemberManager(mf));
+				} else {
+					JOptionPane.showMessageDialog(panel, "개설자가 아닙니다.", "오류", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -103,5 +112,12 @@ public class MenuManager extends JPanel {
 		
 		mf.add(this);
 	}
-
+	
+	public void getMyNumber(int myNumber) {
+		this.myNumber = myNumber;
+	}
+	
+	public void getRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 }

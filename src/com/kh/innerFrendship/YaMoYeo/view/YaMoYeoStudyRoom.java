@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,6 +39,7 @@ public class YaMoYeoStudyRoom extends JPanel {
 	private JTextField txt;
 	private JTextField txt2;
 	private JTextField txt3;
+	public MenuManager mm = new MenuManager();
 	
 	public YaMoYeoStudyRoom() {}
 	
@@ -80,6 +80,8 @@ public class YaMoYeoStudyRoom extends JPanel {
 		menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				mm.getMyNumber(myNumber);
+				mm.getRoomNumber(roomNumber);
 				ChangePanel.changePanel(mf, panel, new MenuManager(mf));
 			}
 		});
