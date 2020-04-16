@@ -32,6 +32,10 @@ public class RoomMemberManager extends JPanel {
 	private JPanel panel;
 	private ArrayList userList;
 	private JTable manageTable;
+	public static int myNumber;
+	public static int roomNumber;
+	
+	public RoomMemberManager() {}
 
 	public RoomMemberManager(JFrame mf) {
 		this.mf = mf;
@@ -161,6 +165,14 @@ public class RoomMemberManager extends JPanel {
 		} 
 		
 		return list;
+	}
+	
+	public void getMyNumber(int myNumber) {
+		this.myNumber = myNumber;
+	}
+	
+	public void getRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 }
 

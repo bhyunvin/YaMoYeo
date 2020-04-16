@@ -25,6 +25,9 @@ public class MenuManager extends JPanel {
 		this.mf = mf;
 		this.panel = this;
 		
+		System.out.println("myNumber menu = " + myNumber);
+		System.out.println("roomNumber menu = " + roomNumber);
+		
 		this.setSize(600, 600);
 		this.setLayout(null);
 		this.setBackground(new Color(234, 208, 184));
@@ -90,7 +93,10 @@ public class MenuManager extends JPanel {
 		btn5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				RoomMemberManager rmm = new RoomMemberManager();
 				if(myNumber == roomNumber) {
+					rmm.getMyNumber(myNumber);
+					rmm.getRoomNumber(roomNumber);
 					ChangePanel.changePanel(mf, panel, new RoomMemberManager(mf));
 				} else {
 					JOptionPane.showMessageDialog(panel, "개설자가 아닙니다.", "오류", JOptionPane.ERROR_MESSAGE);
