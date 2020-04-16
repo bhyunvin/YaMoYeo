@@ -129,7 +129,6 @@ public class Notice extends JPanel {
 		btn.setBackground(Color.WHITE);
 		btn.setFont(new Font("돋음", Font.PLAIN, 20));
 		btn.setForeground(Color.BLACK);
-		btn.addMouseListener(new Clear());
 
 		btn2 = new JTextField("공지사항 2");
 		btn2.setLocation(130, 250);
@@ -137,7 +136,6 @@ public class Notice extends JPanel {
 		btn2.setBackground(Color.WHITE);
 		btn2.setFont(new Font("돋음", Font.PLAIN, 20));
 		btn2.setForeground(Color.BLACK);
-		btn2.addMouseListener(new Clear());
 
 		btn3 = new JTextField("공지사항 3");
 		btn3.setLocation(130, 300);
@@ -145,7 +143,6 @@ public class Notice extends JPanel {
 		btn3.setBackground(Color.WHITE);
 		btn3.setFont(new Font("돋음", Font.PLAIN, 20));
 		btn3.setForeground(Color.BLACK);
-		btn3.addMouseListener(new Clear());
 
 		btn4 = new JTextField("공지사항 4");
 		btn4.setLocation(130, 350);
@@ -153,7 +150,6 @@ public class Notice extends JPanel {
 		btn4.setBackground(Color.WHITE);
 		btn4.setFont(new Font("돋음", Font.PLAIN, 20));
 		btn4.setForeground(Color.BLACK);
-		btn4.addMouseListener(new Clear());
 		
 		btn.addKeyListener(new KeyAdapter() {
 			@Override
@@ -190,6 +186,11 @@ public class Notice extends JPanel {
 				fileOutput();
 			}
 		});
+		
+		btn.setEditable(false);
+		btn2.setEditable(false);
+		btn3.setEditable(false);
+		btn4.setEditable(false);
 		
 		JLabel label2 = new JLabel("제목을 누르시면 공지사항을 확인할 수 있습니다.");
 		label2.setLocation(30, 420);
@@ -311,11 +312,15 @@ public class Notice extends JPanel {
 		}
 	}
 	public void check() {
-		if(roomNumber != myNumber) {
-			btn.setEditable(false);
-			btn2.setEditable(false);
-			btn3.setEditable(false);
-			btn4.setEditable(false);
+		if(roomNumber == myNumber) {
+			btn.setEditable(true);
+			btn2.setEditable(true);
+			btn3.setEditable(true);
+			btn4.setEditable(true);
+			btn.addMouseListener(new Clear());
+			btn2.addMouseListener(new Clear());
+			btn3.addMouseListener(new Clear());
+			btn4.addMouseListener(new Clear());
 		}
 	}
 }
