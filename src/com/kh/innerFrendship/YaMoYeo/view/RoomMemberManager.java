@@ -114,7 +114,7 @@ public class RoomMemberManager extends JPanel {
 	class Back extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
+			ChangePanel.changePanel(mf, panel, new MenuManager(mf));
 		}
 	}
 
