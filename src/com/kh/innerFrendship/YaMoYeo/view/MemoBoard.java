@@ -115,7 +115,7 @@ public class MemoBoard extends JPanel {
 	class MyMouseAdapter extends MouseAdapter {
 		@Override
 		public void mousePressed(MouseEvent e) {
-			ChangePanel.changePanel(mf, panel, new YaMoYeoEnter(mf));
+			ChangePanel.changePanel(mf, panel, new MenuManager(mf));
 		}
 	}
 }
